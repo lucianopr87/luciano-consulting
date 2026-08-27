@@ -62,9 +62,9 @@ export interface SiteContent {
 export const content: Record<Locale, SiteContent> = {
   es: {
     meta: {
-      title: 'Luciano Perez Ruiz — Consultoría IT: Desarrollo Full Stack y Liderazgo de Proyectos',
+      title: 'Luciano Perez Ruiz — Consultoría IT: Desarrollo Full Stack y Gestión de Proyectos',
       description:
-        'Consultor IT con 10+ años de experiencia en Mercado Libre y startups. Ayudo a founders y equipos a definir, planificar y construir productos de software full stack, de principio a fin.',
+        'Consultor IT con más de 10 años de experiencia en Mercado Libre y startups. Ayudo a founders y equipos a planificar y construir productos de software full stack, de punta a punta.',
     },
     nav: {
       services: 'Servicios',
@@ -73,27 +73,26 @@ export const content: Record<Locale, SiteContent> = {
       contact: 'Contacto',
     },
     hero: {
-      eyebrow: 'Consultoría IT · Desarrollo Full Stack y Liderazgo de Proyectos',
-      headline: 'Ayudo a startups y equipos a construir software que funciona — y que llega a tiempo.',
+      eyebrow: 'Consultoría IT · Desarrollo Full Stack y Gestión de Proyectos',
+      headline: 'Ayudo a startups y equipos a sacar adelante software que funciona — y que llega a tiempo.',
       subheadline:
-        'Más de 10 años liderando equipos de desarrollo y construyendo productos full stack, desde Mercado Libre hasta startups en etapa temprana. Conecto la ejecución técnica con la entrega del proyecto.',
+        'Más de 10 años liderando equipos de desarrollo y construyendo productos full stack, desde Mercado Libre hasta startups que recién arrancan. Manejo tanto el código como la gestión, así el proyecto no se traba en el medio.',
       cta: 'Hablemos de tu proyecto',
     },
     services: {
       heading: 'Qué puedo hacer por vos',
-      intro:
-        'Dos formas de trabajar juntos, según lo que tu proyecto necesite en este momento.',
+      intro: 'Dos maneras de trabajar juntos, según lo que necesite tu proyecto hoy.',
       items: [
         {
           title: 'Desarrollo Full Stack',
           description:
-            'Desarrollo hands-on y guía técnica para tu producto: decisiones de arquitectura, revisión de código y construcción de funcionalidades que escalan.',
+            'Me meto de lleno en el código de tu producto: defino arquitectura, reviso código y construyo funcionalidades pensadas para escalar.',
           tags: ['PHP', 'JavaScript / TypeScript', 'React', 'WordPress', 'AWS'],
         },
         {
-          title: 'Liderazgo y Gestión de Proyectos IT',
+          title: 'Gestión y Liderazgo de Proyectos IT',
           description:
-            'Organizo el roadmap, coordino a tu equipo y me aseguro de que la entrega se mantenga en alcance y en tiempo — igual que lideré equipos de hasta 8 desarrolladores en proyectos complejos con múltiples stakeholders.',
+            'Ordeno el roadmap, coordino al equipo y me aseguro de que la entrega no se corra ni en alcance ni en tiempo — así lideré equipos de hasta 8 desarrolladores en proyectos complejos con múltiples stakeholders.',
           tags: ['Agile / Scrum', 'Jira', 'Planificación', 'Stakeholders'],
         },
       ],
@@ -101,9 +100,9 @@ export const content: Record<Locale, SiteContent> = {
     about: {
       heading: 'Sobre mí',
       paragraphs: [
-        'Soy IT Project Leader con más de 10 años convirtiendo iniciativas complejas y en etapa temprana en productos entregados — para empresas como Mercado Libre y startups de alto ritmo.',
-        'Empecé como desarrollador full stack, lo que significa que no solo gestiono roadmaps: entiendo lo que realmente es difícil al construir software, y hablo con fluidez tanto el idioma del negocio como el de la ingeniería. Eso me permitió liderar equipos de hasta 8 desarrolladores en proyectos que van desde plataformas de e-commerce construidas desde cero (con integraciones a SAP y BigQuery) hasta iniciativas cross-business que requerían consenso entre múltiples áreas.',
-        'Algunas cosas de las que estoy orgulloso: mejorar métricas operativas clave en un 30% en un solo trimestre mediante un rediseño de procesos basado en datos, y lanzar en tiempo y forma la plataforma Adobe Commerce de un retailer líder del mercado.',
+        'Soy IT Project Leader y tengo más de 10 años sacando adelante proyectos complejos, desde cero, en empresas como Mercado Libre y en startups que se mueven rápido.',
+        'Arranqué como desarrollador full stack, así que no me quedo solo en la gestión del roadmap: sé lo que realmente cuesta construir software, y eso me permite hablar tanto el idioma del negocio como el de los developers. Gracias a esto pude liderar equipos de hasta 8 desarrolladores en proyectos que van desde plataformas de e-commerce armadas desde cero (con integraciones a SAP y BigQuery) hasta iniciativas que cruzaban varias áreas de la empresa y necesitaban que todos remaran para el mismo lado.',
+        'Algo de lo que estoy orgulloso: mejorar métricas clave de IT en un 30% en un solo trimestre rediseñando procesos en base a datos, y lanzar a tiempo la plataforma de Adobe Commerce de un retailer líder del mercado.',
       ],
     },
     experience: {
@@ -115,16 +114,16 @@ export const content: Record<Locale, SiteContent> = {
           company: 'Freelance',
           period: '2026 — Actualidad',
           description:
-            'Ayudo a founders y startups a definir y planificar sus proyectos desde el inicio, combinando mi experiencia como desarrollador full stack y como project manager para guiarlos en la mejor forma de construir su producto.',
+            'Ayudo a founders y startups a definir y planificar sus proyectos desde cero. Como tengo experiencia tanto de desarrollador full stack como de project manager, puedo guiarlos para que construyan su producto de la mejor manera posible.',
         },
         {
           role: 'IT Project Manager',
           company: 'IURCO',
           period: '2024 — 2025',
           description:
-            'Responsable de supervisar múltiples proyectos simultáneamente, desde la planificación inicial hasta la entrega final, coordinando con product owners y stakeholders para definir alcance y procesos.',
+            'Supervisé varios proyectos en simultáneo, desde la planificación inicial hasta la entrega final, coordinando con product owners y stakeholders para definir alcance y procesos.',
           highlights: [
-            'Orquesté la planificación, ejecución y entrega end-to-end de una plataforma Adobe Commerce desde cero para un retailer líder de electrónica de consumo en Argentina, con integraciones a SAP y BigQuery.',
+            'Lideré de punta a punta la planificación, ejecución y entrega de una plataforma Adobe Commerce hecha desde cero para un retailer líder de electrónica de consumo en Argentina, con integraciones a SAP y BigQuery.',
           ],
         },
         {
@@ -132,9 +131,9 @@ export const content: Record<Locale, SiteContent> = {
           company: 'Mercado Libre',
           period: '2022 — 2024',
           description:
-            'Lideré un equipo de desarrolladores en la unidad de logística de Mercado Libre, gestionando el ciclo de vida completo del desarrollo bajo metodologías Agile y Scrum.',
+            'Lideré un equipo de desarrolladores en la unidad de logística de Mercado Libre, manejando todo el ciclo de desarrollo con Agile y Scrum.',
           highlights: [
-            'Mejoré métricas operativas clave del equipo de IT en un 30% en un trimestre mediante análisis de datos y rediseño de procesos.',
+            'Mejoré en un 30% las métricas clave del equipo de IT en un trimestre, a partir de análisis de datos y rediseño de procesos.',
           ],
         },
         {
@@ -142,28 +141,27 @@ export const content: Record<Locale, SiteContent> = {
           company: 'Serfe',
           period: '2018 — 2022',
           description:
-            'Roles de project manager y team lead en 3 proyectos simultáneos con equipos de hasta 6 desarrolladores. Configuración de infraestructura AWS (Amplify) y automatización de testing para un enfoque CI/CD.',
+            'Trabajé como project manager y team lead en 3 proyectos en simultáneo, con equipos de hasta 6 desarrolladores. También configuré infraestructura en AWS (Amplify) y armé la automatización de testing para poder trabajar con CI/CD.',
         },
         {
           role: 'Desarrollador Web',
           company: 'Freelance',
           period: '2017 — 2018',
           description:
-            'Desarrollé y completé dos proyectos de forma independiente: un showroom online en WordPress para una empresa de equipamiento comercial, y un sistema de gestión de expedientes en PHP/MySQL para una secretaría pública de educación.',
+            'Encaré dos proyectos de forma independiente: un showroom online en WordPress para una empresa de equipamiento comercial, y un sistema de gestión de expedientes en PHP/MySQL para una secretaría de educación pública.',
         },
         {
           role: 'Full-Stack Developer',
           company: 'Serfe',
           period: '2014 — 2017',
           description:
-            'Desarrollo en PHP, JavaScript y SQL sobre Drupal, WordPress, Joomla y CodeIgniter, con configuración de servidores LAMP.',
+            'Trabajé con PHP, JavaScript y SQL sobre Drupal, WordPress, Joomla y CodeIgniter, y configuré servidores LAMP.',
         },
       ],
     },
     contact: {
       heading: 'Hablemos',
-      intro:
-        'Contame en qué estás trabajando y cómo puedo ayudarte. Te respondo a la brevedad.',
+      intro: 'Contame en qué estás trabajando y cómo te puedo ayudar. Te respondo apenas pueda.',
       formName: 'Nombre',
       formEmail: 'Email',
       formMessage: 'Contame sobre tu proyecto',
