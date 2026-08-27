@@ -123,6 +123,9 @@ export const content: Record<Locale, SiteContent> = {
           period: '2024 — 2025',
           description:
             'Responsable de supervisar múltiples proyectos simultáneamente, desde la planificación inicial hasta la entrega final, coordinando con product owners y stakeholders para definir alcance y procesos.',
+          highlights: [
+            'Orquesté la planificación, ejecución y entrega end-to-end de una plataforma Adobe Commerce desde cero para un retailer líder de electrónica de consumo en Argentina, con integraciones a SAP y BigQuery.',
+          ],
         },
         {
           role: 'IT Project Leader',
@@ -131,7 +134,6 @@ export const content: Record<Locale, SiteContent> = {
           description:
             'Lideré un equipo de desarrolladores en la unidad de logística de Mercado Libre, gestionando el ciclo de vida completo del desarrollo bajo metodologías Agile y Scrum.',
           highlights: [
-            'Orquesté la planificación, ejecución y entrega end-to-end de una plataforma Adobe Commerce desde cero para un retailer líder de electrónica de consumo en Argentina, con integraciones a SAP y BigQuery.',
             'Mejoré métricas operativas clave del equipo de IT en un 30% en un trimestre mediante análisis de datos y rediseño de procesos.',
           ],
         },
@@ -238,6 +240,9 @@ export const content: Record<Locale, SiteContent> = {
           period: '2024 — 2025',
           description:
             'Responsible for overseeing multiple projects simultaneously, from initial planning to final delivery, coordinating with product owners and stakeholders to define scope and processes.',
+          highlights: [
+            'Orchestrated the end-to-end planning, execution, and delivery of a from-scratch Adobe Commerce platform for a market-leading consumer electronics retailer in Argentina, with SAP and BigQuery integrations.',
+          ],
         },
         {
           role: 'IT Project Leader',
@@ -246,7 +251,6 @@ export const content: Record<Locale, SiteContent> = {
           description:
             "Led a team of developers in Mercado Libre's shipping unit, managing the full software development lifecycle under Agile and Scrum methodologies.",
           highlights: [
-            'Orchestrated the end-to-end planning, execution, and delivery of a from-scratch Adobe Commerce platform for a market-leading consumer electronics retailer in Argentina, with SAP and BigQuery integrations.',
             "Improved the IT team's core operational metrics by 30% in a quarter through data analysis and process redesign.",
           ],
         },
