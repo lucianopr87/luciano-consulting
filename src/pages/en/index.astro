@@ -1,0 +1,26 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Hero from '../../components/Hero.astro';
+import Services from '../../components/Services.astro';
+import About from '../../components/About.astro';
+import Experience from '../../components/Experience.astro';
+import Contact from '../../components/Contact.astro';
+import Footer from '../../components/Footer.astro';
+import { content } from '../../i18n/content';
+
+const locale = 'en';
+const pageContent = content[locale];
+---
+
+<Layout locale={locale} content={pageContent} path="/en/">
+  <Header locale={locale} content={pageContent} />
+  <main>
+    <Hero content={pageContent} />
+    <Services content={pageContent} />
+    <About content={pageContent} />
+    <Experience content={pageContent} />
+    <Contact content={pageContent} />
+  </main>
+  <Footer content={pageContent} />
+</Layout>

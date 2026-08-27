@@ -1,0 +1,13 @@
+---
+import type { SiteContent } from '../i18n/content';
+
+interface Props {
+  content: SiteContent;
+}
+
+const { content } = Astro.props;
+---
+
+<footer class="bg-slate-950 py-8 text-center text-sm text-slate-500">
+  <p>{content.footer.text} · {new Date().getFullYear()}</p>
+</footer>

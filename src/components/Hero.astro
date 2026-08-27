@@ -1,0 +1,35 @@
+---
+import type { SiteContent } from '../i18n/content';
+
+interface Props {
+  content: SiteContent;
+}
+
+const { content } = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-slate-900">
+  <div
+    class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.25),transparent_60%)]"
+  >
+  </div>
+  <div class="relative mx-auto max-w-5xl px-6 py-28 text-center md:py-36">
+    <p class="mb-4 text-sm font-semibold uppercase tracking-wide text-indigo-400">
+      {content.hero.eyebrow}
+    </p>
+    <h1 class="mx-auto max-w-3xl text-4xl font-extrabold leading-tight text-white md:text-5xl">
+      {content.hero.headline}
+    </h1>
+    <p class="mx-auto mt-6 max-w-2xl text-lg text-slate-300">
+      {content.hero.subheadline}
+    </p>
+    <div class="mt-10">
+      <a
+        href="#contact"
+        class="inline-block rounded-full bg-indigo-500 px-8 py-3 font-semibold text-white transition hover:bg-indigo-400"
+      >
+        {content.hero.cta}
+      </a>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,16 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { content } from '../i18n/content';
+
+const pageContent = content.es;
+---
+
+<Layout locale="es" content={pageContent} path="/404/">
+  <main class="flex min-h-[70vh] flex-col items-center justify-center px-6 text-center">
+    <h1 class="text-6xl font-extrabold text-slate-900">404</h1>
+    <p class="mt-4 text-lg text-slate-600">Página no encontrada / Page not found</p>
+    <a href="/" class="mt-8 rounded-full bg-indigo-500 px-8 py-3 font-semibold text-white hover:bg-indigo-400">
+      Volver al inicio / Back home
+    </a>
+  </main>
+</Layout>

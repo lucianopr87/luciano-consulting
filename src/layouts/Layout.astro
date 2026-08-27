@@ -1,0 +1,65 @@
+---
+import '../styles/global.css';
+import type { Locale, SiteContent } from '../i18n/content';
+
+interface Props {
+  locale: Locale;
+  content: SiteContent;
+  path: string;
+}
+
+const { locale, content, path } = Astro.props;
+const canonicalURL = new URL(path, Astro.site);
+
+const personJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Luciano Perez Ruiz',
+  jobTitle: 'IT Project Manager / Full Stack Developer',
+  url: Astro.site?.toString(),
+  sameAs: ['https://www.linkedin.com/in/luciano-perez-ruiz'],
+  knowsAbout: [
+    'Full Stack Development',
+    'IT Project Management',
+    'Software Development Consulting',
+  ],
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Santa Fe',
+    addressCountry: 'AR',
+  },
+};
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={canonicalURL} />
+
+    <title>{content.meta.title}</title>
+    <meta name="description" content={content.meta.description} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={content.meta.title} />
+    <meta property="og:description" content={content.meta.description} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={content.meta.title} />
+    <meta name="twitter:description" content={content.meta.description} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+  </head>
+  <body class="bg-white text-slate-900 font-sans antialiased">
+    <slot />
+  </body>
+</html>
