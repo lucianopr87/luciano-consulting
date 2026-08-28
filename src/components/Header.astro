@@ -13,8 +13,8 @@ const otherLocalePath = otherLocale === 'es' ? '/' : '/en/';
 
 <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
   <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-    <a href={locale === 'es' ? '/' : '/en/'} class="font-bold text-slate-900">
-      Luciano Perez Ruiz
+    <a href={locale === 'es' ? '/' : '/en/'}>
+      <img src="/logo-horizontal-light.png" alt="Luciano Consulting" class="h-8 w-auto" />
     </a>
     <nav class="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
       <a href="#services" class="hover:text-slate-900">{content.nav.services}</a>

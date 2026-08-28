@@ -8,13 +8,13 @@ interface Props {
 const { content } = Astro.props;
 ---
 
-<section class="relative overflow-hidden bg-slate-900">
+<section class="relative overflow-hidden bg-brand-navy">
   <div
-    class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(99,102,241,0.25),transparent_60%)]"
+    class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,245,212,0.2),transparent_60%)]"
   >
   </div>
   <div class="relative mx-auto max-w-5xl px-6 py-28 text-center md:py-36">
-    <p class="mb-4 text-sm font-semibold uppercase tracking-wide text-indigo-400">
+    <p class="mb-4 text-sm font-semibold uppercase tracking-wide text-brand-teal">
       {content.hero.eyebrow}
     </p>
     <h1 class="mx-auto max-w-3xl text-4xl font-extrabold leading-tight text-white md:text-5xl">
@@ -26,7 +26,7 @@ const { content } = Astro.props;
     <div class="mt-10">
       <a
         href="#contact"
-        class="inline-block rounded-full bg-indigo-500 px-8 py-3 font-semibold text-white transition hover:bg-indigo-400"
+        class="inline-block rounded-full bg-brand-teal px-8 py-3 font-semibold text-brand-navy transition hover:opacity-90"
       >
         {content.hero.cta}
       </a>
