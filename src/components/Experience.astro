@@ -16,8 +16,8 @@ const { content } = Astro.props;
     {
       content.experience.items.map((item) => (
         <li class="relative">
-          <span class="absolute -left-[2.28rem] top-1.5 h-3 w-3 rounded-full bg-blue-500" />
-          <p class="text-sm font-semibold text-blue-600">{item.period}</p>
+          <span class="absolute -left-[2.28rem] top-1.5 h-3 w-3 rounded-full bg-brand-blue" />
+          <p class="text-sm font-semibold text-brand-blue">{item.period}</p>
           <h3 class="mt-1 text-lg font-bold text-slate-900">
             {item.role} · {item.company}
           </h3>
