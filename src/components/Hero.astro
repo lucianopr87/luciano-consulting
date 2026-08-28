@@ -8,28 +8,31 @@ interface Props {
 const { content } = Astro.props;
 ---
 
-<section class="relative overflow-hidden bg-brand-navy">
-  <div
-    class="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(0,245,212,0.2),transparent_60%)]"
-  >
-  </div>
-  <div class="relative mx-auto max-w-5xl px-6 py-28 text-center md:py-36">
-    <p class="mb-4 text-sm font-semibold uppercase tracking-wide text-brand-teal">
-      {content.hero.eyebrow}
-    </p>
-    <h1 class="mx-auto max-w-3xl text-4xl font-extrabold leading-tight text-white md:text-5xl">
-      {content.hero.headline}
-    </h1>
-    <p class="mx-auto mt-6 max-w-2xl text-lg text-slate-300">
-      {content.hero.subheadline}
-    </p>
-    <div class="mt-10">
-      <a
-        href="#contact"
-        class="inline-block rounded-full bg-brand-teal px-8 py-3 font-semibold text-brand-navy transition hover:opacity-90"
-      >
-        {content.hero.cta}
-      </a>
+<section class="relative overflow-hidden bg-white">
+  <img
+    src="/hero-banner.jpg"
+    alt=""
+    class="absolute inset-0 hidden h-full w-full object-cover md:block"
+  />
+  <div class="relative mx-auto max-w-5xl px-6 py-28 md:py-36">
+    <div class="max-w-xl">
+      <p class="mb-4 text-sm font-semibold uppercase tracking-wide text-brand-blue">
+        {content.hero.eyebrow}
+      </p>
+      <h1 class="text-4xl font-extrabold leading-tight text-brand-navy md:text-5xl">
+        {content.hero.headline}
+      </h1>
+      <p class="mt-6 text-lg text-slate-600">
+        {content.hero.subheadline}
+      </p>
+      <div class="mt-10">
+        <a
+          href="#contact"
+          class="inline-block rounded-full bg-brand-teal px-8 py-3 font-semibold text-brand-navy transition hover:opacity-90"
+        >
+          {content.hero.cta}
+        </a>
+      </div>
     </div>
   </div>
 </section>
