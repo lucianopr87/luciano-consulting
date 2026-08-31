@@ -77,10 +77,6 @@ const personJsonLd = {
         window.gtag = function () {
           window.dataLayer.push(arguments);
         };
-        window.gtag('consent', 'default', {
-          analytics_storage: 'denied',
-          wait_for_update: 500,
-        });
         window.gtag('js', new Date());
         window.gtag('config', gaId);
       </script>
