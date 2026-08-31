@@ -23,6 +23,7 @@ jobs:
       - run: npm run build
         env:
           PUBLIC_WEB3FORMS_ACCESS_KEY: ${{ vars.WEB3FORMS_ACCESS_KEY_STAGING }}
+          PUBLIC_GSC_VERIFICATION: ${{ vars.GSC_VERIFICATION }}
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:

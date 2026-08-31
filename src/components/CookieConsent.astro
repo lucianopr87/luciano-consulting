@@ -1,0 +1,69 @@
+---
+import type { Locale, SiteContent } from '../i18n/content';
+
+interface Props {
+  content: SiteContent;
+  locale: Locale;
+}
+
+const { content, locale } = Astro.props;
+const privacyHref = locale === 'es' ? '/privacy/' : '/en/privacy/';
+---
+
+<div
+  id="cookie-consent"
+  class="fixed inset-x-0 bottom-0 z-50 hidden flex-col gap-3 border-t border-slate-700 bg-brand-navy px-6 py-4 text-sm text-slate-300 sm:flex-row sm:items-center sm:justify-between"
+>
+  <p>
+    {content.cookieConsent.message}
+    {' '}
+    <a href={privacyHref} class="underline hover:text-white">{content.cookieConsent.policyLinkText}</a>
+  </p>
+  <div class="flex shrink-0 gap-3">
+    <button
+      id="cookie-reject"
+      type="button"
+      class="rounded-full border border-slate-500 px-4 py-1.5 font-semibold text-slate-200 hover:border-slate-300"
+    >
+      {content.cookieConsent.rejectLabel}
+    </button>
+    <button
+      id="cookie-accept"
+      type="button"
+      class="rounded-full bg-white px-4 py-1.5 font-semibold text-brand-navy hover:bg-slate-200"
+    >
+      {content.cookieConsent.acceptLabel}
+    </button>
+  </div>
+</div>
+
+<script>
+  declare function gtag(...args: unknown[]): void;
+
+  const CONSENT_KEY = 'cookie-consent';
+  const banner = document.getElementById('cookie-consent');
+  const acceptButton = document.getElementById('cookie-accept');
+  const rejectButton = document.getElementById('cookie-reject');
+
+  const grantConsent = () => gtag('consent', 'update', { analytics_storage: 'granted' });
+  const showBanner = () => banner?.classList.replace('hidden', 'flex');
+  const hideBanner = () => banner?.classList.replace('flex', 'hidden');
+
+  const storedChoice = localStorage.getItem(CONSENT_KEY);
+  if (storedChoice === 'granted') {
+    grantConsent();
+  } else if (storedChoice !== 'denied') {
+    showBanner();
+  }
+
+  acceptButton?.addEventListener('click', () => {
+    grantConsent();
+    localStorage.setItem(CONSENT_KEY, 'granted');
+    hideBanner();
+  });
+
+  rejectButton?.addEventListener('click', () => {
+    localStorage.setItem(CONSENT_KEY, 'denied');
+    hideBanner();
+  });
+</script>
