@@ -35,12 +35,23 @@ const privacyHref = locale === 'es' ? '/privacy/' : '/en/privacy/';
   const banner = document.getElementById('cookie-consent');
   const dismissButton = document.getElementById('cookie-dismiss');
 
+  // The banner is fixed to the bottom of the viewport, so it can cover
+  // content (like the footer's privacy link) on short pages. Reserve
+  // space for it via body padding while it's visible.
+  const syncBodyPadding = () => {
+    const isVisible = !banner?.classList.contains('hidden');
+    document.body.style.paddingBottom = isVisible && banner ? `${banner.offsetHeight}px` : '';
+  };
+
   if (!localStorage.getItem(DISMISS_KEY)) {
     banner?.classList.replace('hidden', 'flex');
   }
+  syncBodyPadding();
+  window.addEventListener('resize', syncBodyPadding);
 
   dismissButton?.addEventListener('click', () => {
     localStorage.setItem(DISMISS_KEY, '1');
     banner?.classList.replace('flex', 'hidden');
+    syncBodyPadding();
   });
 </script>
