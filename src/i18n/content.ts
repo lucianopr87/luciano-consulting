@@ -195,19 +195,31 @@ export const content: Record<Locale, SiteContent> = {
     privacy: {
       heading: 'Política de Privacidad',
       intro:
-        'Esta política explica qué datos se recolectan en este sitio, con qué fin, y qué opciones tenés al respecto.',
+        'En este sitio valoramos tu privacidad. Esta política explica qué información recopilamos cuando lo navegás, con qué fin, y qué opciones tenés al respecto.',
       sections: [
         {
-          heading: 'Qué datos recolectamos',
-          body: 'Si completás el formulario de contacto, recibimos el nombre, email y mensaje que ingreses, únicamente para poder responderte. No compartimos esos datos con terceros.',
+          heading: 'Información que recopilamos',
+          body: 'Este sitio no te pide ningún registro ni dato personal para navegarlo. La única excepción es el formulario de contacto: si lo completás, recibimos el nombre, el email y el mensaje que ingreses, únicamente para poder responderte. No compartimos esos datos con terceros.',
         },
         {
           heading: 'Cookies y Google Analytics',
-          body: 'Usamos Google Analytics (GA4) para entender cuántas visitas recibe el sitio y qué páginas se consultan. Este servicio usa cookies, que se activan automáticamente al navegar el sitio. Si preferís no ser trackeado, podés bloquear las cookies de analytics desde la configuración de tu navegador o con una extensión de bloqueo.',
+          body: 'Para entender cómo se usa el sitio y mejorar la experiencia de navegación, usamos Google Analytics. Esta herramienta nos permite ver datos estadísticos agregados —como las páginas más visitadas, el tiempo de permanencia, el tipo de navegador o el país o ciudad de acceso— sin identificarte individualmente. Google Analytics usa cookies (pequeños archivos de texto guardados en tu dispositivo) para esto, que se activan automáticamente al navegar el sitio.',
         },
         {
-          heading: 'Tus derechos',
-          body: 'Podés pedir acceso, corrección o borrado de tus datos escribiendo a lucianopr87@gmail.com.',
+          heading: 'Gestión y desactivación de cookies',
+          body: 'Podés aceptar, rechazar o configurar el uso de cookies en cualquier momento desde la configuración de privacidad de tu navegador (Chrome, Firefox, Safari, Edge, etc.), o instalando el Complemento de inhabilitación para navegadores de Google Analytics (tools.google.com/dlpage/gaoptout). Desactivar estas cookies no afecta el funcionamiento ni el acceso a los contenidos del sitio.',
+        },
+        {
+          heading: 'Enlaces a sitios de terceros',
+          body: 'Este sitio incluye enlaces a sitios externos, como LinkedIn. Una vez que hacés clic en esos enlaces y salís de este sitio, no tenemos control sobre el sitio al que sos redirigido ni somos responsables de sus términos o políticas de privacidad.',
+        },
+        {
+          heading: 'Cambios en esta política',
+          body: 'Podemos actualizar esta política en cualquier momento para reflejar cambios legislativos o en el funcionamiento del sitio. Te recomendamos revisarla periódicamente. Última actualización: agosto de 2026.',
+        },
+        {
+          heading: 'Contacto',
+          body: 'Si tenés dudas sobre esta política, o querés pedir acceso, corrección o borrado de tus datos, escribinos a lucianopr87@gmail.com.',
         },
       ],
     },
@@ -336,19 +348,31 @@ export const content: Record<Locale, SiteContent> = {
     privacy: {
       heading: 'Privacy Policy',
       intro:
-        'This policy explains what data this site collects, why, and what choices you have about it.',
+        'We value your privacy. This policy explains what information this site collects when you browse it, why, and what choices you have about it.',
       sections: [
         {
-          heading: 'What data we collect',
-          body: "If you submit the contact form, we receive the name, email, and message you enter, solely to reply to you. We don't share that data with third parties.",
+          heading: 'Information we collect',
+          body: "This site doesn't require any sign-up or personal data to browse it. The one exception is the contact form: if you submit it, we receive the name, email, and message you enter, solely to reply to you. We don't share that data with third parties.",
         },
         {
           heading: 'Cookies and Google Analytics',
-          body: "We use Google Analytics (GA4) to understand how many people visit the site and which pages they view. This service uses cookies, which are enabled automatically as you browse the site. If you'd rather not be tracked, you can block analytics cookies in your browser settings or with a blocking extension.",
+          body: 'To understand how the site is used and improve the browsing experience, we use Google Analytics. This tool lets us see aggregated statistics — such as the most visited pages, time spent on the site, browser type, or general country/city of access — without identifying you individually. Google Analytics uses cookies (small text files stored on your device) for this, which are enabled automatically as you browse the site.',
         },
         {
-          heading: 'Your rights',
-          body: 'You can request access to, correction of, or deletion of your data by writing to lucianopr87@gmail.com.',
+          heading: 'Managing and disabling cookies',
+          body: 'You can accept, reject, or configure cookies at any time from your browser’s privacy settings (Chrome, Firefox, Safari, Edge, etc.), or by installing the Google Analytics Opt-out Browser Add-on (tools.google.com/dlpage/gaoptout). Disabling these cookies won’t affect the site’s functionality or your access to its content.',
+        },
+        {
+          heading: 'Links to third-party sites',
+          body: "This site includes links to external sites, such as LinkedIn. Once you click one of those links and leave this site, we have no control over the site you're redirected to and aren't responsible for its terms or privacy practices.",
+        },
+        {
+          heading: 'Changes to this policy',
+          body: 'We may update this policy at any time to reflect legal changes or changes to how the site works. We recommend checking this page periodically. Last updated: August 2026.',
+        },
+        {
+          heading: 'Contact',
+          body: 'If you have questions about this policy, or want to request access to, correction of, or deletion of your data, write to us at lucianopr87@gmail.com.',
         },
       ],
     },
