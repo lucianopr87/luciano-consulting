@@ -11,6 +11,13 @@ const { locale, content, otherLocalePath } = Astro.props;
 const homePath = locale === 'es' ? '/' : '/en/';
 const otherLocale = locale === 'es' ? 'en' : 'es';
 const resolvedOtherLocalePath = otherLocalePath ?? (otherLocale === 'es' ? '/' : '/en/');
+
+const navLinks = [
+  { href: `${homePath}#services`, label: content.nav.services },
+  { href: `${homePath}#about`, label: content.nav.about },
+  { href: `${homePath}#experience`, label: content.nav.experience },
+  { href: `${homePath}#contact`, label: content.nav.contact },
+];
 ---
 
 <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
@@ -19,17 +26,56 @@ const resolvedOtherLocalePath = otherLocalePath ?? (otherLocale === 'es' ? '/' :
       <img src="/logo-horizontal-light.png" alt="Luciano Consulting" class="h-8 w-auto" />
     </a>
     <nav class="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
-      <a href={`${homePath}#services`} class="hover:text-slate-900">{content.nav.services}</a>
-      <a href={`${homePath}#about`} class="hover:text-slate-900">{content.nav.about}</a>
-      <a href={`${homePath}#experience`} class="hover:text-slate-900">{content.nav.experience}</a>
-      <a href={`${homePath}#contact`} class="hover:text-slate-900">{content.nav.contact}</a>
+      {navLinks.map((link) => (
+        <a href={link.href} class="hover:text-slate-900">{link.label}</a>
+      ))}
     </nav>
-    <a
-      href={resolvedOtherLocalePath}
-      class="rounded-full border border-slate-300 px-3 py-1 text-sm font-semibold text-slate-700 hover:border-slate-400 hover:text-slate-900"
-      hreflang={otherLocale}
-    >
-      {otherLocale.toUpperCase()}
-    </a>
+    <div class="flex items-center gap-3">
+      <a
+        href={resolvedOtherLocalePath}
+        class="rounded-full border border-slate-300 px-3 py-1 text-sm font-semibold text-slate-700 hover:border-slate-400 hover:text-slate-900"
+        hreflang={otherLocale}
+      >
+        {otherLocale.toUpperCase()}
+      </a>
+      <button
+        id="mobile-menu-toggle"
+        type="button"
+        class="-mr-2 rounded-md p-2 text-slate-700 md:hidden"
+        aria-label="Menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg id="mobile-menu-icon-open" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="mobile-menu-icon-close" class="hidden h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
   </div>
+  <nav id="mobile-menu" class="hidden flex-col border-t border-slate-200 bg-white px-6 py-2 text-sm font-medium text-slate-600 md:hidden">
+    {navLinks.map((link) => (
+      <a href={link.href} class="block py-3 hover:text-slate-900">{link.label}</a>
+    ))}
+  </nav>
 </header>
+
+<script>
+  const toggle = document.getElementById('mobile-menu-toggle');
+  const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('mobile-menu-icon-open');
+  const iconClose = document.getElementById('mobile-menu-icon-close');
+
+  const setOpen = (open: boolean) => {
+    menu?.classList.toggle('hidden', !open);
+    menu?.classList.toggle('flex', open);
+    iconOpen?.classList.toggle('hidden', open);
+    iconClose?.classList.toggle('hidden', !open);
+    toggle?.setAttribute('aria-expanded', String(open));
+  };
+
+  toggle?.addEventListener('click', () => setOpen(menu?.classList.contains('hidden') ?? false));
+  menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setOpen(false)));
+</script>
