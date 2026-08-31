@@ -51,7 +51,9 @@ Ninguna de estas variables se commitea con su valor real — los workflows las i
 - Corren en dos "proyectos": **Desktop Chromium** y **Mobile Chromium** (emulando un Pixel 5), para cubrir tanto el nav de desktop como el menú hamburguesa mobile.
 - El build usado para testear define valores de prueba *ficticios* para `PUBLIC_GA_ID`, `PUBLIC_GSC_VERIFICATION` y `PUBLIC_WEB3FORMS_ACCESS_KEY` (ver `playwright.config.ts`) — no son credenciales reales, solo lo necesario para que el banner de cookies y el snippet de GA se rendericen y puedan testearse. El envío del formulario de contacto se intercepta (`page.route`) para no pegarle a la API real de Web3Forms durante los tests.
 - Qué cubren:
-  - `site.spec.ts`: carga de home (es/en), switch de idioma, navegación a las páginas de privacidad desde el footer, página 404.
+  - `site.spec.ts`: carga de home (es/en) y página 404.
+  - `header.spec.ts`: el logo linkea al home del locale actual, el switch de idioma cambia de locale (con el `hreflang` correcto) y respeta la página actual (ej. desde `/privacy/` va a `/en/privacy/`, no al home), y los links del nav de desktop apuntan a la sección correcta.
+  - `footer.spec.ts`: texto de copyright con el año actual, y el link a la política de privacidad es correcto y navegable en ambos locales.
   - `cookie-consent.spec.ts`: el banner aparece en la primera visita, GA trackea igual desde el arranque, y "Entendido" oculta el banner de forma persistente.
   - `mobile-menu.spec.ts`: el menú hamburguesa se muestra/oculta según el viewport y funciona correctamente.
   - `contact-form.spec.ts`: envío exitoso y manejo de error del formulario (con la API mockeada).
