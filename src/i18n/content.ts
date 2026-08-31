@@ -61,8 +61,7 @@ export interface SiteContent {
   cookieConsent: {
     message: string;
     policyLinkText: string;
-    acceptLabel: string;
-    rejectLabel: string;
+    dismissLabel: string;
   };
   privacy: {
     heading: string;
@@ -189,10 +188,9 @@ export const content: Record<Locale, SiteContent> = {
       privacyLink: 'Política de Privacidad',
     },
     cookieConsent: {
-      message: 'Usamos cookies para entender cómo se usa este sitio.',
+      message: 'Este sitio usa Google Analytics para entender cómo se usa.',
       policyLinkText: 'Más información',
-      acceptLabel: 'Aceptar',
-      rejectLabel: 'Rechazar',
+      dismissLabel: 'Entendido',
     },
     privacy: {
       heading: 'Política de Privacidad',
@@ -205,7 +203,7 @@ export const content: Record<Locale, SiteContent> = {
         },
         {
           heading: 'Cookies y Google Analytics',
-          body: 'Usamos Google Analytics (GA4) para entender cuántas visitas recibe el sitio y qué páginas se consultan. Este servicio usa cookies. Las cookies de analytics sólo se activan si aceptás el banner de consentimiento que aparece al ingresar al sitio; podés rechazarlas y seguir navegando con normalidad.',
+          body: 'Usamos Google Analytics (GA4) para entender cuántas visitas recibe el sitio y qué páginas se consultan. Este servicio usa cookies, que se activan automáticamente al navegar el sitio. Si preferís no ser trackeado, podés bloquear las cookies de analytics desde la configuración de tu navegador o con una extensión de bloqueo.',
         },
         {
           heading: 'Tus derechos',
@@ -331,10 +329,9 @@ export const content: Record<Locale, SiteContent> = {
       privacyLink: 'Privacy Policy',
     },
     cookieConsent: {
-      message: 'We use cookies to understand how this site is used.',
+      message: 'This site uses Google Analytics to understand how it is used.',
       policyLinkText: 'Learn more',
-      acceptLabel: 'Accept',
-      rejectLabel: 'Reject',
+      dismissLabel: 'Got it',
     },
     privacy: {
       heading: 'Privacy Policy',
@@ -347,7 +344,7 @@ export const content: Record<Locale, SiteContent> = {
         },
         {
           heading: 'Cookies and Google Analytics',
-          body: "We use Google Analytics (GA4) to understand how many people visit the site and which pages they view. This service uses cookies. Analytics cookies are only enabled if you accept the consent banner shown when you arrive; you can reject them and keep browsing normally.",
+          body: "We use Google Analytics (GA4) to understand how many people visit the site and which pages they view. This service uses cookies, which are enabled automatically as you browse the site. If you'd rather not be tracked, you can block analytics cookies in your browser settings or with a blocking extension.",
         },
         {
           heading: 'Your rights',

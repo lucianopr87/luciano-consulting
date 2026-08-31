@@ -21,49 +21,26 @@ const privacyHref = locale === 'es' ? '/privacy/' : '/en/privacy/';
   </p>
   <div class="flex shrink-0 gap-3">
     <button
-      id="cookie-reject"
-      type="button"
-      class="rounded-full border border-slate-500 px-4 py-1.5 font-semibold text-slate-200 hover:border-slate-300"
-    >
-      {content.cookieConsent.rejectLabel}
-    </button>
-    <button
-      id="cookie-accept"
+      id="cookie-dismiss"
       type="button"
       class="rounded-full bg-white px-4 py-1.5 font-semibold text-brand-navy hover:bg-slate-200"
     >
-      {content.cookieConsent.acceptLabel}
+      {content.cookieConsent.dismissLabel}
     </button>
   </div>
 </div>
 
 <script>
-  declare function gtag(...args: unknown[]): void;
-
-  const CONSENT_KEY = 'cookie-consent';
+  const DISMISS_KEY = 'cookie-notice-dismissed';
   const banner = document.getElementById('cookie-consent');
-  const acceptButton = document.getElementById('cookie-accept');
-  const rejectButton = document.getElementById('cookie-reject');
+  const dismissButton = document.getElementById('cookie-dismiss');
 
-  const grantConsent = () => gtag('consent', 'update', { analytics_storage: 'granted' });
-  const showBanner = () => banner?.classList.replace('hidden', 'flex');
-  const hideBanner = () => banner?.classList.replace('flex', 'hidden');
-
-  const storedChoice = localStorage.getItem(CONSENT_KEY);
-  if (storedChoice === 'granted') {
-    grantConsent();
-  } else if (storedChoice !== 'denied') {
-    showBanner();
+  if (!localStorage.getItem(DISMISS_KEY)) {
+    banner?.classList.replace('hidden', 'flex');
   }
 
-  acceptButton?.addEventListener('click', () => {
-    grantConsent();
-    localStorage.setItem(CONSENT_KEY, 'granted');
-    hideBanner();
-  });
-
-  rejectButton?.addEventListener('click', () => {
-    localStorage.setItem(CONSENT_KEY, 'denied');
-    hideBanner();
+  dismissButton?.addEventListener('click', () => {
+    localStorage.setItem(DISMISS_KEY, '1');
+    banner?.classList.replace('flex', 'hidden');
   });
 </script>
