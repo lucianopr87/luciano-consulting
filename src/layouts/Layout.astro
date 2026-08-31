@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import CookieConsent from '../components/CookieConsent.astro';
 import type { Locale, SiteContent } from '../i18n/content';
 
 interface Props {
@@ -10,6 +11,8 @@ interface Props {
 
 const { locale, content, path } = Astro.props;
 const canonicalURL = new URL(path, Astro.site);
+const gaId = import.meta.env.PUBLIC_GA_ID ?? '';
+const gscVerification = import.meta.env.PUBLIC_GSC_VERIFICATION ?? '';
 
 const personJsonLd = {
   '@context': 'https://schema.org',
@@ -42,6 +45,7 @@ const personJsonLd = {
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href={canonicalURL} />
+    {gscVerification && <meta name="google-site-verification" content={gscVerification} />}
 
     <title>{content.meta.title}</title>
     <meta name="description" content={content.meta.description} />
@@ -66,8 +70,25 @@ const personJsonLd = {
     />
 
     <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+
+    {gaId && (
+      <script is:inline define:vars={{ gaId }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+          dataLayer.push(arguments);
+        }
+        gtag('consent', 'default', {
+          analytics_storage: 'denied',
+          wait_for_update: 500,
+        });
+        gtag('js', new Date());
+        gtag('config', gaId);
+      </script>
+    )}
+    {gaId && <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />}
   </head>
   <body class="bg-white text-slate-900 font-sans antialiased">
+    {gaId && <CookieConsent content={content} locale={locale} />}
     <slot />
   </body>
 </html>

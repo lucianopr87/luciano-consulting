@@ -4,26 +4,28 @@ import type { Locale, SiteContent } from '../i18n/content';
 interface Props {
   locale: Locale;
   content: SiteContent;
+  otherLocalePath?: string;
 }
 
-const { locale, content } = Astro.props;
+const { locale, content, otherLocalePath } = Astro.props;
+const homePath = locale === 'es' ? '/' : '/en/';
 const otherLocale = locale === 'es' ? 'en' : 'es';
-const otherLocalePath = otherLocale === 'es' ? '/' : '/en/';
+const resolvedOtherLocalePath = otherLocalePath ?? (otherLocale === 'es' ? '/' : '/en/');
 ---
 
 <header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
   <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-    <a href={locale === 'es' ? '/' : '/en/'}>
+    <a href={homePath}>
       <img src="/logo-horizontal-light.png" alt="Luciano Consulting" class="h-8 w-auto" />
     </a>
     <nav class="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
-      <a href="#services" class="hover:text-slate-900">{content.nav.services}</a>
-      <a href="#about" class="hover:text-slate-900">{content.nav.about}</a>
-      <a href="#experience" class="hover:text-slate-900">{content.nav.experience}</a>
-      <a href="#contact" class="hover:text-slate-900">{content.nav.contact}</a>
+      <a href={`${homePath}#services`} class="hover:text-slate-900">{content.nav.services}</a>
+      <a href={`${homePath}#about`} class="hover:text-slate-900">{content.nav.about}</a>
+      <a href={`${homePath}#experience`} class="hover:text-slate-900">{content.nav.experience}</a>
+      <a href={`${homePath}#contact`} class="hover:text-slate-900">{content.nav.contact}</a>
     </nav>
     <a
-      href={otherLocalePath}
+      href={resolvedOtherLocalePath}
       class="rounded-full border border-slate-300 px-3 py-1 text-sm font-semibold text-slate-700 hover:border-slate-400 hover:text-slate-900"
       hreflang={otherLocale}
     >

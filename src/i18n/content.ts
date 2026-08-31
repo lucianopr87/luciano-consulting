@@ -56,6 +56,18 @@ export interface SiteContent {
   };
   footer: {
     text: string;
+    privacyLink: string;
+  };
+  cookieConsent: {
+    message: string;
+    policyLinkText: string;
+    acceptLabel: string;
+    rejectLabel: string;
+  };
+  privacy: {
+    heading: string;
+    intro: string;
+    sections: { heading: string; body: string }[];
   };
 }
 
@@ -174,6 +186,32 @@ export const content: Record<Locale, SiteContent> = {
     },
     footer: {
       text: 'Luciano Perez Ruiz — Consultoría IT',
+      privacyLink: 'Política de Privacidad',
+    },
+    cookieConsent: {
+      message: 'Usamos cookies para entender cómo se usa este sitio.',
+      policyLinkText: 'Más información',
+      acceptLabel: 'Aceptar',
+      rejectLabel: 'Rechazar',
+    },
+    privacy: {
+      heading: 'Política de Privacidad',
+      intro:
+        'Esta política explica qué datos se recolectan en este sitio, con qué fin, y qué opciones tenés al respecto.',
+      sections: [
+        {
+          heading: 'Qué datos recolectamos',
+          body: 'Si completás el formulario de contacto, recibimos el nombre, email y mensaje que ingreses, únicamente para poder responderte. No compartimos esos datos con terceros.',
+        },
+        {
+          heading: 'Cookies y Google Analytics',
+          body: 'Usamos Google Analytics (GA4) para entender cuántas visitas recibe el sitio y qué páginas se consultan. Este servicio usa cookies. Las cookies de analytics sólo se activan si aceptás el banner de consentimiento que aparece al ingresar al sitio; podés rechazarlas y seguir navegando con normalidad.',
+        },
+        {
+          heading: 'Tus derechos',
+          body: 'Podés pedir acceso, corrección o borrado de tus datos escribiendo a lucianopr87@gmail.com.',
+        },
+      ],
     },
   },
   en: {
@@ -290,6 +328,32 @@ export const content: Record<Locale, SiteContent> = {
     },
     footer: {
       text: 'Luciano Perez Ruiz — IT Consulting',
+      privacyLink: 'Privacy Policy',
+    },
+    cookieConsent: {
+      message: 'We use cookies to understand how this site is used.',
+      policyLinkText: 'Learn more',
+      acceptLabel: 'Accept',
+      rejectLabel: 'Reject',
+    },
+    privacy: {
+      heading: 'Privacy Policy',
+      intro:
+        'This policy explains what data this site collects, why, and what choices you have about it.',
+      sections: [
+        {
+          heading: 'What data we collect',
+          body: "If you submit the contact form, we receive the name, email, and message you enter, solely to reply to you. We don't share that data with third parties.",
+        },
+        {
+          heading: 'Cookies and Google Analytics',
+          body: "We use Google Analytics (GA4) to understand how many people visit the site and which pages they view. This service uses cookies. Analytics cookies are only enabled if you accept the consent banner shown when you arrive; you can reject them and keep browsing normally.",
+        },
+        {
+          heading: 'Your rights',
+          body: 'You can request access to, correction of, or deletion of your data by writing to lucianopr87@gmail.com.',
+        },
+      ],
     },
   },
 };

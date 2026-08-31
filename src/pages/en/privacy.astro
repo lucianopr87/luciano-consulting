@@ -1,0 +1,26 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { content } from '../../i18n/content';
+
+const locale = 'en';
+const pageContent = content[locale];
+---
+
+<Layout locale={locale} content={pageContent} path="/en/privacy/">
+  <Header locale={locale} content={pageContent} otherLocalePath="/privacy/" />
+  <main class="mx-auto max-w-3xl px-6 py-24">
+    <h1 class="text-3xl font-bold text-slate-900">{pageContent.privacy.heading}</h1>
+    <p class="mt-4 text-slate-600">{pageContent.privacy.intro}</p>
+    {
+      pageContent.privacy.sections.map((section) => (
+        <section class="mt-8">
+          <h2 class="text-xl font-semibold text-slate-900">{section.heading}</h2>
+          <p class="mt-2 text-slate-600">{section.body}</p>
+        </section>
+      ))
+    }
+  </main>
+  <Footer content={pageContent} locale={locale} />
+</Layout>
