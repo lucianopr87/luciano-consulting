@@ -38,14 +38,18 @@ const privacyHref = locale === 'es' ? '/privacy/' : '/en/privacy/';
 </div>
 
 <script>
-  declare function gtag(...args: unknown[]): void;
+  declare global {
+    interface Window {
+      gtag?: (...args: unknown[]) => void;
+    }
+  }
 
   const CONSENT_KEY = 'cookie-consent';
   const banner = document.getElementById('cookie-consent');
   const acceptButton = document.getElementById('cookie-accept');
   const rejectButton = document.getElementById('cookie-reject');
 
-  const grantConsent = () => gtag('consent', 'update', { analytics_storage: 'granted' });
+  const grantConsent = () => window.gtag?.('consent', 'update', { analytics_storage: 'granted' });
   const showBanner = () => banner?.classList.replace('hidden', 'flex');
   const hideBanner = () => banner?.classList.replace('flex', 'hidden');
 
