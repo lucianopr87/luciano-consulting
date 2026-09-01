@@ -11,6 +11,8 @@ Conocí un proyecto que creció y creció en funcionalidades durante meses. Cada
 
 Ese patrón lo vi repetirse con distintos nombres y en distintos contextos, y cada vez confirma lo mismo: los proyectos no fracasan porque el equipo eligió mal el framework o la base de datos. A veces pasa, pero en mi experiencia es el error menos frecuente. Fracasan porque nadie se compromete a una fecha, y sin fecha, el alcance no tiene techo. Cada semana aparece algo que "hace sentido" agregar antes de lanzar, y ese lanzamiento — que es el único momento en que el proyecto empieza a aprender de la realidad — se sigue postergando.
 
+**La paradoja de la IA en los MVPs**
+
 Acá hay algo contraintuitivo que vale la pena mencionar, sobre todo ahora: la IA generativa hizo que construir sea más rápido que nunca, y eso debería significar que se lanza antes, no después. Pero en la práctica pasa lo contrario en muchos equipos — como es más fácil y más barato agregar una feature más, se agregan más features antes de salir, en vez de aprovechar esa velocidad para llegar antes al mercado y ajustar con datos reales. La misma herramienta que debería acortar el camino al lanzamiento, lo alarga.
 
 Mi postura acá es simple: comprometerse a una fecha de lanzamiento no es una imprudencia, es la disciplina que evita que el alcance crezca sin límite. Y esa fecha no tiene que coincidir con "cuando esté perfecto" — tiene que coincidir con el momento en que ya podés testear tu solución principal contra usuarios reales. Todo lo que no sea necesario para esa prueba, espera.
