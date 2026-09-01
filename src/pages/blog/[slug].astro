@@ -1,0 +1,44 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { content } from '../../i18n/content';
+import { getCollection, render } from 'astro:content';
+
+const locale = 'es';
+const pageContent = content[locale];
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => data.lang === 'es' && !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const dateFormatter = new Intl.DateTimeFormat('es-AR', { dateStyle: 'long', timeZone: 'UTC' });
+---
+
+<Layout
+  locale={locale}
+  content={pageContent}
+  path={`/blog/${post.id}/`}
+  title={`${post.data.title} — ${pageContent.meta.title}`}
+  description={post.data.description}
+>
+  <Header locale={locale} content={pageContent} otherLocalePath="/en/blog/" />
+  <main class="mx-auto max-w-3xl px-6 py-24">
+    <a href="/blog/" class="text-sm font-medium text-slate-500 hover:text-slate-900">
+      {pageContent.blog.backLink}
+    </a>
+    <h1 class="mt-4 text-3xl font-bold text-slate-900">{post.data.title}</h1>
+    <p class="mt-2 text-sm text-slate-400">{dateFormatter.format(post.data.pubDate)}</p>
+    <div class="prose mt-10">
+      <Content />
+    </div>
+  </main>
+  <Footer content={pageContent} locale={locale} />
+</Layout>

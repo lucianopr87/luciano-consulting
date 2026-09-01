@@ -10,3 +10,43 @@
 html {
   scroll-behavior: smooth;
 }
+
+.prose {
+  color: var(--color-slate-600);
+}
+
+.prose p {
+  margin-top: 1.25em;
+}
+
+.prose p:first-child {
+  margin-top: 0;
+}
+
+.prose strong {
+  color: var(--color-slate-900);
+  font-weight: 600;
+}
+
+.prose ol,
+.prose ul {
+  margin-top: 1.25em;
+  padding-left: 1.5em;
+}
+
+.prose ol {
+  list-style-type: decimal;
+}
+
+.prose ul {
+  list-style-type: disc;
+}
+
+.prose li + li {
+  margin-top: 0.5em;
+}
+
+.prose a {
+  color: var(--color-brand-blue);
+  text-decoration: underline;
+}

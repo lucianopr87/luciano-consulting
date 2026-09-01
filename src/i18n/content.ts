@@ -20,6 +20,7 @@ export interface SiteContent {
     about: string;
     experience: string;
     contact: string;
+    blog: string;
   };
   hero: {
     eyebrow: string;
@@ -68,6 +69,12 @@ export interface SiteContent {
     intro: string;
     sections: { heading: string; body: string }[];
   };
+  blog: {
+    heading: string;
+    intro: string;
+    backLink: string;
+    emptyState: string;
+  };
 }
 
 export const content: Record<Locale, SiteContent> = {
@@ -82,6 +89,7 @@ export const content: Record<Locale, SiteContent> = {
       about: 'Sobre mí',
       experience: 'Experiencia',
       contact: 'Contacto',
+      blog: 'Blog',
     },
     hero: {
       eyebrow: 'Consultoría IT · Desarrollo Full Stack y Gestión de Proyectos',
@@ -223,6 +231,12 @@ export const content: Record<Locale, SiteContent> = {
         },
       ],
     },
+    blog: {
+      heading: 'Blog',
+      intro: 'Notas sobre desarrollo, gestión de proyectos y lo que aprendo trabajando con founders y equipos.',
+      backLink: '← Volver al blog',
+      emptyState: 'Todavía no hay artículos publicados. Volvé pronto.',
+    },
   },
   en: {
     meta: {
@@ -235,6 +249,7 @@ export const content: Record<Locale, SiteContent> = {
       about: 'About',
       experience: 'Experience',
       contact: 'Contact',
+      blog: 'Blog',
     },
     hero: {
       eyebrow: 'IT Consulting · Full Stack Development & Project Leadership',
@@ -375,6 +390,12 @@ export const content: Record<Locale, SiteContent> = {
           body: 'If you have questions about this policy, or want to request access to, correction of, or deletion of your data, write to us at lucianopr87@gmail.com.',
         },
       ],
+    },
+    blog: {
+      heading: 'Blog',
+      intro: 'Notes on development, project management, and what I learn working with founders and teams.',
+      backLink: '← Back to blog',
+      emptyState: 'No articles published yet. Check back soon.',
     },
   },
 };
