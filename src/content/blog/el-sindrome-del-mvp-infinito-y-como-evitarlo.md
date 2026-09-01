@@ -1,5 +1,5 @@
 ---
-title: "Por qué tu MVP no sale a producción (y no es por el stack)"
+title: "El síndrome del MVP infinito y cómo evitarlo"
 description: "Los proyectos no fracasan por elegir mal la tecnología. Fracasan porque nadie se compromete a una fecha, y sin fecha el alcance no tiene techo."
 pubDate: 2026-09-01
 tags: ["startups", "gestión de proyectos", "mvp", "lanzamiento", "ia"]
@@ -20,7 +20,7 @@ Pero comprometerse a una fecha y lanzar temprano no alcanza si después no sabé
 ¿Cómo lo bajo a la práctica cuando trabajo con un founder?
 
 1. **La fecha se define primero, el alcance después — no al revés.** Si el alcance define la fecha, siempre va a haber una razón para correrla. Si la fecha está fija, el alcance se negocia contra ella.
-2. **Identifico cuál es "la solución principal" que hay que validar**, y todo lo que no aporte directamente a esa validación queda afuera del v1, sin excepción. No importa cuán bien pensada esté una feature — si no es necesaria para la prueba con usuarios reales, es v2. Obviamente en el camino se van haciendo concesiones y pequeños ajustes, ese es el espíritu de la metodología agile, pero la atención y el foco debe estar comprometida al MVP y la fecha si queremos maximizar las probabilidades de éxito.
+2. **Identifico cuál es "la solución principal" que hay que validar**, y todo lo que no aporte directamente a esa validación queda afuera del v1, sin excepción. No importa cuán bien pensada esté una feature — si no es necesaria para la prueba con usuarios reales, es v2. Obviamente en el camino se van haciendo concesiones y pequeños ajustes, ese es el espíritu de la metodología agile, pero la atención y el foco deben estar comprometidas al MVP y la fecha de salida si queremos maximizar las probabilidades de éxito.
 3. **Definimos las métricas antes de lanzar, no después.** Dos o tres números concretos que van a decir si la solución principal funcionó o no — activación, finalización del flujo core, retención a la semana, lo que corresponda al caso. Si no se puede medir, no se puede saber si el MVP funcionó; solo se puede opinar.
 4. **Aprovecho la velocidad que da la IA para el lado correcto: llegar antes a testear, no para meter más cosas antes de testear.** Hoy se puede prototipar y ajustar un flujo en horas, no en semanas — eso es una razón más para salir rápido y aprender rápido, no para acumular funcionalidades "mientras se puede".
 5. **Cada feature nueva que aparece durante el desarrollo se anota, no se discute en el momento.** Va a un backlog de v2. Discutirla ahí, después del lanzamiento, con datos reales de usuarios y contra las métricas que definiste, es una conversación completamente distinta — y mejor — que discutirla a ciegas antes de lanzar.
