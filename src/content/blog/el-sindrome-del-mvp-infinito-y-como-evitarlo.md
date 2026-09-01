@@ -4,7 +4,9 @@ description: "Los proyectos no fracasan por elegir mal la tecnología. Fracasan 
 pubDate: 2026-09-01
 tags: ["startups", "gestión de proyectos", "mvp", "lanzamiento", "ia"]
 lang: "es"
-draft: true
+draft: false
+coverImage: "./mvp-infinito-cover.jpg"
+coverImageAlt: "Un cohete llamado MVP, tachado y cubierto de carteles de features (IA, integraciones, dashboard), con un letrero de fecha de lanzamiento que tacha 'HOY' y dice 'PRÓXIMA SEMANA', mientras un cohete rival mucho más simple, V1 Core, ya está despegando de fondo."
 ---
 
 Conocí un proyecto que creció y creció en funcionalidades durante meses. Cada sprint sumaba algo nuevo: una integración más, un flujo alternativo, una mejora "importante" antes de mostrárselo al mundo exterior. El problema no era la calidad de lo que se construía — era muy buena. El problema es que todavía no había salido al mercado. Ningún usuario real lo había tocado. El alcance crecía exponencialmente y la fecha de lanzamiento no existía, o se corría cada vez que "faltaba una cosa más". Existía este sentimiento "cómodo" de que la fecha era charlable, todo se justificaba por los nuevos cambios introducidos.
