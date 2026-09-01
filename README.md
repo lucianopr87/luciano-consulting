@@ -8,6 +8,9 @@ Sitio de consultoría IT, bilingüe (ES/EN), construido con [Astro](https://docs
 /
 ├── src/
 │   ├── pages/           # index.astro (es), en/index.astro, privacy.astro, en/privacy.astro, 404.astro
+│   │                     # blog/index.astro + blog/[slug].astro (es), en/blog/ (en)
+│   ├── content/blog/    # posts del blog (Markdown, un archivo por post, ver sección Blog abajo)
+│   ├── content.config.ts # schema de la content collection "blog"
 │   ├── components/      # Header, Hero, Services, About, Experience, Contact, Footer, CookieConsent
 │   ├── layouts/Layout.astro
 │   └── i18n/content.ts  # todo el copy del sitio, por locale (es/en)
@@ -45,6 +48,14 @@ Ninguna de estas variables se commitea con su valor real — los workflows las i
 - El copy de la política de privacidad (`content.ts` → `privacy`) explica esto mismo a los visitantes, y menciona cómo bloquear las cookies de Analytics desde el navegador si alguien no quiere ser trackeado.
 - Verificación de Google Search Console: el meta tag se agrega en el `<head>` vía `PUBLIC_GSC_VERIFICATION`, independiente de si GA está activo o no (para que la verificación del sitio no dependa del estado de Analytics).
 
+## Blog
+
+- Los posts son archivos Markdown en `src/content/blog/`, uno por artículo, con frontmatter tipado (`title`, `description`, `pubDate`, `tags`, `lang`, `draft`) validado por el schema de `src/content.config.ts`.
+- Bilingüe vía el campo `lang` en el frontmatter (`'es' | 'en'`), no por carpetas separadas — cada ruta filtra la colección por `lang` y locale.
+- `draft: true` (default) excluye el post del listado y de la generación de su página de detalle, en cualquier ambiente. Un post recién creado no es público hasta que se cambia a `draft: false` explícitamente.
+- Rutas: `/blog/` y `/blog/[slug]/` en español, `/en/blog/` y `/en/blog/[slug]/` en inglés. El slug es el nombre del archivo (sin extensión).
+- El body en Markdown se renderiza con estilos mínimos definidos en `.prose` (`src/styles/global.css`) — el sitio no usa el plugin de tipografía de Tailwind, solo un puñado de reglas a mano para párrafos, listas, negritas y links.
+
 ## Testing automatizado (Playwright)
 
 - Los tests viven en `e2e/*.spec.ts` y corren contra un build real del sitio (`npm run build` + `npx serve dist`, ver `playwright.config.ts`), no contra el dev server. Se usa `serve` en vez de `astro preview` porque en este proyecto `astro preview` se demoniza en background y el proceso termina enseguida, lo que rompe el arranque del `webServer` de Playwright.
@@ -57,5 +68,6 @@ Ninguna de estas variables se commitea con su valor real — los workflows las i
   - `cookie-consent.spec.ts`: el banner aparece en la primera visita, GA trackea igual desde el arranque, y "Entendido" oculta el banner de forma persistente.
   - `mobile-menu.spec.ts`: el menú hamburguesa se muestra/oculta según el viewport y funciona correctamente.
   - `contact-form.spec.ts`: envío exitoso y manejo de error del formulario (con la API mockeada).
+  - `blog.spec.ts`: el link "Blog" del nav lleva al índice del locale actual, y el switch de idioma en el blog lleva al índice traducido (no al home).
 - **Se disparan automáticamente en cada push a `develop`**, como un job `test` en `.github/workflows/deploy-staging.yml` — el job `deploy` a staging depende de que los tests pasen (`needs: test`). Si un test falla, no se deploya esa versión a staging.
 - Para correrlos en local: `npm run test:e2e` (Playwright levanta el preview server solo, según `playwright.config.ts`).
