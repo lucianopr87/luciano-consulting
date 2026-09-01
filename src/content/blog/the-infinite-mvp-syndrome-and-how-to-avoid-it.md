@@ -4,7 +4,7 @@ description: "Projects don't fail because of the wrong tech stack. They fail bec
 pubDate: 2026-09-01
 tags: ["startups", "project management", "mvp", "launch", "ai"]
 lang: "en"
-draft: true
+draft: false
 coverImage: "./mvp-infinito-cover.jpg"
 coverImageAlt: "A rocket named MVP, crossed out and covered in feature signs (AI, integrations, dashboard), with a launch-date board crossing out 'TODAY' in favor of 'NEXT WEEK,' while a much simpler rival rocket, V1 Core, is already lifting off in the background."
 ---
