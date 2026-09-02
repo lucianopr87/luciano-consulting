@@ -34,4 +34,4 @@ La pregunta que le hago a cualquier founder que duda si algo va en el MVP es sie
 
 El proyecto que crece en features sin haber salido nunca al mercado no está "casi listo". Está evitando el momento en que alguien de afuera le va a decir si funciona o no — con datos, no con opiniones. Cuanto antes pase eso, antes vas a saber en qué invertir de verdad tu tiempo — y hoy, con lo rápido que se puede iterar, no hay excusa para no llegar a ese momento antes.
 
-Si tu proyecto lleva meses "casi listo", hablemos.
+Si tu proyecto lleva meses "casi listo", [hablemos](/#contact).

@@ -34,4 +34,4 @@ The question I ask any founder who's unsure whether something belongs in the MVP
 
 A project that keeps growing in features without ever shipping isn't "almost ready." It's avoiding the moment when someone outside the team gets to say whether it works — with data, not opinions. The sooner that happens, the sooner you'll know where to actually invest your time — and today, with how fast you can iterate, there's no excuse not to get there sooner.
 
-If your project has been "almost ready" for months, let's talk.
+If your project has been "almost ready" for months, [let's talk](/en/#contact).
