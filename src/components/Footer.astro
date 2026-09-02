@@ -11,7 +11,7 @@ const privacyHref = locale === 'es' ? '/privacy/' : '/en/privacy/';
 ---
 
 <footer class="bg-brand-navy py-8 text-center text-sm text-slate-400">
-  <p>{content.footer.text} · {new Date().getFullYear()}</p>
+  <p>{content.footer.text} · {content.footer.location} · {new Date().getFullYear()}</p>
   <p class="mt-2">
     <a href={privacyHref} class="underline hover:text-slate-200">{content.footer.privacyLink}</a>
   </p>

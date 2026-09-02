@@ -1,6 +1,7 @@
 ---
 title: "El síndrome del MVP infinito y cómo evitarlo"
 description: "Los proyectos no fracasan por elegir mal la tecnología. Fracasan porque nadie se compromete a una fecha, y sin fecha el alcance no tiene techo."
+author: "Luciano Perez Ruiz"
 pubDate: 2026-09-01
 tags: ["startups", "gestión de proyectos", "mvp", "lanzamiento", "ia"]
 lang: "es"

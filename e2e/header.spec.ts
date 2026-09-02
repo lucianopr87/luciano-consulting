@@ -2,11 +2,11 @@ import { test, expect } from '@playwright/test';
 
 test('logo links to the home page for the current locale', async ({ page }) => {
   await page.goto('/privacy/');
-  await page.getByRole('link', { name: 'Luciano Consulting' }).click();
+  await page.getByRole('link', { name: 'Consulting IT' }).click();
   await expect(page).toHaveURL(/\/$/);
 
   await page.goto('/en/privacy/');
-  await page.getByRole('link', { name: 'Luciano Consulting' }).click();
+  await page.getByRole('link', { name: 'Consulting IT' }).click();
   await expect(page).toHaveURL(/\/en\/$/);
 });
 
