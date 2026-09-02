@@ -21,3 +21,15 @@ test('language switcher on the blog index links to the translated blog index, no
   await page.getByRole('link', { name: 'ES', exact: true }).click();
   await expect(page).toHaveURL(/\/blog\/$/);
 });
+
+test('the closing CTA in a post links to the contact form for the current locale', async ({ page }) => {
+  await page.goto('/blog/el-sindrome-del-mvp-infinito-y-como-evitarlo/');
+  await page.getByRole('link', { name: 'hablemos' }).click();
+  await expect(page).toHaveURL(/\/#contact$/);
+  await expect(page.locator('#contact')).toBeInViewport();
+
+  await page.goto('/en/blog/the-infinite-mvp-syndrome-and-how-to-avoid-it/');
+  await page.getByRole('link', { name: 'let’s talk' }).click();
+  await expect(page).toHaveURL(/\/en\/#contact$/);
+  await expect(page.locator('#contact')).toBeInViewport();
+});
