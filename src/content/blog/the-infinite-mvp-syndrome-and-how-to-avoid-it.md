@@ -1,6 +1,7 @@
 ---
 title: "The Infinite MVP Syndrome (and How to Avoid It)"
 description: "Projects don't fail because of the wrong tech stack. They fail because nobody commits to a launch date — and without a date, scope has no ceiling."
+author: "Luciano Perez Ruiz"
 pubDate: 2026-09-01
 tags: ["startups", "project management", "mvp", "launch", "ai"]
 lang: "en"

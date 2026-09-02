@@ -54,9 +54,11 @@ export interface SiteContent {
     directHeading: string;
     email: string;
     linkedin: string;
+    location: string;
   };
   footer: {
     text: string;
+    location: string;
     privacyLink: string;
   };
   cookieConsent: {
@@ -74,6 +76,7 @@ export interface SiteContent {
     intro: string;
     backLink: string;
     emptyState: string;
+    byline: string;
   };
 }
 
@@ -190,9 +193,11 @@ export const content: Record<Locale, SiteContent> = {
       directHeading: 'O escribime directo',
       email: 'lucianopr87@gmail.com',
       linkedin: 'linkedin.com/in/luciano-perez-ruiz',
+      location: 'Santa Fe, Argentina',
     },
     footer: {
       text: 'Luciano Perez Ruiz — Consultoría IT',
+      location: 'Santa Fe, Argentina',
       privacyLink: 'Política de Privacidad',
     },
     cookieConsent: {
@@ -236,6 +241,7 @@ export const content: Record<Locale, SiteContent> = {
       intro: 'Notas sobre desarrollo, gestión de proyectos y lo que aprendo trabajando con founders y equipos.',
       backLink: '← Volver al blog',
       emptyState: 'Todavía no hay artículos publicados. Volvé pronto.',
+      byline: 'Por',
     },
   },
   en: {
@@ -350,9 +356,11 @@ export const content: Record<Locale, SiteContent> = {
       directHeading: 'Or reach out directly',
       email: 'lucianopr87@gmail.com',
       linkedin: 'linkedin.com/in/luciano-perez-ruiz',
+      location: 'Santa Fe, Argentina',
     },
     footer: {
       text: 'Luciano Perez Ruiz — IT Consulting',
+      location: 'Santa Fe, Argentina',
       privacyLink: 'Privacy Policy',
     },
     cookieConsent: {
@@ -396,6 +404,7 @@ export const content: Record<Locale, SiteContent> = {
       intro: 'Notes on development, project management, and what I learn working with founders and teams.',
       backLink: '← Back to blog',
       emptyState: 'No articles published yet. Check back soon.',
+      byline: 'By',
     },
   },
 };

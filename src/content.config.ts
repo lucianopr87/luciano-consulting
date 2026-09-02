@@ -7,6 +7,7 @@ const blog = defineCollection({
     z.object({
       title: z.string(),
       description: z.string(),
+      author: z.string().default('Luciano Perez Ruiz'),
       pubDate: z.coerce.date(),
       tags: z.array(z.string()),
       lang: z.enum(['es', 'en']),
