@@ -47,6 +47,7 @@ Ninguna de estas variables se commitea con su valor real — los workflows las i
 - El banner que aparece (`src/components/CookieConsent.astro`) es **puramente informativo**: avisa que se usa Google Analytics y linkea a `/privacy/`. El botón "Entendido" no afecta el tracking en absoluto — solo guarda `cookie-notice-dismissed` en `localStorage` para no volver a mostrar el aviso en ese navegador.
 - El copy de la política de privacidad (`content.ts` → `privacy`) explica esto mismo a los visitantes, y menciona cómo bloquear las cookies de Analytics desde el navegador si alguien no quiere ser trackeado.
 - Verificación de Google Search Console: el meta tag se agrega en el `<head>` vía `PUBLIC_GSC_VERIFICATION`, independiente de si GA está activo o no (para que la verificación del sitio no dependa del estado de Analytics).
+- Al enviarse el formulario de contacto con éxito se dispara un evento GA4 `generate_lead` (`src/components/Contact.astro`). Como en staging no hay `PUBLIC_GA_ID`, ahí no se puede ver el evento en tiempo real — la cobertura real está en el e2e (`e2e/contact-form.spec.ts`, que intercepta `window.gtag`). En GA4 hay que marcarlo manualmente como conversión (Admin → Eventos) si no aparece marcado por default.
 
 ## Blog
 

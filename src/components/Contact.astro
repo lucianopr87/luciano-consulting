@@ -105,7 +105,10 @@ const accessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
           status.classList.toggle('text-red-400', !result.success);
         }
 
-        if (result.success) form.reset();
+        if (result.success) {
+          form.reset();
+          window.gtag?.('event', 'generate_lead');
+        }
       } catch {
         if (status) {
           status.textContent = errorMessage;
