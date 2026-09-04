@@ -85,6 +85,8 @@ export interface SiteContent {
     timezoneNote: string;
     loading: string;
     dayLabel: string;
+    timeLabel: string;
+    timePlaceholder: string;
     noSlots: string;
     loadError: string;
     formName: string;
@@ -269,6 +271,8 @@ export const content: Record<Locale, SiteContent> = {
       timezoneNote: 'Horarios en hora de Argentina (GMT-3).',
       loading: 'Buscando horarios disponibles...',
       dayLabel: 'Día',
+      timeLabel: 'Horario',
+      timePlaceholder: 'Elegí un horario',
       noSlots: 'No hay horarios disponibles por el momento. Escribime directamente para coordinar.',
       loadError: 'No se pudieron cargar los horarios disponibles. Probá de nuevo en un rato.',
       formName: 'Nombre',
@@ -451,6 +455,8 @@ export const content: Record<Locale, SiteContent> = {
       timezoneNote: 'Times shown in Argentina time (GMT-3).',
       loading: 'Loading available slots...',
       dayLabel: 'Day',
+      timeLabel: 'Time',
+      timePlaceholder: 'Pick a time',
       noSlots: "No slots available right now. Reach out directly and we'll coordinate.",
       loadError: 'Could not load available slots. Please try again shortly.',
       formName: 'Name',

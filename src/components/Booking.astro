@@ -21,6 +21,7 @@ const bookingEnv = import.meta.env.PUBLIC_BOOKING_ENV ?? 'production';
     data-env={bookingEnv}
     data-no-slots={content.booking.noSlots}
     data-load-error={content.booking.loadError}
+    data-time-placeholder={content.booking.timePlaceholder}
   >
     <div class="slots-step">
       <div class="slots-status flex items-center gap-2 text-sm text-slate-500">
@@ -31,12 +32,23 @@ const bookingEnv = import.meta.env.PUBLIC_BOOKING_ENV ?? 'production';
         <span class="slots-status-text">{content.booking.loading}</span>
       </div>
       <div class="day-picker hidden">
-        <label for="booking-day" class="mb-1 block text-sm font-medium text-slate-700">{content.booking.dayLabel}</label>
-        <select
-          id="booking-day"
-          class="day-select w-full max-w-xs rounded-lg border border-slate-300 px-4 py-2.5 text-slate-900 focus:border-brand-teal focus:outline-none"
-        ></select>
-        <div class="times-list mt-4 flex flex-wrap gap-2"></div>
+        <div>
+          <label for="booking-day" class="mb-1 block text-sm font-medium text-slate-700">{content.booking.dayLabel}</label>
+          <select
+            id="booking-day"
+            class="day-select w-full max-w-xs rounded-lg border border-slate-300 px-4 py-2.5 text-slate-900 focus:border-brand-teal focus:outline-none"
+          ></select>
+        </div>
+
+        <div class="mt-4">
+          <label for="booking-time" class="mb-1 block text-sm font-medium text-slate-700">{content.booking.timeLabel}</label>
+          <select
+            id="booking-time"
+            class="time-select w-full max-w-xs rounded-lg border border-slate-300 px-4 py-2.5 text-slate-900 focus:border-brand-teal focus:outline-none"
+          >
+            <option value="">{content.booking.timePlaceholder}</option>
+          </select>
+        </div>
       </div>
     </div>
 
@@ -118,7 +130,7 @@ const bookingEnv = import.meta.env.PUBLIC_BOOKING_ENV ?? 'production';
     const loadingSpinner = widget.querySelector<HTMLElement>('.loading-spinner');
     const dayPicker = widget.querySelector<HTMLDivElement>('.day-picker');
     const daySelect = widget.querySelector<HTMLSelectElement>('.day-select');
-    const timesList = widget.querySelector<HTMLDivElement>('.times-list');
+    const timeSelect = widget.querySelector<HTMLSelectElement>('.time-select');
     const form = widget.querySelector<HTMLFormElement>('.booking-form');
     const selectedSlotLabel = widget.querySelector<HTMLParagraphElement>('.selected-slot-label');
     const status = widget.querySelector<HTMLParagraphElement>('.form-status');
@@ -160,16 +172,20 @@ const bookingEnv = import.meta.env.PUBLIC_BOOKING_ENV ?? 'production';
     };
 
     const showTimesForDay = (key: string) => {
-      if (!timesList) return;
-      timesList.innerHTML = '';
+      if (!timeSelect) return;
+      timeSelect.innerHTML = '';
+
+      const placeholder = document.createElement('option');
+      placeholder.value = '';
+      placeholder.textContent = widget.dataset.timePlaceholder ?? '';
+      placeholder.selected = true;
+      timeSelect.appendChild(placeholder);
+
       (slotsByDay.get(key) ?? []).forEach((slot) => {
-        const button = document.createElement('button');
-        button.type = 'button';
-        button.textContent = formatTime(slot);
-        button.className =
-          'rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 hover:border-brand-teal hover:text-brand-teal';
-        button.addEventListener('click', () => selectSlot(slot));
-        timesList.appendChild(button);
+        const option = document.createElement('option');
+        option.value = slot.start;
+        option.textContent = formatTime(slot);
+        timeSelect.appendChild(option);
       });
     };
 
@@ -214,6 +230,16 @@ const bookingEnv = import.meta.env.PUBLIC_BOOKING_ENV ?? 'production';
       showTimesForDay(daySelect.value);
     });
 
+    timeSelect?.addEventListener('change', () => {
+      if (!timeSelect.value) {
+        selectedSlot = null;
+        form?.classList.add('hidden');
+        return;
+      }
+      const slot = (slotsByDay.get(daySelect?.value ?? '') ?? []).find((candidate) => candidate.start === timeSelect.value);
+      if (slot) selectSlot(slot);
+    });
+
     const loadSlots = async () => {
       try {
         const response = await fetch(endpoint, { method: 'GET' });
@@ -229,6 +255,7 @@ const bookingEnv = import.meta.env.PUBLIC_BOOKING_ENV ?? 'production';
     backButton?.addEventListener('click', () => {
       form?.classList.add('hidden');
       selectedSlot = null;
+      if (timeSelect) timeSelect.value = '';
     });
 
     form?.addEventListener('submit', async (event) => {
@@ -261,6 +288,7 @@ const bookingEnv = import.meta.env.PUBLIC_BOOKING_ENV ?? 'production';
 
         if (result.success) {
           selectedSlot = null;
+          if (timeSelect) timeSelect.value = '';
           form.classList.add('hidden');
           if (confirmation) {
             confirmation.innerHTML = '';
