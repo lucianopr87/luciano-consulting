@@ -40,7 +40,7 @@ test('books a slot, shows the confirmation with the Meet link, and fires a GA4 e
     };
   });
 
-  await page.locator('.times-list button').first().click();
+  await page.locator('.time-select').selectOption({ index: 1 });
   await page.getByLabel('Nombre').fill('Test User');
   await page.getByLabel('Email').fill('test@example.com');
   await page.getByRole('button', { name: 'Confirmar reserva' }).click();
@@ -74,7 +74,7 @@ test('shows an error and reloads slots when the chosen slot was just taken', asy
   });
 
   await page.goto('/booking/');
-  await page.locator('.times-list button').first().click();
+  await page.locator('.time-select').selectOption({ index: 1 });
   await page.getByLabel('Nombre').fill('Test User');
   await page.getByLabel('Email').fill('test@example.com');
   await page.getByRole('button', { name: 'Confirmar reserva' }).click();
@@ -104,11 +104,32 @@ test('switching days after picking a time clears the stale selection instead of 
   });
 
   await page.goto('/booking/');
-  await page.locator('.times-list button').first().click();
+  await page.locator('.time-select').selectOption({ index: 1 });
   await expect(page.locator('.booking-form')).toBeVisible();
 
   await page.locator('.day-select').selectOption({ index: 1 });
 
   await expect(page.locator('.booking-form')).toBeHidden();
   expect(postCalled).toBe(false);
+});
+
+test('the booking form stays hidden until a real time is picked from the dropdown', async ({ page }) => {
+  await page.route(BOOKING_ENDPOINT, async (route) => {
+    if (route.request().method() === 'GET') {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ slots: fakeSlots }),
+      });
+      return;
+    }
+    throw new Error('POST should not be called when no time was selected');
+  });
+
+  await page.goto('/booking/');
+  await expect(page.locator('.time-select')).toHaveValue('');
+  await expect(page.locator('.booking-form')).toBeHidden();
+
+  await page.locator('.time-select').selectOption({ index: 1 });
+  await expect(page.locator('.booking-form')).toBeVisible();
 });
