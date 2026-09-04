@@ -19,6 +19,8 @@ export default defineConfig({
       PUBLIC_GA_ID: 'G-TESTONLY0000',
       PUBLIC_GSC_VERIFICATION: 'test-verification-token',
       PUBLIC_WEB3FORMS_ACCESS_KEY: 'test-access-key',
+      PUBLIC_BOOKING_ENDPOINT: 'https://script.google.com/macros/s/TEST_DEPLOYMENT_ID/exec',
+      PUBLIC_BOOKING_ENV: 'staging',
     },
   },
   projects: [

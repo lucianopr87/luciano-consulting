@@ -25,6 +25,8 @@ jobs:
           PUBLIC_WEB3FORMS_ACCESS_KEY: ${{ vars.WEB3FORMS_ACCESS_KEY_PROD }}
           PUBLIC_GA_ID: ${{ vars.GA_ID }}
           PUBLIC_GSC_VERIFICATION: ${{ vars.GSC_VERIFICATION }}
+          PUBLIC_BOOKING_ENDPOINT: ${{ vars.BOOKING_ENDPOINT }}
+          PUBLIC_BOOKING_ENV: production
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
