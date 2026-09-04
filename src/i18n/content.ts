@@ -84,6 +84,7 @@ export interface SiteContent {
     intro: string;
     timezoneNote: string;
     loading: string;
+    dayLabel: string;
     noSlots: string;
     loadError: string;
     formName: string;
@@ -264,9 +265,10 @@ export const content: Record<Locale, SiteContent> = {
     },
     booking: {
       heading: 'Reservá una reunión',
-      intro: 'Elegí un horario disponible y coordinamos una videollamada por Google Meet — el link se genera automáticamente.',
+      intro: 'Elegí un día y un horario disponible para una videollamada por Google Meet.',
       timezoneNote: 'Horarios en hora de Argentina (GMT-3).',
       loading: 'Buscando horarios disponibles...',
+      dayLabel: 'Día',
       noSlots: 'No hay horarios disponibles por el momento. Escribime directamente para coordinar.',
       loadError: 'No se pudieron cargar los horarios disponibles. Probá de nuevo en un rato.',
       formName: 'Nombre',
@@ -445,9 +447,10 @@ export const content: Record<Locale, SiteContent> = {
     },
     booking: {
       heading: 'Book a meeting',
-      intro: "Pick an available time slot and we'll get a Google Meet video call set up — the link is generated automatically.",
+      intro: 'Pick a day and an available time for a Google Meet video call.',
       timezoneNote: 'Times shown in Argentina time (GMT-3).',
       loading: 'Loading available slots...',
+      dayLabel: 'Day',
       noSlots: "No slots available right now. Reach out directly and we'll coordinate.",
       loadError: 'Could not load available slots. Please try again shortly.',
       formName: 'Name',

@@ -24,7 +24,14 @@ const bookingEnv = import.meta.env.PUBLIC_BOOKING_ENV ?? 'production';
   >
     <div class="slots-step">
       <p class="slots-status text-sm text-slate-500">{content.booking.loading}</p>
-      <div class="slots-list mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3"></div>
+      <div class="day-picker hidden">
+        <label for="booking-day" class="mb-1 block text-sm font-medium text-slate-700">{content.booking.dayLabel}</label>
+        <select
+          id="booking-day"
+          class="day-select w-full max-w-xs rounded-lg border border-slate-300 px-4 py-2.5 text-slate-900 focus:border-brand-teal focus:outline-none"
+        ></select>
+        <div class="times-list mt-4 flex flex-wrap gap-2"></div>
+      </div>
     </div>
 
     <form
@@ -101,7 +108,9 @@ const bookingEnv = import.meta.env.PUBLIC_BOOKING_ENV ?? 'production';
     const env = widget.dataset.env ?? 'production';
 
     const slotsStatus = widget.querySelector<HTMLParagraphElement>('.slots-status');
-    const slotsList = widget.querySelector<HTMLDivElement>('.slots-list');
+    const dayPicker = widget.querySelector<HTMLDivElement>('.day-picker');
+    const daySelect = widget.querySelector<HTMLSelectElement>('.day-select');
+    const timesList = widget.querySelector<HTMLDivElement>('.times-list');
     const form = widget.querySelector<HTMLFormElement>('.booking-form');
     const selectedSlotLabel = widget.querySelector<HTMLParagraphElement>('.selected-slot-label');
     const status = widget.querySelector<HTMLParagraphElement>('.form-status');
@@ -109,16 +118,31 @@ const bookingEnv = import.meta.env.PUBLIC_BOOKING_ENV ?? 'production';
     const backButton = widget.querySelector<HTMLButtonElement>('.back-to-slots');
 
     let selectedSlot: Slot | null = null;
+    let slotsByDay = new Map<string, Slot[]>();
 
-    const formatSlot = (slot: Slot) =>
-      new Intl.DateTimeFormat(document.documentElement.lang || 'es', {
-        weekday: 'short',
-        day: 'numeric',
-        month: 'short',
-        hour: '2-digit',
-        minute: '2-digit',
-        timeZone: 'America/Argentina/Buenos_Aires',
-      }).format(new Date(slot.start));
+    const locale = document.documentElement.lang || 'es';
+    const dayKeyFormatter = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'America/Argentina/Buenos_Aires',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+    });
+    const dayLabelFormatter = new Intl.DateTimeFormat(locale, {
+      weekday: 'long',
+      day: 'numeric',
+      month: 'long',
+      timeZone: 'America/Argentina/Buenos_Aires',
+    });
+    const timeFormatter = new Intl.DateTimeFormat(locale, {
+      hour: '2-digit',
+      minute: '2-digit',
+      timeZone: 'America/Argentina/Buenos_Aires',
+    });
+
+    const dayKey = (slot: Slot) => dayKeyFormatter.format(new Date(slot.start));
+    const formatDayLabel = (key: string) => dayLabelFormatter.format(new Date(`${key}T12:00:00Z`));
+    const formatTime = (slot: Slot) => timeFormatter.format(new Date(slot.start));
+    const formatSlot = (slot: Slot) => `${formatDayLabel(dayKey(slot))}, ${formatTime(slot)}`;
 
     const selectSlot = (slot: Slot) => {
       selectedSlot = slot;
@@ -127,27 +151,51 @@ const bookingEnv = import.meta.env.PUBLIC_BOOKING_ENV ?? 'production';
       form?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     };
 
-    const showSlots = (slots: Slot[]) => {
-      if (!slotsList || !slotsStatus) return;
-
-      if (slots.length === 0) {
-        slotsStatus.textContent = widget.dataset.noSlots ?? '';
-        slotsList.innerHTML = '';
-        return;
-      }
-
-      slotsStatus.classList.add('hidden');
-      slotsList.innerHTML = '';
-      slots.forEach((slot) => {
+    const showTimesForDay = (key: string) => {
+      if (!timesList) return;
+      timesList.innerHTML = '';
+      (slotsByDay.get(key) ?? []).forEach((slot) => {
         const button = document.createElement('button');
         button.type = 'button';
-        button.textContent = formatSlot(slot);
+        button.textContent = formatTime(slot);
         button.className =
           'rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 hover:border-brand-teal hover:text-brand-teal';
         button.addEventListener('click', () => selectSlot(slot));
-        slotsList.appendChild(button);
+        timesList.appendChild(button);
       });
     };
+
+    const showSlots = (slots: Slot[]) => {
+      if (!slotsStatus || !dayPicker || !daySelect) return;
+
+      if (slots.length === 0) {
+        slotsStatus.textContent = widget.dataset.noSlots ?? '';
+        dayPicker.classList.add('hidden');
+        return;
+      }
+
+      slotsByDay = new Map();
+      slots.forEach((slot) => {
+        const key = dayKey(slot);
+        const existing = slotsByDay.get(key) ?? [];
+        existing.push(slot);
+        slotsByDay.set(key, existing);
+      });
+
+      slotsStatus.classList.add('hidden');
+      daySelect.innerHTML = '';
+      slotsByDay.forEach((_daySlots, key) => {
+        const option = document.createElement('option');
+        option.value = key;
+        option.textContent = formatDayLabel(key);
+        daySelect.appendChild(option);
+      });
+
+      dayPicker.classList.remove('hidden');
+      showTimesForDay(daySelect.value);
+    };
+
+    daySelect?.addEventListener('change', () => showTimesForDay(daySelect.value));
 
     const loadSlots = async () => {
       try {

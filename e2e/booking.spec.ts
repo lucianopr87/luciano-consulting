@@ -40,7 +40,7 @@ test('books a slot, shows the confirmation with the Meet link, and fires a GA4 e
     };
   });
 
-  await page.locator('.slots-list button').first().click();
+  await page.locator('.times-list button').first().click();
   await page.getByLabel('Nombre').fill('Test User');
   await page.getByLabel('Email').fill('test@example.com');
   await page.getByRole('button', { name: 'Confirmar reserva' }).click();
@@ -74,7 +74,7 @@ test('shows an error and reloads slots when the chosen slot was just taken', asy
   });
 
   await page.goto('/booking/');
-  await page.locator('.slots-list button').first().click();
+  await page.locator('.times-list button').first().click();
   await page.getByLabel('Nombre').fill('Test User');
   await page.getByLabel('Email').fill('test@example.com');
   await page.getByRole('button', { name: 'Confirmar reserva' }).click();
