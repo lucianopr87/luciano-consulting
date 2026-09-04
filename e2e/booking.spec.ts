@@ -82,3 +82,33 @@ test('shows an error and reloads slots when the chosen slot was just taken', asy
   await expect(page.locator('.form-status')).toContainText('Justo se ocupó ese horario');
   await expect.poll(() => getCalls).toBeGreaterThan(1);
 });
+
+test('switching days after picking a time clears the stale selection instead of leaving it submittable', async ({ page }) => {
+  const twoDaySlots = [
+    { start: '2099-01-06T13:00:00.000Z', end: '2099-01-06T13:30:00.000Z' },
+    { start: '2099-01-07T13:00:00.000Z', end: '2099-01-07T13:30:00.000Z' },
+  ];
+  let postCalled = false;
+
+  await page.route(BOOKING_ENDPOINT, async (route) => {
+    if (route.request().method() === 'GET') {
+      await route.fulfill({
+        status: 200,
+        contentType: 'application/json',
+        body: JSON.stringify({ slots: twoDaySlots }),
+      });
+      return;
+    }
+    postCalled = true;
+    await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ success: true }) });
+  });
+
+  await page.goto('/booking/');
+  await page.locator('.times-list button').first().click();
+  await expect(page.locator('.booking-form')).toBeVisible();
+
+  await page.locator('.day-select').selectOption({ index: 1 });
+
+  await expect(page.locator('.booking-form')).toBeHidden();
+  expect(postCalled).toBe(false);
+});

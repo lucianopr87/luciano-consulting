@@ -195,7 +195,14 @@ const bookingEnv = import.meta.env.PUBLIC_BOOKING_ENV ?? 'production';
       showTimesForDay(daySelect.value);
     };
 
-    daySelect?.addEventListener('change', () => showTimesForDay(daySelect.value));
+    daySelect?.addEventListener('change', () => {
+      // Switching days invalidates whatever time was picked for the previous
+      // day — force a fresh selection instead of silently submitting a stale
+      // slot from a day the visitor is no longer looking at.
+      selectedSlot = null;
+      form?.classList.add('hidden');
+      showTimesForDay(daySelect.value);
+    });
 
     const loadSlots = async () => {
       try {
@@ -244,6 +251,7 @@ const bookingEnv = import.meta.env.PUBLIC_BOOKING_ENV ?? 'production';
         const result = await response.json();
 
         if (result.success) {
+          selectedSlot = null;
           form.classList.add('hidden');
           if (confirmation) {
             confirmation.innerHTML = '';
