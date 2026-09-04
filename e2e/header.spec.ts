@@ -40,6 +40,7 @@ test('desktop nav links point to the right sections and scroll to them', async (
   await expect(nav.getByRole('link', { name: 'Servicios' })).toHaveAttribute('href', '/#services');
   await expect(nav.getByRole('link', { name: 'Sobre mí' })).toHaveAttribute('href', '/#about');
   await expect(nav.getByRole('link', { name: 'Experiencia' })).toHaveAttribute('href', '/#experience');
+  await expect(nav.getByRole('link', { name: 'Reservar reunión' })).toHaveAttribute('href', '/booking/');
   await expect(nav.getByRole('link', { name: 'Contacto' })).toHaveAttribute('href', '/#contact');
 
   await nav.getByRole('link', { name: 'Contacto' }).click();

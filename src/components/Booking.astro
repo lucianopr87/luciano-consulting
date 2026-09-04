@@ -1,0 +1,242 @@
+---
+import type { SiteContent } from '../i18n/content';
+
+interface Props {
+  content: SiteContent;
+}
+
+const { content } = Astro.props;
+const bookingEndpoint = import.meta.env.PUBLIC_BOOKING_ENDPOINT ?? '';
+const bookingEnv = import.meta.env.PUBLIC_BOOKING_ENV ?? 'production';
+---
+
+<section class="mx-auto max-w-3xl px-6 py-24">
+  <h1 class="text-3xl font-bold text-slate-900">{content.booking.heading}</h1>
+  <p class="mt-3 text-slate-600">{content.booking.intro}</p>
+  <p class="mt-1 text-sm text-slate-400">{content.booking.timezoneNote}</p>
+
+  <div
+    class="booking-widget mt-10"
+    data-endpoint={bookingEndpoint}
+    data-env={bookingEnv}
+    data-no-slots={content.booking.noSlots}
+    data-load-error={content.booking.loadError}
+  >
+    <div class="slots-step">
+      <p class="slots-status text-sm text-slate-500">{content.booking.loading}</p>
+      <div class="slots-list mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3"></div>
+    </div>
+
+    <form
+      class="booking-form mt-8 hidden space-y-5"
+      data-success={content.booking.formSuccess}
+      data-error={content.booking.formError}
+      data-slot-taken={content.booking.slotTakenError}
+      data-rate-limited={content.booking.rateLimitedError}
+    >
+      <input type="checkbox" name="botcheck" class="hidden" style="display:none" />
+      <p class="selected-slot-label text-sm font-medium text-slate-700"></p>
+
+      <div>
+        <label for="booking-name" class="mb-1 block text-sm font-medium text-slate-700">{content.booking.formName}</label>
+        <input
+          id="booking-name"
+          name="name"
+          type="text"
+          required
+          class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-slate-900 focus:border-brand-teal focus:outline-none"
+        />
+      </div>
+
+      <div>
+        <label for="booking-email" class="mb-1 block text-sm font-medium text-slate-700">{content.booking.formEmail}</label>
+        <input
+          id="booking-email"
+          name="email"
+          type="email"
+          required
+          class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-slate-900 focus:border-brand-teal focus:outline-none"
+        />
+      </div>
+
+      <div>
+        <label for="booking-message" class="mb-1 block text-sm font-medium text-slate-700">{content.booking.formMessage}</label>
+        <textarea
+          id="booking-message"
+          name="message"
+          rows="4"
+          class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-slate-900 focus:border-brand-teal focus:outline-none"
+        ></textarea>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <button type="button" class="back-to-slots text-sm text-slate-500 hover:text-slate-700">
+          {content.booking.backToSlots}
+        </button>
+        <button
+          type="submit"
+          class="rounded-full bg-brand-teal px-8 py-3 font-semibold text-brand-navy transition hover:opacity-90 disabled:opacity-50"
+        >
+          {content.booking.formSubmit}
+        </button>
+      </div>
+
+      <p class="form-status hidden text-sm" role="status"></p>
+    </form>
+
+    <div class="confirmation hidden mt-8 rounded-lg border border-emerald-200 bg-emerald-50 p-6 text-emerald-900"></div>
+  </div>
+</section>
+
+<script>
+  interface Slot {
+    start: string;
+    end: string;
+  }
+
+  const widget = document.querySelector<HTMLDivElement>('.booking-widget');
+
+  if (widget) {
+    const endpoint = widget.dataset.endpoint ?? '';
+    const env = widget.dataset.env ?? 'production';
+
+    const slotsStatus = widget.querySelector<HTMLParagraphElement>('.slots-status');
+    const slotsList = widget.querySelector<HTMLDivElement>('.slots-list');
+    const form = widget.querySelector<HTMLFormElement>('.booking-form');
+    const selectedSlotLabel = widget.querySelector<HTMLParagraphElement>('.selected-slot-label');
+    const status = widget.querySelector<HTMLParagraphElement>('.form-status');
+    const confirmation = widget.querySelector<HTMLDivElement>('.confirmation');
+    const backButton = widget.querySelector<HTMLButtonElement>('.back-to-slots');
+
+    let selectedSlot: Slot | null = null;
+
+    const formatSlot = (slot: Slot) =>
+      new Intl.DateTimeFormat(document.documentElement.lang || 'es', {
+        weekday: 'short',
+        day: 'numeric',
+        month: 'short',
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZone: 'America/Argentina/Buenos_Aires',
+      }).format(new Date(slot.start));
+
+    const selectSlot = (slot: Slot) => {
+      selectedSlot = slot;
+      if (selectedSlotLabel) selectedSlotLabel.textContent = formatSlot(slot);
+      form?.classList.remove('hidden');
+      form?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    };
+
+    const showSlots = (slots: Slot[]) => {
+      if (!slotsList || !slotsStatus) return;
+
+      if (slots.length === 0) {
+        slotsStatus.textContent = widget.dataset.noSlots ?? '';
+        slotsList.innerHTML = '';
+        return;
+      }
+
+      slotsStatus.classList.add('hidden');
+      slotsList.innerHTML = '';
+      slots.forEach((slot) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.textContent = formatSlot(slot);
+        button.className =
+          'rounded-lg border border-slate-300 px-3 py-2 text-sm text-slate-700 hover:border-brand-teal hover:text-brand-teal';
+        button.addEventListener('click', () => selectSlot(slot));
+        slotsList.appendChild(button);
+      });
+    };
+
+    const loadSlots = async () => {
+      try {
+        const response = await fetch(endpoint, { method: 'GET' });
+        const data = await response.json();
+        showSlots(data.slots ?? []);
+      } catch {
+        if (slotsStatus) {
+          slotsStatus.textContent = widget.dataset.loadError ?? '';
+          slotsStatus.classList.remove('hidden');
+        }
+      }
+    };
+
+    backButton?.addEventListener('click', () => {
+      form?.classList.add('hidden');
+      selectedSlot = null;
+    });
+
+    form?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!selectedSlot) return;
+
+      const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      const formData = new FormData(form);
+      const payload = {
+        slotStart: selectedSlot.start,
+        name: formData.get('name'),
+        email: formData.get('email'),
+        message: formData.get('message'),
+        botcheck: formData.get('botcheck'),
+        env,
+      };
+
+      if (submitButton) submitButton.disabled = true;
+      if (status) status.classList.add('hidden');
+
+      try {
+        // Content-Type: text/plain avoids a CORS preflight against the Apps Script
+        // Web App, which doesn't handle OPTIONS requests.
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify(payload),
+        });
+        const result = await response.json();
+
+        if (result.success) {
+          form.classList.add('hidden');
+          if (confirmation) {
+            confirmation.innerHTML = '';
+            const message = document.createElement('p');
+            message.textContent = form.dataset.success ?? '';
+            confirmation.appendChild(message);
+            if (result.meetLink) {
+              const link = document.createElement('a');
+              link.href = result.meetLink;
+              link.textContent = result.meetLink;
+              link.target = '_blank';
+              link.rel = 'noopener noreferrer';
+              link.className = 'mt-2 block break-all text-brand-teal underline';
+              confirmation.appendChild(link);
+            }
+            confirmation.classList.remove('hidden');
+          }
+          window.gtag?.('event', 'booking_confirmed');
+        } else if (status) {
+          let message = form.dataset.error ?? '';
+          if (result.error === 'slot_taken') {
+            message = form.dataset.slotTaken ?? message;
+            loadSlots();
+          } else if (result.error === 'rate_limited') {
+            message = form.dataset.rateLimited ?? message;
+          }
+          status.textContent = message;
+          status.classList.remove('hidden');
+          status.classList.add('text-red-500');
+        }
+      } catch {
+        if (status) {
+          status.textContent = form.dataset.error ?? '';
+          status.classList.remove('hidden');
+          status.classList.add('text-red-500');
+        }
+      } finally {
+        if (submitButton) submitButton.disabled = false;
+      }
+    });
+
+    loadSlots();
+  }
+</script>

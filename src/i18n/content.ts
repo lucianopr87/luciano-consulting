@@ -21,6 +21,7 @@ export interface SiteContent {
     experience: string;
     contact: string;
     blog: string;
+    booking: string;
   };
   hero: {
     eyebrow: string;
@@ -78,6 +79,23 @@ export interface SiteContent {
     emptyState: string;
     byline: string;
   };
+  booking: {
+    heading: string;
+    intro: string;
+    timezoneNote: string;
+    loading: string;
+    noSlots: string;
+    loadError: string;
+    formName: string;
+    formEmail: string;
+    formMessage: string;
+    formSubmit: string;
+    formSuccess: string;
+    formError: string;
+    slotTakenError: string;
+    rateLimitedError: string;
+    backToSlots: string;
+  };
 }
 
 export const content: Record<Locale, SiteContent> = {
@@ -93,6 +111,7 @@ export const content: Record<Locale, SiteContent> = {
       experience: 'Experiencia',
       contact: 'Contacto',
       blog: 'Blog',
+      booking: 'Reservar reunión',
     },
     hero: {
       eyebrow: 'Consultoría IT · Desarrollo Full Stack y Gestión de Proyectos',
@@ -243,6 +262,23 @@ export const content: Record<Locale, SiteContent> = {
       emptyState: 'Todavía no hay artículos publicados. Volvé pronto.',
       byline: 'Por',
     },
+    booking: {
+      heading: 'Reservá una reunión',
+      intro: 'Elegí un horario disponible y coordinamos una videollamada por Google Meet — el link se genera automáticamente.',
+      timezoneNote: 'Horarios en hora de Argentina (GMT-3).',
+      loading: 'Buscando horarios disponibles...',
+      noSlots: 'No hay horarios disponibles por el momento. Escribime directamente para coordinar.',
+      loadError: 'No se pudieron cargar los horarios disponibles. Probá de nuevo en un rato.',
+      formName: 'Nombre',
+      formEmail: 'Email',
+      formMessage: '¿De qué te gustaría hablar? (opcional)',
+      formSubmit: 'Confirmar reserva',
+      formSuccess: '¡Listo! Te mandé una invitación de Google Calendar con el link de Meet.',
+      formError: 'Hubo un error al confirmar la reserva. Probá de nuevo o escribime directamente.',
+      slotTakenError: 'Justo se ocupó ese horario. Elegí otro de la lista actualizada.',
+      rateLimitedError: 'Ya recibimos una reserva tuya hace poco. Si necesitás otro horario, escribime directamente.',
+      backToSlots: '← Elegir otro horario',
+    },
   },
   en: {
     meta: {
@@ -256,6 +292,7 @@ export const content: Record<Locale, SiteContent> = {
       experience: 'Experience',
       contact: 'Contact',
       blog: 'Blog',
+      booking: 'Book a meeting',
     },
     hero: {
       eyebrow: 'IT Consulting · Full Stack Development & Project Leadership',
@@ -405,6 +442,23 @@ export const content: Record<Locale, SiteContent> = {
       backLink: '← Back to blog',
       emptyState: 'No articles published yet. Check back soon.',
       byline: 'By',
+    },
+    booking: {
+      heading: 'Book a meeting',
+      intro: "Pick an available time slot and we'll get a Google Meet video call set up — the link is generated automatically.",
+      timezoneNote: 'Times shown in Argentina time (GMT-3).',
+      loading: 'Loading available slots...',
+      noSlots: "No slots available right now. Reach out directly and we'll coordinate.",
+      loadError: 'Could not load available slots. Please try again shortly.',
+      formName: 'Name',
+      formEmail: 'Email',
+      formMessage: "What would you like to talk about? (optional)",
+      formSubmit: 'Confirm booking',
+      formSuccess: "You're all set! I sent you a Google Calendar invite with the Meet link.",
+      formError: 'There was an error confirming your booking. Please try again or reach out directly.',
+      slotTakenError: 'That slot was just taken. Please pick another one from the updated list.',
+      rateLimitedError: "We already received a booking from you recently. If you need another slot, reach out directly.",
+      backToSlots: '← Pick a different slot',
     },
   },
 };

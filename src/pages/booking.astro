@@ -1,0 +1,18 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Booking from '../components/Booking.astro';
+import Footer from '../components/Footer.astro';
+import { content } from '../i18n/content';
+
+const locale = 'es';
+const pageContent = content[locale];
+---
+
+<Layout locale={locale} content={pageContent} path="/booking/" title={pageContent.booking.heading}>
+  <Header locale={locale} content={pageContent} otherLocalePath="/en/booking/" />
+  <main>
+    <Booking content={pageContent} />
+  </main>
+  <Footer content={pageContent} locale={locale} />
+</Layout>
