@@ -65,6 +65,7 @@ Ninguna de estas variables se commitea con su valor real — los workflows las i
 ## Blog
 
 - Los posts son archivos Markdown en `src/content/blog/`, uno por artículo, con frontmatter tipado (`title`, `description`, `pubDate`, `tags`, `lang`, `draft`) validado por el schema de `src/content.config.ts`.
+- Portada opcional: `coverImage` (ruta relativa a una imagen en `src/content/blog/`) + `coverImageAlt`. Astro genera en build las versiones WebP de la portada del post y del thumbnail del listado, así que no hace falta crear thumbnails a mano; solo conviene recomprimir la imagen fuente antes de commitearla (p. ej. con `sharp`, JPEG calidad ~82) para no inflar el repo. Las versiones ES y EN de un post pueden compartir la misma imagen.
 - Bilingüe vía el campo `lang` en el frontmatter (`'es' | 'en'`), no por carpetas separadas — cada ruta filtra la colección por `lang` y locale.
 - `draft: true` (default) excluye el post del listado y de la generación de su página de detalle, en cualquier ambiente. Un post recién creado no es público hasta que se cambia a `draft: false` explícitamente.
 - Rutas: `/blog/` y `/blog/[slug]/` en español, `/en/blog/` y `/en/blog/[slug]/` en inglés. El slug es el nombre del archivo (sin extensión).
@@ -82,7 +83,7 @@ Ninguna de estas variables se commitea con su valor real — los workflows las i
   - `cookie-consent.spec.ts`: el banner aparece en la primera visita, GA trackea igual desde el arranque, y "Entendido" oculta el banner de forma persistente.
   - `mobile-menu.spec.ts`: el menú hamburguesa se muestra/oculta según el viewport y funciona correctamente.
   - `contact-form.spec.ts`: envío exitoso y manejo de error del formulario (con la API mockeada).
-  - `blog.spec.ts`: el link "Blog" del nav lleva al índice del locale actual, y el switch de idioma en el blog lleva al índice traducido (no al home).
+  - `blog.spec.ts`: el link "Blog" del nav lleva al índice del locale actual, y el switch de idioma en el blog lleva al índice traducido (no al home), el CTA de cierre de los posts lleva al formulario de contacto del locale, y el post de métricas aparece en el listado con su thumbnail.
   - `booking.spec.ts`: elegir un horario, completar el formulario y confirmar la reserva (con el backend mockeado) dispara el evento GA4 `booking_confirmed`; también cubre el caso de "horario ya ocupado".
 - **Se disparan automáticamente en cada push a `develop`**, como un job `test` en `.github/workflows/deploy-staging.yml` — el job `deploy` a staging depende de que los tests pasen (`needs: test`). Si un test falla, no se deploya esa versión a staging.
 - Para correrlos en local: `npm run test:e2e` (Playwright levanta el preview server solo, según `playwright.config.ts`).
