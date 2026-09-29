@@ -1,5 +1,5 @@
 ---
-import type { Locale, SiteContent } from '../i18n/content';
+import { contactDetails, cvPdfPath, sectionIds, type Locale, type SectionKey, type SiteContent } from '../i18n/content';
 
 interface Props {
   locale: Locale;
@@ -12,84 +12,107 @@ const homePath = locale === 'es' ? '/' : '/en/';
 const otherLocale = locale === 'es' ? 'en' : 'es';
 const resolvedOtherLocalePath = otherLocalePath ?? (otherLocale === 'es' ? '/' : '/en/');
 
-const navLinks = [
-  { href: `${homePath}#services`, label: content.nav.services },
-  { href: `${homePath}#about`, label: content.nav.about },
-  { href: `${homePath}#experience`, label: content.nav.experience },
-  { href: `${homePath}blog/`, label: content.nav.blog },
-  { href: `${homePath}#contact`, label: content.nav.contact },
-];
-const bookingLink = { href: `${homePath}booking/`, label: content.nav.booking };
+const navKeys = Object.keys(sectionIds) as SectionKey[];
+const navLinks = navKeys.map((key, index) => ({
+  num: String(index).padStart(2, '0'),
+  label: content.nav.items[key],
+  href: `${homePath}#${sectionIds[key]}`,
+}));
 ---
 
-<header class="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur">
-  <div class="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-    <a href={homePath}>
-      <img src="/logo-horizontal-light.png" alt="Consulting IT" class="h-8 w-auto" />
+<header class="fixed inset-x-0 top-0 z-40 border-b border-line bg-paper/85 backdrop-blur-md">
+  <div class="wrap flex items-center justify-between gap-4 py-3.5">
+    <a href={`${homePath}#${sectionIds.home}`} class="flex min-w-0 items-center gap-3 text-ink hover:text-ink">
+      <span
+        class="flex size-[34px] flex-none items-center justify-center rounded-full bg-ink font-mono text-xs tracking-[0.02em] text-paper"
+        aria-hidden="true">LPR</span
+      >
+      <span class="min-w-0 truncate text-[15px] font-medium tracking-[-0.01em]">Luciano Perez Ruiz</span>
     </a>
-    <nav class="hidden items-center gap-8 text-sm font-medium text-slate-600 md:flex">
-      {navLinks.map((link) => (
-        <a href={link.href} class="hover:text-slate-900">{link.label}</a>
-      ))}
+    <div class="flex flex-none items-center gap-2.5">
       <a
-        href={bookingLink.href}
-        class="rounded-full bg-brand-teal px-4 py-2 font-semibold text-brand-navy transition hover:opacity-90"
+        href={`${homePath}#${sectionIds.booking}`}
+        class="whitespace-nowrap rounded-full border border-ink px-4 py-[9px] text-sm text-ink transition-colors duration-150 hover:bg-ink hover:text-paper"
       >
-        {bookingLink.label}
-      </a>
-    </nav>
-    <div class="flex items-center gap-3">
-      <a
-        href={resolvedOtherLocalePath}
-        class="rounded-full border border-slate-300 px-3 py-1 text-sm font-semibold text-slate-700 hover:border-slate-400 hover:text-slate-900"
-        hreflang={otherLocale}
-      >
-        {otherLocale.toUpperCase()}
+        {content.nav.bookShort}
       </a>
       <button
-        id="mobile-menu-toggle"
+        id="menu-toggle"
         type="button"
-        class="-mr-2 rounded-md p-2 text-slate-700 md:hidden"
-        aria-label="Menu"
+        class="flex cursor-pointer items-center gap-2.5 py-[9px] pl-2.5 pr-1 text-sm text-ink"
         aria-expanded="false"
-        aria-controls="mobile-menu"
+        aria-controls="site-menu"
+        data-label-open={content.nav.menu}
+        data-label-close={content.nav.close}
       >
-        <svg id="mobile-menu-icon-open" class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
-        <svg id="mobile-menu-icon-close" class="hidden h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-        </svg>
+        <span id="menu-toggle-label">{content.nav.menu}</span>
+        <span class="flex w-[22px] flex-col gap-[5px]" aria-hidden="true">
+          <span class="block h-[1.5px] bg-ink"></span>
+          <span class="ml-2 block h-[1.5px] w-3.5 bg-ink"></span>
+        </span>
       </button>
     </div>
   </div>
-  <nav id="mobile-menu" class="hidden flex-col border-t border-slate-200 bg-white px-6 py-2 text-sm font-medium text-slate-600 md:hidden">
-    {navLinks.map((link) => (
-      <a href={link.href} class="block py-3 hover:text-slate-900">{link.label}</a>
-    ))}
-    <a
-      href={bookingLink.href}
-      class="my-2 block rounded-full bg-brand-teal px-4 py-2.5 text-center font-semibold text-brand-navy transition hover:opacity-90"
-    >
-      {bookingLink.label}
-    </a>
-  </nav>
 </header>
 
+<div id="site-menu" class="fixed inset-0 z-[35] hidden overflow-auto bg-night text-paper" hidden>
+  <div class="wrap flex flex-wrap justify-between gap-12 pb-12 pt-[120px]">
+    <nav class="flex flex-[1_1_420px] flex-col gap-1" aria-label={content.nav.menu}>
+      {
+        navLinks.map((link) => (
+          <a
+            href={link.href}
+            class="menu-link flex items-baseline gap-5 py-1 text-[clamp(34px,5vw,56px)] leading-[1.2] font-normal tracking-[-0.03em] text-paper transition-colors duration-150 hover:text-accent-light"
+          >
+            <span class="w-6 font-mono text-[13px] tracking-normal text-night-label">{link.num}</span>
+            {link.label}
+          </a>
+        ))
+      }
+    </nav>
+    <div class="flex flex-[0_1_300px] flex-col gap-3.5 pt-3 text-[15px]">
+      <span class="font-mono text-xs tracking-[0.08em] text-night-label">{content.nav.directContact}</span>
+      <a href={`mailto:${contactDetails.email}`} class="text-paper hover:text-accent-light">{contactDetails.email}</a>
+      <a href={contactDetails.linkedinUrl} target="_blank" rel="noopener noreferrer" class="text-paper hover:text-accent-light">
+        LinkedIn ↗
+      </a>
+      <a href={cvPdfPath} target="_blank" class="text-paper hover:text-accent-light">{content.nav.downloadCv}</a>
+      <a
+        href={resolvedOtherLocalePath}
+        hreflang={otherLocale}
+        lang={otherLocale}
+        class="mt-4 self-start rounded-full border border-night-line px-4 py-2 text-sm text-paper hover:border-paper hover:text-paper"
+      >
+        <span class="mr-2 font-mono text-xs text-night-label">{otherLocale.toUpperCase()}</span>{content.nav.otherLanguage}
+      </a>
+    </div>
+  </div>
+</div>
+
 <script>
-  const toggle = document.getElementById('mobile-menu-toggle');
-  const menu = document.getElementById('mobile-menu');
-  const iconOpen = document.getElementById('mobile-menu-icon-open');
-  const iconClose = document.getElementById('mobile-menu-icon-close');
+  const toggle = document.getElementById('menu-toggle');
+  const toggleLabel = document.getElementById('menu-toggle-label');
+  const menu = document.getElementById('site-menu');
+
+  const isOpen = () => toggle?.getAttribute('aria-expanded') === 'true';
 
   const setOpen = (open: boolean) => {
-    menu?.classList.toggle('hidden', !open);
-    menu?.classList.toggle('flex', open);
-    iconOpen?.classList.toggle('hidden', open);
-    iconClose?.classList.toggle('hidden', !open);
-    toggle?.setAttribute('aria-expanded', String(open));
+    if (!toggle || !menu) return;
+    menu.hidden = !open;
+    menu.classList.toggle('hidden', !open);
+    toggle.setAttribute('aria-expanded', String(open));
+    if (toggleLabel) {
+      toggleLabel.textContent = (open ? toggle.dataset.labelClose : toggle.dataset.labelOpen) ?? '';
+    }
+    document.body.style.overflow = open ? 'hidden' : '';
   };
 
-  toggle?.addEventListener('click', () => setOpen(menu?.classList.contains('hidden') ?? false));
+  toggle?.addEventListener('click', () => setOpen(!isOpen()));
   menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => setOpen(false)));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && isOpen()) {
+      setOpen(false);
+      toggle?.focus();
+    }
+  });
 </script>

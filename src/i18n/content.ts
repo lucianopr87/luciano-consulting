@@ -2,12 +2,35 @@ export const locales = ['es', 'en'] as const;
 export type Locale = (typeof locales)[number];
 export const defaultLocale: Locale = 'es';
 
+// Section anchors are shared by both locales so links like /#contact and
+// /en/#contact (used in blog post CTAs) keep working.
+export const sectionIds = {
+  home: 'top',
+  profile: 'profile',
+  experience: 'experience',
+  skills: 'skills',
+  education: 'education',
+  blog: 'blog',
+  booking: 'booking',
+  contact: 'contact',
+} as const;
+export type SectionKey = keyof typeof sectionIds;
+
+export const cvPdfPath = '/Luciano_Perez_Ruiz_CV_EN.pdf';
+
+export const contactDetails = {
+  email: 'lucianopr87@gmail.com',
+  linkedinHandle: 'luciano-perez-ruiz',
+  linkedinUrl: 'https://www.linkedin.com/in/luciano-perez-ruiz',
+};
+
 export interface ExperienceEntry {
-  role: string;
+  years: string;
   company: string;
-  period: string;
+  role: string;
   description: string;
-  highlights?: string[];
+  link?: { label: string; href: string };
+  highlights?: { year: string; text: string }[];
 }
 
 export interface SiteContent {
@@ -16,50 +39,95 @@ export interface SiteContent {
     description: string;
   };
   nav: {
-    services: string;
-    about: string;
-    experience: string;
-    contact: string;
-    blog: string;
-    booking: string;
+    items: Record<SectionKey, string>;
+    menu: string;
+    close: string;
+    bookShort: string;
+    directContact: string;
+    downloadCv: string;
+    otherLanguage: string;
   };
   hero: {
-    eyebrow: string;
-    headline: string;
-    subheadline: string;
-    cta: string;
+    status: string;
+    firstName: string;
+    lastName: string;
+    lead: string;
+    ctaBook: string;
+    ctaCv: string;
+    photoAlt: string;
   };
-  services: {
-    heading: string;
-    intro: string;
-    items: { title: string; description: string; tags: string[] }[];
-  };
-  about: {
-    heading: string;
-    paragraphs: string[];
+  profile: {
+    label: string;
+    lead: string;
+    body: string;
   };
   experience: {
+    label: string;
     heading: string;
-    intro: string;
     items: ExperienceEntry[];
   };
-  contact: {
+  skills: {
+    label: string;
+    groups: { title: string; items: string[] }[];
+  };
+  education: {
+    label: string;
+    items: { name: string; org: string; year: string }[];
+    languagesHeading: string;
+    languages: { name: string; level: string }[];
+  };
+  blogTeaser: {
+    label: string;
+    heading: string;
+    viewAll: string;
+    readMore: string;
+  };
+  booking: {
+    label: string;
     heading: string;
     intro: string;
+    bullets: string[];
+    stepDay: string;
+    stepTime: string;
+    stepDetails: string;
+    namePlaceholder: string;
+    emailPlaceholder: string;
+    topicPlaceholder: string;
+    selectPrompt: string;
+    timeSuffix: string;
+    submit: string;
+    successTitle: string;
+    /** Placeholders: {name}, {date}, {time}, {email} */
+    successSummary: string;
+    meetLinkLabel: string;
+    reset: string;
+    noSlots: string;
+    loadError: string;
+    formError: string;
+    slotTakenError: string;
+    rateLimitedError: string;
+    invalidSlotError: string;
+  };
+  contact: {
+    label: string;
+    heading: string;
+    intro: string;
+    emailLabel: string;
+    linkedinLabel: string;
     formName: string;
     formEmail: string;
+    reasonsLabel: string;
+    reasons: string[];
     formMessage: string;
     formSubmit: string;
-    formSuccess: string;
+    successTitle: string;
+    successBody: string;
+    reset: string;
     formError: string;
-    directHeading: string;
-    email: string;
-    linkedin: string;
-    location: string;
   };
   footer: {
-    text: string;
-    location: string;
+    role: string;
+    backToTop: string;
     privacyLink: string;
   };
   cookieConsent: {
@@ -78,148 +146,223 @@ export interface SiteContent {
     backLink: string;
     emptyState: string;
     byline: string;
-  };
-  booking: {
-    heading: string;
-    intro: string;
-    timezoneNote: string;
-    loading: string;
-    dayLabel: string;
-    timeLabel: string;
-    timePlaceholder: string;
-    noSlots: string;
-    loadError: string;
-    formName: string;
-    formEmail: string;
-    formMessage: string;
-    formSubmit: string;
-    formSuccess: string;
-    formError: string;
-    slotTakenError: string;
-    rateLimitedError: string;
-    backToSlots: string;
+    months: string[];
   };
 }
 
 export const content: Record<Locale, SiteContent> = {
   es: {
     meta: {
-      title: 'Luciano Perez Ruiz — Consultoría IT: Desarrollo Full Stack y Gestión de Proyectos',
+      title: 'Luciano Perez Ruiz — IT / Technical Project Manager',
       description:
-        'Consultor IT con más de 10 años de experiencia en Mercado Libre y startups. Ayudo a founders y equipos a planificar y construir productos de software full stack, de punta a punta.',
+        'IT / Technical Project Manager con más de 10 años en Mercado Libre y startups. Empecé escribiendo código: hoy lidero equipos y convierto iniciativas complejas en productos lanzados.',
     },
     nav: {
-      services: 'Servicios',
-      about: 'Sobre mí',
-      experience: 'Experiencia',
-      contact: 'Contacto',
-      blog: 'Blog',
-      booking: 'Reservar reunión',
+      items: {
+        home: 'Inicio',
+        profile: 'Perfil',
+        experience: 'Experiencia',
+        skills: 'Habilidades',
+        education: 'Formación',
+        blog: 'Blog',
+        booking: 'Reservar reunión',
+        contact: 'Contacto',
+      },
+      menu: 'Menú',
+      close: 'Cerrar',
+      bookShort: 'Reservar',
+      directContact: 'CONTACTO DIRECTO',
+      downloadCv: 'Descargar CV (PDF, EN) ↓',
+      otherLanguage: 'English',
     },
     hero: {
-      eyebrow: 'Consultoría IT · Desarrollo Full Stack y Gestión de Proyectos',
-      headline: 'Ayudo a startups y equipos a sacar adelante software que funciona — y que llega a tiempo.',
-      subheadline:
-        'Más de 10 años liderando equipos de desarrollo y construyendo productos full stack, desde Mercado Libre hasta startups que recién arrancan. Manejo tanto el código como la gestión, así el proyecto no se traba en el medio.',
-      cta: 'Hablemos de tu proyecto',
+      status: 'DISPONIBLE PARA ROLES REMOTOS · SANTA FE, ARGENTINA',
+      firstName: 'Luciano',
+      lastName: 'Perez Ruiz',
+      lead: 'IT / Technical Project Manager. Más de 10 años convirtiendo iniciativas complejas en productos lanzados — con la mirada de alguien que empezó escribiendo código.',
+      ctaBook: 'Reservar una reunión',
+      ctaCv: 'Descargar CV (PDF, EN) ↓',
+      photoAlt: 'Luciano Perez Ruiz',
     },
-    services: {
-      heading: 'Qué puedo hacer por vos',
-      intro: 'Dos maneras de trabajar juntos, según lo que necesite tu proyecto hoy.',
-      items: [
-        {
-          title: 'Desarrollo Full Stack',
-          description:
-            'Me meto de lleno en el código de tu producto: defino arquitectura, reviso código y construyo funcionalidades pensadas para escalar.',
-          tags: ['PHP', 'JavaScript / TypeScript', 'React', 'WordPress', 'AWS'],
-        },
-        {
-          title: 'Gestión y Liderazgo de Proyectos IT',
-          description:
-            'Ordeno el roadmap, coordino al equipo y me aseguro de que la entrega no se corra ni en alcance ni en tiempo — así lideré equipos de hasta 8 desarrolladores en proyectos complejos con múltiples stakeholders.',
-          tags: ['Agile / Scrum', 'Jira', 'Planificación', 'Stakeholders'],
-        },
-      ],
-    },
-    about: {
-      heading: 'Sobre mí',
-      paragraphs: [
-        'Soy IT Project Leader y tengo más de 10 años sacando adelante proyectos complejos, desde cero, en empresas como Mercado Libre y en startups que se mueven rápido.',
-        'Arranqué como desarrollador full stack, así que no me quedo solo en la gestión del roadmap: sé lo que realmente cuesta construir software, y eso me permite hablar tanto el idioma del negocio como el de los developers. Gracias a esto pude liderar equipos de hasta 8 desarrolladores en proyectos que van desde plataformas de e-commerce armadas desde cero (con integraciones a SAP y BigQuery) hasta iniciativas que cruzaban varias áreas de la empresa y necesitaban que todos remaran para el mismo lado.',
-        'Algo de lo que estoy orgulloso: mejorar métricas clave de IT en un 30% en un solo trimestre rediseñando procesos en base a datos, y lanzar a tiempo la plataforma de Adobe Commerce de un retailer líder del mercado.',
-      ],
+    profile: {
+      label: '01 — PERFIL',
+      lead: 'Hablo “negocio” e “ingeniería” con la misma fluidez. Lideré equipos de hasta 8 personas en Mercado Libre y startups, desde e‑commerce construidos desde cero hasta iniciativas que requerían alinear a múltiples unidades de negocio.',
+      body: 'Empecé como desarrollador full‑stack, así que no solo gestiono roadmaps: entiendo qué es realmente difícil al construir software. Trabajo con Agile, Scrum, Kanban y esquemas híbridos. Mejoré métricas operativas clave un 30% en un solo trimestre con rediseño de procesos basado en datos, y entregué en tiempo y alcance la plataforma Adobe Commerce de un retailer líder del mercado.',
     },
     experience: {
-      heading: 'Experiencia',
-      intro: 'Un recorrido de más de 10 años entre desarrollo y liderazgo de proyectos.',
+      label: '02 — EXPERIENCIA',
+      heading: 'De developer a líder de proyectos IT.',
       items: [
         {
-          role: 'IT Consultant & Project Manager',
-          company: 'Freelance',
-          period: '2026 — Actualidad',
+          years: '2026 — Hoy',
+          company: 'pipacode.studio',
+          role: 'Cofundador · Consultor IT',
           description:
-            'Ayudo a founders y startups a definir y planificar sus proyectos desde cero. Como tengo experiencia tanto de desarrollador full stack como de project manager, puedo guiarlos para que construyan su producto de la mejor manera posible.',
+            'Estudio que ofrece servicios de desarrollo de software, automatización y consultoría. Ayudo a founders y startups a definir y planificar su producto desde el día uno, actuando como su IT Project Manager: armo el roadmap y mantengo la entrega en marcha. En paralelo automatizo flujos de trabajo con IA generativa (Claude Code, Claude API) para investigación y reportes.',
+          link: { label: 'pipacode.studio ↗', href: 'https://pipacode.studio' },
         },
         {
-          role: 'IT Project Manager',
+          years: '2024 — 2025',
           company: 'IURCO',
-          period: '2024 — 2025',
+          role: 'IT Project Manager',
           description:
-            'Supervisé varios proyectos en simultáneo, desde la planificación inicial hasta la entrega final, coordinando con product owners y stakeholders para definir alcance y procesos.',
+            'Gestión simultánea de múltiples proyectos de software factory, desde la planificación inicial hasta la entrega final. Coordinación con product owners y stakeholders para definir alcance, alinear procesos y documentación, con feedback continuo y mejora de procesos.',
           highlights: [
-            'Lideré de punta a punta la planificación, ejecución y entrega de una plataforma Adobe Commerce hecha desde cero para un retailer líder de electrónica de consumo en Argentina, con integraciones a SAP y BigQuery.',
+            {
+              year: '2025',
+              text: 'Planificación, ejecución y entrega end‑to‑end de una plataforma Adobe Commerce de gran escala, desde cero, para un retailer líder de electrónica en Argentina. Equipo de 6 devs con Scrum y Jira, integraciones con SAP y Google BigQuery. Lanzada en fecha, con el 100% del alcance.',
+            },
           ],
         },
         {
-          role: 'IT Project Leader',
+          years: '2022 — 2024',
           company: 'Mercado Libre',
-          period: '2022 — 2024',
+          role: 'IT Project Leader',
           description:
-            'Lideré un equipo de desarrolladores en la unidad de logística de Mercado Libre, manejando todo el ciclo de desarrollo con Agile y Scrum.',
+            'Lideré un equipo de desarrollo en la unidad de envíos, a cargo del ciclo de vida completo del software bajo Agile/Scrum. Responsable de contratación, desarrollo y evaluación de desempeño del equipo.',
           highlights: [
-            'Mejoré en un 30% las métricas clave del equipo de IT en un trimestre, a partir de análisis de datos y rediseño de procesos.',
+            {
+              year: '2024',
+              text: 'Análisis de métricas de nivel 2 y diseño de soluciones con el equipo IT: mejora del 30% en métricas clave en un solo trimestre y definición del roadmap de largo plazo junto al liderazgo técnico.',
+            },
+            {
+              year: '2023',
+              text: 'Desarrollo y lanzamiento de iniciativas cross‑business que requirieron coordinación y negociación entre varias unidades de negocio, IT, producto y UX.',
+            },
           ],
         },
         {
+          years: '2018 — 2022',
+          company: 'Serfe',
           role: 'Senior Developer / Project Manager',
-          company: 'Serfe',
-          period: '2018 — 2022',
           description:
-            'Trabajé como project manager y team lead en 3 proyectos en simultáneo, con equipos de hasta 6 desarrolladores. También configuré infraestructura en AWS (Amplify) y armé la automatización de testing para poder trabajar con CI/CD.',
+            'Project manager y team lead en 3 proyectos simultáneos con equipos de hasta 6 desarrolladores. Configuración de AWS — apps en Amplify, repositorios y testing automatizado — habilitando CI/CD para el equipo.',
+          highlights: [
+            {
+              year: '2022',
+              text: 'Beta launch de Everprep sobre AWS + React, uno de los proyectos más grandes de la empresa. Capacitación interna en AWS Amplify.',
+            },
+            { year: '2021', text: 'Lanzamiento de la tienda WooCommerce del proyecto 45R.' },
+            {
+              year: '2020',
+              text: 'Rediseño de web app y nueva app mobile (React / React Native) para Bluejacketeer.',
+            },
+          ],
         },
         {
-          role: 'Desarrollador Web',
-          company: 'Freelance',
-          period: '2017 — 2018',
+          years: '2017 — 2018',
+          company: 'Independiente',
+          role: 'Web Developer',
           description:
-            'Encaré dos proyectos de forma independiente: un showroom online en WordPress para una empresa de equipamiento comercial, y un sistema de gestión de expedientes en PHP/MySQL para una secretaría de educación pública.',
+            'Dos proyectos end‑to‑end: Patrone Equipamientos, showroom online en WordPress con setup de marketing digital; y SIGE, sistema de gestión de legajos para la Regional IV de Educación de Santa Fe (PHP/CodeIgniter, MySQL), incluyendo relevamiento, deploy y capacitación.',
         },
         {
-          role: 'Full-Stack Developer',
+          years: '2014 — 2017',
           company: 'Serfe',
-          period: '2014 — 2017',
+          role: 'Full‑Stack Developer',
           description:
-            'Trabajé con PHP, JavaScript y SQL sobre Drupal, WordPress, Joomla y CodeIgniter, y configuré servidores LAMP.',
+            'Análisis de requerimientos, estimación y desarrollo de proyectos web en PHP, JavaScript y SQL con Drupal, WordPress, Joomla, CodeIgniter, jQuery y Bootstrap sobre servidores LAMP, con Git.',
         },
       ],
     },
+    skills: {
+      label: '03 — HABILIDADES',
+      groups: [
+        {
+          title: 'Metodologías y entrega',
+          items: ['Agile', 'Scrum', 'Kanban', 'Waterfall', 'Híbrido', 'Roadmapping', 'Gestión de riesgo y alcance'],
+        },
+        {
+          title: 'Liderazgo',
+          items: ['Equipos cross‑funcionales', 'Stakeholders', 'Reportes ejecutivos', 'Hiring y coaching', 'Clientes y proveedores'],
+        },
+        {
+          title: 'Herramientas',
+          items: ['Jira', 'Confluence', 'Monday', 'Slack', 'Google Workspace', 'Excel / Sheets', 'BigQuery'],
+        },
+        {
+          title: 'Base técnica',
+          items: ['AWS', 'CI/CD', 'SDLC', 'Node.js', 'React', 'React Native', 'PHP', 'SQL', 'CCNA'],
+        },
+        { title: 'IA y automatización', items: ['Claude Code', 'Claude API', 'Automatización con IA'] },
+      ],
+    },
+    education: {
+      label: '04 — FORMACIÓN',
+      items: [
+        { name: 'Claude Platform 101', org: 'Anthropic', year: '2026' },
+        { name: 'Claude Code 101', org: 'Anthropic', year: '2026' },
+        { name: 'Kanban for Software Project Management', org: 'Packt', year: '2026' },
+        { name: 'IBM IT Project Manager', org: 'Coursera', year: '2026' },
+        { name: 'DevOps on AWS & Project Management', org: 'Coursera', year: '2026' },
+        { name: 'Full‑Stack Web Development', org: 'Acámica', year: '2013–14' },
+        { name: 'Cisco CCNA 1 & 2', org: 'UTN Academy', year: '2011–13' },
+        { name: 'Ingeniería en Sistemas (4º año)', org: 'UTN', year: '2009–15' },
+        { name: 'Inglés', org: 'Alicana Institute · 5 años', year: '' },
+      ],
+      languagesHeading: 'Idiomas',
+      languages: [
+        { name: 'Español', level: 'Nativo' },
+        { name: 'Inglés', level: 'Avanzado (B2/C1)' },
+      ],
+    },
+    blogTeaser: {
+      label: '05 — BLOG',
+      heading: 'Notas sobre gestión y producto.',
+      viewAll: 'Ver todos los artículos →',
+      readMore: 'Leer artículo →',
+    },
+    booking: {
+      label: '06 — RESERVAR REUNIÓN',
+      heading: 'Hablemos de tu proyecto o de un rol.',
+      intro:
+        'Una videollamada sin costo para entender qué necesitás: planificar un producto desde cero, ordenar la entrega o sumar un IT Project Manager al equipo.',
+      bullets: [
+        '30 minutos por Google Meet',
+        'Martes a jueves 10–17 h, viernes 11–15 h (GMT‑3)',
+        'La invitación de Google Calendar llega con el link',
+      ],
+      stepDay: '1. Elegí un día',
+      stepTime: '2. Elegí un horario',
+      stepDetails: '3. Tus datos',
+      namePlaceholder: 'Nombre',
+      emailPlaceholder: 'Email',
+      topicPlaceholder: '¿De qué te gustaría hablar? (opcional)',
+      selectPrompt: 'Seleccioná día y horario',
+      timeSuffix: 'hs',
+      submit: 'Confirmar reunión',
+      successTitle: 'Reunión solicitada',
+      successSummary:
+        '{name}, te espero el {date} a las {time} hs (30 min). Vas a recibir la invitación de Google Calendar con el link de Meet en {email}.',
+      meetLinkLabel: 'Link de Google Meet',
+      reset: 'Reservar otro horario',
+      noSlots: 'No hay horarios disponibles por el momento. Escribime directamente para coordinar.',
+      loadError: 'No se pudieron cargar los horarios disponibles. Probá de nuevo en un rato.',
+      formError: 'Hubo un error al confirmar la reserva. Probá de nuevo o escribime directamente.',
+      slotTakenError: 'Justo se ocupó ese horario. Elegí otro de la lista actualizada.',
+      rateLimitedError: 'Ya recibimos una reserva tuya hace poco. Si necesitás otro horario, escribime directamente.',
+      invalidSlotError: 'Ese horario ya no está disponible. Elegí otro de la lista actualizada.',
+    },
     contact: {
-      heading: 'Hablemos',
-      intro: 'Contame en qué estás trabajando y cómo te puedo ayudar. Te respondo apenas pueda.',
+      label: '07 — CONTACTO',
+      heading: '¿Preferís escribir?',
+      intro: 'Respondo en menos de 24 horas hábiles.',
+      emailLabel: 'Email',
+      linkedinLabel: 'LinkedIn',
       formName: 'Nombre',
       formEmail: 'Email',
-      formMessage: 'Contame sobre tu proyecto',
+      reasonsLabel: 'Motivo del contacto (podés elegir varios)',
+      reasons: ['Consultoría', 'Aplicación web', 'App mobile', 'Project Manager', 'Desarrollo', 'Oportunidad laboral'],
+      formMessage: 'Mensaje',
       formSubmit: 'Enviar mensaje',
-      formSuccess: '¡Gracias! Tu mensaje fue enviado, te voy a responder pronto.',
+      successTitle: 'Gracias, mensaje enviado.',
+      successBody: 'Te respondo a la brevedad.',
+      reset: 'Enviar otro mensaje',
       formError: 'Hubo un error al enviar el mensaje. Probá de nuevo o escribime directamente por email.',
-      directHeading: 'O escribime directo',
-      email: 'lucianopr87@gmail.com',
-      linkedin: 'linkedin.com/in/luciano-perez-ruiz',
-      location: 'Santa Fe, Argentina',
     },
     footer: {
-      text: 'Luciano Perez Ruiz — Consultoría IT',
-      location: 'Santa Fe, Argentina',
+      role: 'IT / Technical Project Manager',
+      backToTop: 'Volver arriba ↑',
       privacyLink: 'Política de Privacidad',
     },
     cookieConsent: {
@@ -264,146 +407,221 @@ export const content: Record<Locale, SiteContent> = {
       backLink: '← Volver al blog',
       emptyState: 'Todavía no hay artículos publicados. Volvé pronto.',
       byline: 'Por',
-    },
-    booking: {
-      heading: 'Reservá una reunión',
-      intro: 'Elegí un día y un horario disponible para una videollamada por Google Meet.',
-      timezoneNote: 'Horarios en hora de Argentina (GMT-3).',
-      loading: 'Buscando horarios disponibles...',
-      dayLabel: 'Día',
-      timeLabel: 'Horario',
-      timePlaceholder: 'Elegí un horario',
-      noSlots: 'No hay horarios disponibles por el momento. Escribime directamente para coordinar.',
-      loadError: 'No se pudieron cargar los horarios disponibles. Probá de nuevo en un rato.',
-      formName: 'Nombre',
-      formEmail: 'Email',
-      formMessage: '¿De qué te gustaría hablar? (opcional)',
-      formSubmit: 'Confirmar reserva',
-      formSuccess: '¡Listo! Te mandé una invitación de Google Calendar con el link de Meet.',
-      formError: 'Hubo un error al confirmar la reserva. Probá de nuevo o escribime directamente.',
-      slotTakenError: 'Justo se ocupó ese horario. Elegí otro de la lista actualizada.',
-      rateLimitedError: 'Ya recibimos una reserva tuya hace poco. Si necesitás otro horario, escribime directamente.',
-      backToSlots: '← Elegir otro horario',
+      months: ['ENE', 'FEB', 'MAR', 'ABR', 'MAY', 'JUN', 'JUL', 'AGO', 'SEP', 'OCT', 'NOV', 'DIC'],
     },
   },
   en: {
     meta: {
-      title: 'Luciano Perez Ruiz — IT Consulting: Full Stack Development & Project Leadership',
+      title: 'Luciano Perez Ruiz — IT / Technical Project Manager',
       description:
-        'IT consultant with 10+ years of experience at Mercado Libre and startups. I help founders and teams define, plan, and build full-stack software products from the ground up.',
+        'IT / Technical Project Manager with 10+ years at Mercado Libre and startups. I started out writing code — today I lead teams and turn complex initiatives into shipped products.',
     },
     nav: {
-      services: 'Services',
-      about: 'About',
-      experience: 'Experience',
-      contact: 'Contact',
-      blog: 'Blog',
-      booking: 'Book a meeting',
+      items: {
+        home: 'Home',
+        profile: 'Profile',
+        experience: 'Experience',
+        skills: 'Skills',
+        education: 'Education',
+        blog: 'Blog',
+        booking: 'Book a meeting',
+        contact: 'Contact',
+      },
+      menu: 'Menu',
+      close: 'Close',
+      bookShort: 'Book a call',
+      directContact: 'DIRECT CONTACT',
+      downloadCv: 'Download CV (PDF) ↓',
+      otherLanguage: 'Español',
     },
     hero: {
-      eyebrow: 'IT Consulting · Full Stack Development & Project Leadership',
-      headline: 'I help startups and teams ship software that actually works — and stays on track.',
-      subheadline:
-        "10+ years leading development teams and building full-stack products, from Mercado Libre to early-stage startups. I bridge the gap between technical execution and project delivery.",
-      cta: "Let's talk about your project",
+      status: 'OPEN TO REMOTE ROLES · SANTA FE, ARGENTINA',
+      firstName: 'Luciano',
+      lastName: 'Perez Ruiz',
+      lead: 'IT / Technical Project Manager. 10+ years turning complex initiatives into shipped products — with the eye of someone who started out writing code.',
+      ctaBook: 'Book a meeting',
+      ctaCv: 'Download CV (PDF) ↓',
+      photoAlt: 'Luciano Perez Ruiz',
     },
-    services: {
-      heading: 'What I can do for you',
-      intro: 'Two ways to work together, depending on what your project needs right now.',
-      items: [
-        {
-          title: 'Full Stack Development',
-          description:
-            'Hands-on development and technical guidance for your product — architecture decisions, code reviews, and building features that scale.',
-          tags: ['PHP', 'JavaScript / TypeScript', 'React', 'WordPress', 'AWS'],
-        },
-        {
-          title: 'IT Project Leadership & Management',
-          description:
-            "I organize the roadmap, coordinate your team, and make sure delivery stays on scope and on time — the same way I've led teams of up to 8 developers through complex, multi-stakeholder projects.",
-          tags: ['Agile / Scrum', 'Jira', 'Planning', 'Stakeholders'],
-        },
-      ],
-    },
-    about: {
-      heading: 'About me',
-      paragraphs: [
-        "I'm an IT Project Leader with 10+ years turning complex, early-stage initiatives into shipped products — for companies like Mercado Libre and fast-moving startups.",
-        "I started as a full-stack developer, which means I don't just manage roadmaps — I understand what's actually hard about building software, and I speak both \"business\" and \"engineering\" fluently. That's let me lead teams of up to 8 developers through everything from e-commerce platforms built from scratch (with SAP and BigQuery integrations) to cross-business initiatives requiring buy-in from multiple stakeholders.",
-        "Some things I'm proud of: improving core operational metrics by 30% in a single quarter through data-driven process redesign, and launching a market-leading retailer's Adobe Commerce platform on time and on scope.",
-      ],
+    profile: {
+      label: '01 — PROFILE',
+      lead: 'I speak both “business” and “engineering” fluently. I’ve led teams of up to 8 people at Mercado Libre and startups, from e‑commerce platforms built from scratch to initiatives that needed buy‑in from several business units.',
+      body: 'I started out as a full‑stack developer, so I don’t just manage roadmaps — I understand what’s actually hard about building software. I work across Agile, Scrum, Kanban and hybrid delivery. I improved core operational metrics by 30% in a single quarter through data‑driven process redesign, and delivered a market‑leading retailer’s Adobe Commerce platform on time and on scope.',
     },
     experience: {
-      heading: 'Experience',
-      intro: 'Over 10 years moving between hands-on development and project leadership.',
+      label: '02 — EXPERIENCE',
+      heading: 'From developer to IT project leader.',
       items: [
         {
-          role: 'IT Consultant & Project Manager',
-          company: 'Freelance',
-          period: '2026 — Present',
+          years: '2026 — Present',
+          company: 'pipacode.studio',
+          role: 'Co‑founder · IT Consultant',
           description:
-            'I help founders and startups define and plan their projects from the beginning, combining full-stack development and project management experience to guide them toward the best way to build their product.',
+            'A studio offering software development, automation and consulting services. I help founders and startups define and plan their product from day one, acting as their IT Project Manager: building the roadmap and keeping delivery on track. In parallel, I automate workflows with generative AI (Claude Code, Claude API) for research and reporting.',
+          link: { label: 'pipacode.studio ↗', href: 'https://pipacode.studio' },
         },
         {
-          role: 'IT Project Manager',
+          years: '2024 — 2025',
           company: 'IURCO',
-          period: '2024 — 2025',
+          role: 'IT Project Manager',
           description:
-            'Responsible for overseeing multiple projects simultaneously, from initial planning to final delivery, coordinating with product owners and stakeholders to define scope and processes.',
+            'Managed multiple software‑factory projects simultaneously, from initial planning to final delivery. Coordinated with product owners and stakeholders to define scope and align on process and documentation, with continuous feedback and process improvement.',
           highlights: [
-            'Orchestrated the end-to-end planning, execution, and delivery of a from-scratch Adobe Commerce platform for a market-leading consumer electronics retailer in Argentina, with SAP and BigQuery integrations.',
+            {
+              year: '2025',
+              text: 'End‑to‑end planning, execution and delivery of a high‑scale, from‑scratch Adobe Commerce platform for a market‑leading consumer electronics retailer in Argentina. 6‑developer team under Scrum and Jira, with SAP and Google BigQuery integrations. Launched on schedule, meeting 100% of scope.',
+            },
           ],
         },
         {
-          role: 'IT Project Leader',
+          years: '2022 — 2024',
           company: 'Mercado Libre',
-          period: '2022 — 2024',
+          role: 'IT Project Leader',
           description:
-            "Led a team of developers in Mercado Libre's shipping unit, managing the full software development lifecycle under Agile and Scrum methodologies.",
+            'Led a development team in the shipping unit, owning the full software development lifecycle under Agile/Scrum. Responsible for hiring, development and performance evaluation of the team.',
           highlights: [
-            "Improved the IT team's core operational metrics by 30% in a quarter through data analysis and process redesign.",
+            {
+              year: '2024',
+              text: 'Analyzed level‑2 metrics and designed solutions with the IT team: a 30% improvement in core metrics in a single quarter, and a long‑term roadmap defined alongside technical leadership.',
+            },
+            {
+              year: '2023',
+              text: 'Developed and released cross‑business initiatives that required coordination and negotiation across several business units, IT, product and UX.',
+            },
           ],
         },
         {
+          years: '2018 — 2022',
+          company: 'Serfe',
           role: 'Senior Developer / Project Manager',
-          company: 'Serfe',
-          period: '2018 — 2022',
           description:
-            'Project manager and team lead role across 3 concurrent projects with teams of up to 6 developers. AWS (Amplify) infrastructure configuration and automated testing setup for a CI/CD approach.',
+            'Project manager and team lead across 3 concurrent projects with teams of up to 6 developers. AWS configuration — Amplify apps, repositories and automated testing — enabling CI/CD for the team.',
+          highlights: [
+            {
+              year: '2022',
+              text: 'Beta launch of Everprep on AWS + React, one of the company’s largest projects. Internal AWS Amplify training.',
+            },
+            { year: '2021', text: 'Launched the WooCommerce store for the 45R project.' },
+            {
+              year: '2020',
+              text: 'Web app redesign and new mobile app (React / React Native) for Bluejacketeer.',
+            },
+          ],
         },
         {
+          years: '2017 — 2018',
+          company: 'Independent',
           role: 'Web Developer',
-          company: 'Freelance',
-          period: '2017 — 2018',
           description:
-            'Developed and completed two independent projects: a WordPress showroom for a commercial equipment company, and a PHP/MySQL records management system for a public education department.',
+            'Two end‑to‑end projects: Patrone Equipamientos, an online showroom built in WordPress with a digital‑marketing setup; and SIGE, a records‑management system for Santa Fe’s Regional IV Education authority (PHP/CodeIgniter, MySQL), including requirements gathering, deployment and staff training.',
         },
         {
-          role: 'Full-Stack Developer',
+          years: '2014 — 2017',
           company: 'Serfe',
-          period: '2014 — 2017',
+          role: 'Full‑Stack Developer',
           description:
-            'Development in PHP, JavaScript, and SQL on Drupal, WordPress, Joomla, and CodeIgniter, with LAMP server configuration.',
+            'Requirements analysis, estimation and development of web projects in PHP, JavaScript and SQL with Drupal, WordPress, Joomla, CodeIgniter, jQuery and Bootstrap on LAMP servers, using Git.',
         },
       ],
     },
+    skills: {
+      label: '03 — SKILLS',
+      groups: [
+        {
+          title: 'Delivery & methodology',
+          items: ['Agile', 'Scrum', 'Kanban', 'Waterfall', 'Hybrid delivery', 'Roadmapping', 'Risk & scope management'],
+        },
+        {
+          title: 'Leadership',
+          items: ['Cross‑functional teams', 'Stakeholder management', 'Executive reporting', 'Hiring & coaching', 'Client & vendor coordination'],
+        },
+        {
+          title: 'Tools',
+          items: ['Jira', 'Confluence', 'Monday', 'Slack', 'Google Workspace', 'Excel / Sheets', 'BigQuery'],
+        },
+        {
+          title: 'Technical background',
+          items: ['AWS', 'CI/CD', 'SDLC', 'Node.js', 'React', 'React Native', 'PHP', 'SQL', 'CCNA'],
+        },
+        { title: 'AI & automation', items: ['Claude Code', 'Claude API', 'AI workflow automation'] },
+      ],
+    },
+    education: {
+      label: '04 — EDUCATION',
+      items: [
+        { name: 'Claude Platform 101', org: 'Anthropic', year: '2026' },
+        { name: 'Claude Code 101', org: 'Anthropic', year: '2026' },
+        { name: 'Kanban for Software Project Management', org: 'Packt', year: '2026' },
+        { name: 'IBM IT Project Manager', org: 'Coursera', year: '2026' },
+        { name: 'DevOps on AWS & Project Management', org: 'Coursera', year: '2026' },
+        { name: 'Full‑Stack Web Development', org: 'Acámica', year: '2013–14' },
+        { name: 'Cisco CCNA 1 & 2', org: 'UTN Academy', year: '2011–13' },
+        { name: 'Systems Engineering (4th year)', org: 'UTN', year: '2009–15' },
+        { name: 'English', org: 'Alicana Institute · 5 years', year: '' },
+      ],
+      languagesHeading: 'Languages',
+      languages: [
+        { name: 'Spanish', level: 'Native' },
+        { name: 'English', level: 'Advanced (B2/C1)' },
+      ],
+    },
+    blogTeaser: {
+      label: '05 — BLOG',
+      heading: 'Notes on delivery and product.',
+      viewAll: 'See all articles →',
+      readMore: 'Read article →',
+    },
+    booking: {
+      label: '06 — BOOK A MEETING',
+      heading: 'Let’s talk about your project or a role.',
+      intro:
+        'A free video call to understand what you need: planning a product from scratch, getting delivery back on track, or adding an IT Project Manager to your team.',
+      bullets: [
+        '30 minutes on Google Meet',
+        'Tuesday to Thursday 10am–5pm, Friday 11am–3pm (GMT‑3)',
+        'The Google Calendar invite includes the link',
+      ],
+      stepDay: '1. Pick a day',
+      stepTime: '2. Pick a time',
+      stepDetails: '3. Your details',
+      namePlaceholder: 'Name',
+      emailPlaceholder: 'Email',
+      topicPlaceholder: 'What would you like to talk about? (optional)',
+      selectPrompt: 'Select a day and time',
+      timeSuffix: '',
+      submit: 'Confirm meeting',
+      successTitle: 'Meeting requested',
+      successSummary:
+        '{name}, see you on {date} at {time} (30 min, GMT‑3). The Google Calendar invite with the Meet link is on its way to {email}.',
+      meetLinkLabel: 'Google Meet link',
+      reset: 'Book another time',
+      noSlots: "No slots available right now. Reach out directly and we'll coordinate.",
+      loadError: 'Could not load available slots. Please try again shortly.',
+      formError: 'There was an error confirming your booking. Please try again or reach out directly.',
+      slotTakenError: 'That slot was just taken. Please pick another one from the updated list.',
+      rateLimitedError: 'We already received a booking from you recently. If you need another slot, reach out directly.',
+      invalidSlotError: 'That slot is no longer available. Please pick another one from the updated list.',
+    },
     contact: {
-      heading: "Let's talk",
-      intro: "Tell me what you're working on and how I can help. I'll get back to you shortly.",
+      label: '07 — CONTACT',
+      heading: 'Rather write?',
+      intro: 'I reply within 24 business hours.',
+      emailLabel: 'Email',
+      linkedinLabel: 'LinkedIn',
       formName: 'Name',
       formEmail: 'Email',
-      formMessage: 'Tell me about your project',
+      reasonsLabel: 'What is this about? (pick as many as you like)',
+      reasons: ['Consulting', 'Web app', 'Mobile app', 'Project Manager', 'Development', 'Job opportunity'],
+      formMessage: 'Message',
       formSubmit: 'Send message',
-      formSuccess: "Thanks! Your message was sent, I'll reply soon.",
+      successTitle: 'Thanks, message sent.',
+      successBody: "I'll get back to you shortly.",
+      reset: 'Send another message',
       formError: 'There was an error sending your message. Please try again or email me directly.',
-      directHeading: 'Or reach out directly',
-      email: 'lucianopr87@gmail.com',
-      linkedin: 'linkedin.com/in/luciano-perez-ruiz',
-      location: 'Santa Fe, Argentina',
     },
     footer: {
-      text: 'Luciano Perez Ruiz — IT Consulting',
-      location: 'Santa Fe, Argentina',
+      role: 'IT / Technical Project Manager',
+      backToTop: 'Back to top ↑',
       privacyLink: 'Privacy Policy',
     },
     cookieConsent: {
@@ -448,26 +666,7 @@ export const content: Record<Locale, SiteContent> = {
       backLink: '← Back to blog',
       emptyState: 'No articles published yet. Check back soon.',
       byline: 'By',
-    },
-    booking: {
-      heading: 'Book a meeting',
-      intro: 'Pick a day and an available time for a Google Meet video call.',
-      timezoneNote: 'Times shown in Argentina time (GMT-3).',
-      loading: 'Loading available slots...',
-      dayLabel: 'Day',
-      timeLabel: 'Time',
-      timePlaceholder: 'Pick a time',
-      noSlots: "No slots available right now. Reach out directly and we'll coordinate.",
-      loadError: 'Could not load available slots. Please try again shortly.',
-      formName: 'Name',
-      formEmail: 'Email',
-      formMessage: "What would you like to talk about? (optional)",
-      formSubmit: 'Confirm booking',
-      formSuccess: "You're all set! I sent you a Google Calendar invite with the Meet link.",
-      formError: 'There was an error confirming your booking. Please try again or reach out directly.',
-      slotTakenError: 'That slot was just taken. Please pick another one from the updated list.',
-      rateLimitedError: "We already received a booking from you recently. If you need another slot, reach out directly.",
-      backToSlots: '← Pick a different slot',
+      months: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
     },
   },
 };

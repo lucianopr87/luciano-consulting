@@ -1,123 +1,180 @@
 ---
-import type { SiteContent } from '../i18n/content';
+import { contactDetails, sectionIds, type SiteContent } from '../i18n/content';
 
 interface Props {
   content: SiteContent;
 }
 
 const { content } = Astro.props;
+const t = content.contact;
 const accessKey = import.meta.env.PUBLIC_WEB3FORMS_ACCESS_KEY ?? '';
+
+const fieldLabelClass = 'flex flex-col gap-1.5 text-[13px] text-muted';
+const inputClass =
+  'w-full min-w-0 rounded-md border border-line-3 bg-surface px-3.5 py-[13px] text-base text-ink outline-none focus:border-ink';
+const directLinks = [
+  { label: t.emailLabel, value: contactDetails.email, href: `mailto:${contactDetails.email}`, external: false },
+  { label: t.linkedinLabel, value: `${contactDetails.linkedinHandle} ↗`, href: contactDetails.linkedinUrl, external: true },
+];
 ---
 
-<section id="contact" class="bg-brand-navy py-24">
-  <div class="mx-auto max-w-3xl px-6">
-    <h2 class="text-3xl font-bold text-white">{content.contact.heading}</h2>
-    <p class="mt-3 text-slate-300">{content.contact.intro}</p>
-
-    <form class="contact-form mt-10 space-y-5" data-success={content.contact.formSuccess} data-error={content.contact.formError}>
-      <input type="hidden" name="access_key" value={accessKey} />
-      <input type="hidden" name="subject" value="New message from luciano-consulting.web.app" />
-      <input type="checkbox" name="botcheck" class="hidden" style="display:none" />
-
-      <div>
-        <label for="name" class="mb-1 block text-sm font-medium text-slate-200">{content.contact.formName}</label>
-        <input
-          id="name"
-          name="name"
-          type="text"
-          required
-          class="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-2.5 text-white placeholder-slate-500 focus:border-brand-teal focus:outline-none"
-        />
+<section id={sectionIds.contact}>
+  <div class="wrap flex flex-wrap gap-14 py-24">
+    <div class="flex min-w-0 flex-[1_1_320px] flex-col gap-5">
+      <span class="font-mono text-xs tracking-[0.08em] text-label">{t.label}</span>
+      <h2 class="text-[clamp(34px,4.4vw,54px)] leading-[1.02] font-medium tracking-[-0.035em]">{t.heading}</h2>
+      <p class="max-w-[420px] text-[17px] leading-[1.6] text-ink-soft">{t.intro}</p>
+      <div class="mt-2 flex flex-col border-t border-line">
+        {
+          directLinks.map((link) => (
+            <a
+              href={link.href}
+              target={link.external ? '_blank' : undefined}
+              rel={link.external ? 'noopener noreferrer' : undefined}
+              class="flex justify-between gap-3 border-b border-line py-3.5 text-base text-ink hover:text-accent"
+            >
+              <span class="text-muted">{link.label}</span>
+              <span class="min-w-0 truncate">{link.value}</span>
+            </a>
+          ))
+        }
       </div>
+    </div>
 
-      <div>
-        <label for="email" class="mb-1 block text-sm font-medium text-slate-200">{content.contact.formEmail}</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          required
-          class="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-2.5 text-white placeholder-slate-500 focus:border-brand-teal focus:outline-none"
-        />
-      </div>
+    <div class="min-w-0 flex-[1.4_1_460px]">
+      <form class="contact-form flex flex-col gap-3" data-error={t.formError}>
+        <input type="hidden" name="access_key" value={accessKey} />
+        <input type="hidden" name="subject" value="New message from luciano-consulting.web.app" />
+        <input type="hidden" name="motivos" value="" />
+        <input type="checkbox" name="botcheck" class="hidden" style="display:none" tabindex="-1" autocomplete="off" />
 
-      <div>
-        <label for="message" class="mb-1 block text-sm font-medium text-slate-200">{content.contact.formMessage}</label>
-        <textarea
-          id="message"
-          name="message"
-          rows="5"
-          required
-          class="w-full rounded-lg border border-slate-700 bg-slate-800 px-4 py-2.5 text-white placeholder-slate-500 focus:border-brand-teal focus:outline-none"
-        ></textarea>
-      </div>
+        <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-3">
+          <label class={fieldLabelClass}>
+            {t.formName}
+            <input name="name" type="text" required autocomplete="name" class={inputClass} />
+          </label>
+          <label class={fieldLabelClass}>
+            {t.formEmail}
+            <input name="email" type="email" required autocomplete="email" class={inputClass} />
+          </label>
+        </div>
 
-      <button
-        type="submit"
-        class="rounded-full bg-brand-teal px-8 py-3 font-semibold text-brand-navy transition hover:opacity-90 disabled:opacity-50"
-      >
-        {content.contact.formSubmit}
-      </button>
+        <div class="flex flex-col gap-2" role="group" aria-labelledby="contact-reasons-label">
+          <span id="contact-reasons-label" class="text-[13px] text-muted">{t.reasonsLabel}</span>
+          <div class="flex flex-wrap gap-2">
+            {
+              t.reasons.map((reason) => (
+                <button
+                  type="button"
+                  class="reason-pill flex cursor-pointer items-center rounded-full border border-line-3 bg-surface px-3.5 py-[9px] text-sm text-ink transition-colors duration-150 hover:border-ink aria-pressed:border-ink aria-pressed:bg-ink aria-pressed:text-paper"
+                  aria-pressed="false"
+                  data-reason={reason}
+                >
+                  <span class="reason-check hidden" aria-hidden="true">✓&nbsp;</span>
+                  {reason}
+                </button>
+              ))
+            }
+          </div>
+        </div>
 
-      <p class="form-status hidden text-sm" role="status"></p>
-    </form>
+        <label class={fieldLabelClass}>
+          {t.formMessage}
+          <textarea name="message" rows="6" required class={`${inputClass} resize-y leading-[1.5]`}></textarea>
+        </label>
 
-    <div class="mt-16 border-t border-slate-700 pt-8">
-      <p class="text-sm font-semibold uppercase tracking-wide text-slate-400">{content.contact.directHeading}</p>
-      <div class="mt-3 flex flex-col gap-2 text-slate-200 sm:flex-row sm:gap-8">
-        <a href={`mailto:${content.contact.email}`} class="hover:text-white">{content.contact.email}</a>
-        <a href="https://www.linkedin.com/in/luciano-perez-ruiz" target="_blank" rel="noopener noreferrer" class="hover:text-white">
-          {content.contact.linkedin}
-        </a>
-        <span>{content.contact.location}</span>
+        <button
+          type="submit"
+          class="mt-1.5 cursor-pointer self-start rounded-full bg-ink px-6 py-3.5 text-[15px] font-medium text-paper transition-colors duration-150 hover:bg-accent disabled:opacity-50"
+        >
+          {t.formSubmit}
+        </button>
+
+        <p class="form-status hidden text-sm text-accent" role="alert"></p>
+      </form>
+
+      <div class="contact-success hidden flex-col gap-3.5 rounded-md border border-line-2 bg-surface p-8" role="status">
+        <h3 class="text-[26px] font-medium tracking-[-0.02em]">{t.successTitle}</h3>
+        <p class="text-base text-ink-soft">{t.successBody}</p>
+        <button
+          type="button"
+          class="contact-reset cursor-pointer self-start rounded-full border border-ink px-[18px] py-2.5 text-sm text-ink hover:bg-ink hover:text-paper"
+        >
+          {t.reset}
+        </button>
       </div>
     </div>
   </div>
 </section>
 
 <script>
-  const forms = document.querySelectorAll<HTMLFormElement>('.contact-form');
+  const form = document.querySelector<HTMLFormElement>('.contact-form');
+  const success = document.querySelector<HTMLDivElement>('.contact-success');
 
-  forms.forEach((form) => {
+  if (form && success) {
+    const pills = form.querySelectorAll<HTMLButtonElement>('.reason-pill');
+    const reasonsInput = form.querySelector<HTMLInputElement>('input[name="motivos"]')!;
+    const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
+    const status = form.querySelector<HTMLParagraphElement>('.form-status')!;
+
+    const setPressed = (pill: HTMLButtonElement, pressed: boolean) => {
+      pill.setAttribute('aria-pressed', String(pressed));
+      pill.querySelector('.reason-check')?.classList.toggle('hidden', !pressed);
+    };
+
+    const syncReasons = () => {
+      reasonsInput.value = Array.from(pills)
+        .filter((pill) => pill.getAttribute('aria-pressed') === 'true')
+        .map((pill) => pill.dataset.reason)
+        .join(', ');
+    };
+
+    pills.forEach((pill) =>
+      pill.addEventListener('click', () => {
+        setPressed(pill, pill.getAttribute('aria-pressed') !== 'true');
+        syncReasons();
+      })
+    );
+
+    const showError = () => {
+      status.textContent = form.dataset.error ?? '';
+      status.classList.remove('hidden');
+    };
+
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
-
-      const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
-      const status = form.querySelector<HTMLParagraphElement>('.form-status');
-      const successMessage = form.dataset.success ?? '';
-      const errorMessage = form.dataset.error ?? '';
-
-      if (submitButton) submitButton.disabled = true;
+      syncReasons();
+      submitButton.disabled = true;
+      status.classList.add('hidden');
 
       try {
-        const formData = new FormData(form);
         const response = await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: { Accept: 'application/json' },
-          body: formData,
+          body: new FormData(form),
         });
         const result = await response.json();
 
-        if (status) {
-          status.textContent = result.success ? successMessage : errorMessage;
-          status.classList.remove('hidden');
-          status.classList.toggle('text-emerald-400', Boolean(result.success));
-          status.classList.toggle('text-red-400', !result.success);
-        }
-
         if (result.success) {
           form.reset();
+          pills.forEach((pill) => setPressed(pill, false));
+          syncReasons();
+          form.classList.add('hidden');
+          success.classList.replace('hidden', 'flex');
           window.gtag?.('event', 'generate_lead');
+        } else {
+          showError();
         }
       } catch {
-        if (status) {
-          status.textContent = errorMessage;
-          status.classList.remove('hidden');
-          status.classList.add('text-red-400');
-        }
+        showError();
       } finally {
-        if (submitButton) submitButton.disabled = false;
+        submitButton.disabled = false;
       }
     });
-  });
+
+    success.querySelector('.contact-reset')?.addEventListener('click', () => {
+      success.classList.replace('flex', 'hidden');
+      form.classList.remove('hidden');
+    });
+  }
 </script>

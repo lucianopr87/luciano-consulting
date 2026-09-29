@@ -6,10 +6,11 @@ const pageContent = content.es;
 ---
 
 <Layout locale="es" content={pageContent} path="/404/">
-  <main class="flex min-h-[70vh] flex-col items-center justify-center px-6 text-center">
-    <h1 class="text-6xl font-extrabold text-slate-900">404</h1>
-    <p class="mt-4 text-lg text-slate-600">Página no encontrada / Page not found</p>
-    <a href="/" class="mt-8 rounded-full bg-brand-blue px-8 py-3 font-semibold text-white hover:opacity-90">
+  <main class="wrap flex min-h-[80vh] flex-col items-start justify-center gap-6">
+    <span class="font-mono text-xs tracking-[0.08em] text-label">ERROR 404</span>
+    <h1 class="text-[clamp(52px,8vw,104px)] leading-[0.95] font-medium tracking-[-0.045em]">404</h1>
+    <p class="text-[clamp(20px,2.2vw,26px)] leading-[1.35] text-ink-soft">Página no encontrada / Page not found</p>
+    <a href="/" class="mt-2 rounded-full bg-accent px-[22px] py-3.5 text-[15px] font-medium text-white hover:bg-accent-hover">
       Volver al inicio / Back home
     </a>
   </main>

@@ -12,18 +12,18 @@ const privacyHref = locale === 'es' ? '/privacy/' : '/en/privacy/';
 
 <div
   id="cookie-consent"
-  class="fixed inset-x-0 bottom-0 z-50 hidden flex-col gap-3 border-t border-slate-700 bg-brand-navy px-6 py-4 text-sm text-slate-300 sm:flex-row sm:items-center sm:justify-between"
+  class="fixed inset-x-0 bottom-0 z-30 hidden flex-col gap-3 border-t border-night-line bg-night px-6 py-4 text-sm text-night-text sm:flex-row sm:items-center sm:justify-between"
 >
   <p>
     {content.cookieConsent.message}
     {' '}
-    <a href={privacyHref} class="underline hover:text-white">{content.cookieConsent.policyLinkText}</a>
+    <a href={privacyHref} class="underline hover:text-paper">{content.cookieConsent.policyLinkText}</a>
   </p>
   <div class="flex shrink-0 gap-3">
     <button
       id="cookie-dismiss"
       type="button"
-      class="rounded-full bg-white px-4 py-1.5 font-semibold text-brand-navy hover:bg-slate-200"
+      class="cursor-pointer rounded-full bg-paper px-4 py-1.5 font-medium text-ink hover:bg-white"
     >
       {content.cookieConsent.dismissLabel}
     </button>

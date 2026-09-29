@@ -22,13 +22,14 @@ const personJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Person',
   name: 'Luciano Perez Ruiz',
-  jobTitle: 'IT Project Manager / Full Stack Developer',
+  jobTitle: 'IT / Technical Project Manager',
   url: Astro.site?.toString(),
   sameAs: ['https://www.linkedin.com/in/luciano-perez-ruiz'],
   knowsAbout: [
-    'Full Stack Development',
     'IT Project Management',
-    'Software Development Consulting',
+    'Technical Project Management',
+    'Agile / Scrum delivery',
+    'Full Stack Development',
   ],
   address: {
     '@type': 'PostalAddress',
@@ -69,7 +70,7 @@ const personJsonLd = {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap"
       rel="stylesheet"
     />
 
@@ -87,7 +88,7 @@ const personJsonLd = {
     )}
     {gaId && <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />}
   </head>
-  <body class="bg-white text-slate-900 font-sans antialiased">
+  <body class="bg-paper font-sans text-ink antialiased">
     {gaId && <CookieConsent content={content} locale={locale} />}
     <slot />
   </body>

@@ -1,0 +1,38 @@
+---
+import { Image } from 'astro:assets';
+import type { Locale } from '../i18n/content';
+import { postHref, postMeta, type BlogPost } from '../lib/blog';
+
+interface Props {
+  locale: Locale;
+  post: BlogPost;
+  readMore: string;
+}
+
+const { locale, post, readMore } = Astro.props;
+---
+
+<a
+  href={postHref(locale, post)}
+  class="blog-card flex flex-col overflow-hidden rounded border border-line-2 bg-surface text-ink transition-colors duration-150 hover:border-ink"
+>
+  {
+    post.data.coverImage && (
+      <Image
+        src={post.data.coverImage}
+        alt={post.data.coverImageAlt ?? ''}
+        widths={[480, 960]}
+        sizes="(max-width: 700px) 100vw, 580px"
+        format="webp"
+        quality={80}
+        class="block aspect-video w-full border-b border-line-2 object-cover"
+      />
+    )
+  }
+  <div class="flex flex-1 flex-col gap-3 px-[26px] pb-[26px] pt-6">
+    <span class="font-mono text-xs tracking-[0.04em] text-muted">{postMeta(locale, post)}</span>
+    <h3 class="text-[22px] leading-[1.25] font-medium tracking-[-0.02em] text-pretty">{post.data.title}</h3>
+    <p class="flex-1 text-[15px] leading-[1.55] text-muted text-pretty">{post.data.description}</p>
+    <span class="text-sm text-accent">{readMore}</span>
+  </div>
+</a>
