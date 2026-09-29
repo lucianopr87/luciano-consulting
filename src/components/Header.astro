@@ -1,5 +1,5 @@
 ---
-import { contactDetails, cvPdfPath, sectionIds, type Locale, type SectionKey, type SiteContent } from '../i18n/content';
+import { contactDetails, sectionIds, type Locale, type SectionKey, type SiteContent } from '../i18n/content';
 
 interface Props {
   locale: Locale;
@@ -76,7 +76,7 @@ const navLinks = navKeys.map((key, index) => ({
       <a href={contactDetails.linkedinUrl} target="_blank" rel="noopener noreferrer" class="text-paper hover:text-accent-light">
         LinkedIn ↗
       </a>
-      <a href={cvPdfPath} target="_blank" class="text-paper hover:text-accent-light">{content.nav.downloadCv}</a>
+      <a href={content.cvPdf} target="_blank" class="text-paper hover:text-accent-light">{content.nav.downloadCv}</a>
       <a
         href={resolvedOtherLocalePath}
         hreflang={otherLocale}

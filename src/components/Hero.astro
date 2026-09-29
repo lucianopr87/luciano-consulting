@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import portrait from '../assets/luciano-portrait.jpg';
-import { cvPdfPath, sectionIds, type SiteContent } from '../i18n/content';
+import { sectionIds, type SiteContent } from '../i18n/content';
 
 interface Props {
   content: SiteContent;
@@ -30,7 +30,7 @@ const { content } = Astro.props;
         {content.hero.ctaBook}
       </a>
       <a
-        href={cvPdfPath}
+        href={content.cvPdf}
         target="_blank"
         class="rounded-full border border-line-4 px-[22px] py-3.5 text-[15px] text-ink transition-colors duration-150 hover:border-ink"
       >
