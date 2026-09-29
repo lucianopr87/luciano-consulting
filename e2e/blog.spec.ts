@@ -1,24 +1,40 @@
 import { test, expect } from '@playwright/test';
 
-test('blog nav link navigates to the blog index for the current locale', async ({ page, isMobile }) => {
-  test.skip(isMobile, 'Desktop nav is hidden on mobile; see mobile-menu.spec.ts');
-
+test('the home shows the latest posts as cards linking to the post in the same locale', async ({ page }) => {
   await page.goto('/');
-  await page.locator('header nav').first().getByRole('link', { name: 'Blog' }).click();
+  const cards = page.locator('#blog .blog-card');
+  await expect(cards).toHaveCount(2);
+  await expect(cards.first()).toContainText('Medir tokens no es medir desempeño');
+  await expect(cards.first()).toContainText('23 SEP 2026 · EQUIPOS · MÉTRICAS');
+  await cards.first().click();
+  await expect(page).toHaveURL(/\/blog\/medir-tokens-no-es-medir-desempeno\/$/);
+
+  await page.goto('/en/');
+  await expect(page.locator('#blog .blog-card').first()).toHaveAttribute(
+    'href',
+    '/en/blog/measuring-tokens-is-not-measuring-performance/'
+  );
+});
+
+test('"see all articles" goes to the blog index for the current locale', async ({ page }) => {
+  await page.goto('/');
+  await page.getByRole('link', { name: /Ver todos los artículos/ }).click();
   await expect(page).toHaveURL(/\/blog\/$/);
   await expect(page.getByRole('heading', { level: 1, name: 'Blog' })).toBeVisible();
 
   await page.goto('/en/');
-  await page.locator('header nav').first().getByRole('link', { name: 'Blog' }).click();
+  await page.getByRole('link', { name: /See all articles/ }).click();
   await expect(page).toHaveURL(/\/en\/blog\/$/);
 });
 
 test('language switcher on the blog index links to the translated blog index, not the home page', async ({ page }) => {
   await page.goto('/blog/');
-  await page.getByRole('link', { name: 'EN', exact: true }).click();
+  await page.locator('#menu-toggle').click();
+  await page.locator('#site-menu a[hreflang="en"]').click();
   await expect(page).toHaveURL(/\/en\/blog\/$/);
 
-  await page.getByRole('link', { name: 'ES', exact: true }).click();
+  await page.locator('#menu-toggle').click();
+  await page.locator('#site-menu a[hreflang="es"]').click();
   await expect(page).toHaveURL(/\/blog\/$/);
 });
 

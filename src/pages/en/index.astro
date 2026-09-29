@@ -2,12 +2,15 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Hero from '../../components/Hero.astro';
-import Services from '../../components/Services.astro';
-import About from '../../components/About.astro';
+import Profile from '../../components/Profile.astro';
 import Experience from '../../components/Experience.astro';
+import Skills from '../../components/Skills.astro';
+import Education from '../../components/Education.astro';
+import BlogTeaser from '../../components/BlogTeaser.astro';
+import Booking from '../../components/Booking.astro';
 import Contact from '../../components/Contact.astro';
 import Footer from '../../components/Footer.astro';
-import { content } from '../../i18n/content';
+import { content, sectionIds } from '../../i18n/content';
 
 const locale = 'en';
 const pageContent = content[locale];
@@ -15,11 +18,14 @@ const pageContent = content[locale];
 
 <Layout locale={locale} content={pageContent} path="/en/">
   <Header locale={locale} content={pageContent} />
-  <main>
+  <main id={sectionIds.home}>
     <Hero content={pageContent} />
-    <Services content={pageContent} />
-    <About content={pageContent} />
+    <Profile content={pageContent} />
     <Experience content={pageContent} />
+    <Skills content={pageContent} />
+    <Education content={pageContent} />
+    <BlogTeaser locale={locale} content={pageContent} />
+    <Booking content={pageContent} />
     <Contact content={pageContent} />
   </main>
   <Footer content={pageContent} locale={locale} />

@@ -1,18 +1,86 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --color-brand-navy: #0b132b;
-  --color-brand-blue: #357adb;
-  --color-brand-teal: #00f5d4;
+  --font-sans: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, monospace;
+
+  /* Paper */
+  --color-paper: #f6f4f0;
+  --color-surface: #fbfaf7;
+  --color-paper-alt: #efece6;
+
+  /* Ink */
+  --color-ink: #1a1917;
+  --color-ink-soft: #4a4641;
+  --color-muted: #5f5b55;
+  --color-label: #8a857d;
+
+  /* Hairlines, lightest to darkest */
+  --color-line: #e3dfd8;
+  --color-line-2: #e0dbd2;
+  --color-line-3: #d8d3ca;
+  --color-line-4: #cfc9bf;
+
+  /* Accents */
+  --color-accent: #b5542f;
+  --color-accent-hover: #9a4526;
+  --color-accent-light: #e08a64;
+  --color-ok: #3f8f5a;
+
+  /* Dark sections (booking, menu) */
+  --color-night: #1a1917;
+  --color-night-panel: #24221f;
+  --color-night-line: #3a3733;
+  --color-night-text: #c9c3b9;
+  --color-night-label: #9b958c;
+  --color-night-off: #6b665f;
 }
 
 html {
   scroll-behavior: smooth;
 }
 
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+::selection {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+/* Every section anchor clears the fixed header. */
+section[id],
+main[id] {
+  scroll-margin-top: 72px;
+}
+
+/* Page container: max 1200px, 28px gutters. */
+.wrap {
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: 28px;
+}
+
+/* Two-column section pattern: mono label + content, stacks on narrow viewports. */
+.label-col {
+  flex: 1 1 220px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--color-label);
+}
+
+.content-col {
+  flex: 3 1 520px;
+  min-width: 0;
+}
+
 .prose {
-  color: var(--color-slate-600);
+  color: var(--color-ink-soft);
+  font-size: 17px;
+  line-height: 1.7;
 }
 
 .prose p {
@@ -23,8 +91,25 @@ html {
   margin-top: 0;
 }
 
+.prose h2,
+.prose h3 {
+  margin-top: 2em;
+  color: var(--color-ink);
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+
+.prose h2 {
+  font-size: 26px;
+}
+
+.prose h3 {
+  font-size: 21px;
+}
+
 .prose strong {
-  color: var(--color-slate-900);
+  color: var(--color-ink);
   font-weight: 600;
 }
 
@@ -47,6 +132,18 @@ html {
 }
 
 .prose a {
-  color: var(--color-brand-blue);
+  color: var(--color-accent);
   text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.prose a:hover {
+  color: var(--color-accent-hover);
+}
+
+.prose blockquote {
+  margin-top: 1.5em;
+  padding-left: 1.25em;
+  border-left: 2px solid var(--color-line-3);
+  color: var(--color-muted);
 }
