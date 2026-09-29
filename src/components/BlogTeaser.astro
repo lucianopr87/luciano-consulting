@@ -1,0 +1,33 @@
+---
+import BlogCard from './BlogCard.astro';
+import { sectionIds, type Locale, type SiteContent } from '../i18n/content';
+import { getPublishedPosts } from '../lib/blog';
+
+interface Props {
+  locale: Locale;
+  content: SiteContent;
+}
+
+const { locale, content } = Astro.props;
+const posts = (await getPublishedPosts(locale)).slice(0, 3);
+const blogIndexHref = locale === 'es' ? '/blog/' : '/en/blog/';
+---
+
+<section id={sectionIds.blog} class="border-t border-line">
+  <div class="wrap flex flex-col gap-10 py-[88px]">
+    <div class="flex flex-wrap items-baseline gap-10">
+      <div class="label-col">{content.blogTeaser.label}</div>
+      <div class="content-col flex flex-wrap items-baseline justify-between gap-4">
+        <h2 class="text-[clamp(32px,4vw,48px)] leading-[1.05] font-medium tracking-[-0.035em]">
+          {content.blogTeaser.heading}
+        </h2>
+        <a href={blogIndexHref} class="border-b border-current pb-0.5 text-[15px] text-ink hover:text-accent">
+          {content.blogTeaser.viewAll}
+        </a>
+      </div>
+    </div>
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-5">
+      {posts.map((post) => <BlogCard locale={locale} post={post} readMore={content.blogTeaser.readMore} />)}
+    </div>
+  </div>
+</section>

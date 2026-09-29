@@ -1,0 +1,29 @@
+---
+import { sectionIds, type SiteContent } from '../i18n/content';
+
+interface Props {
+  content: SiteContent;
+}
+
+const { content } = Astro.props;
+---
+
+<section id={sectionIds.skills} class="border-t border-line bg-paper-alt">
+  <div class="wrap flex flex-wrap gap-10 py-[88px]">
+    <div class="label-col">{content.skills.label}</div>
+    <div class="content-col grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-x-8 gap-y-10">
+      {
+        content.skills.groups.map((group) => (
+          <div class="flex flex-col gap-3.5">
+            <h3 class="border-b border-line-3 pb-2.5 text-[15px] font-medium">{group.title}</h3>
+            <ul class="flex flex-wrap gap-2">
+              {group.items.map((item) => (
+                <li class="rounded-full border border-line-2 bg-surface px-3 py-1.5 text-sm">{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

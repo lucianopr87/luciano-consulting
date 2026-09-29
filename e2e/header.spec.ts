@@ -1,49 +1,45 @@
 import { test, expect } from '@playwright/test';
 
-test('logo links to the home page for the current locale', async ({ page }) => {
+test('name/monogram links to the home page for the current locale', async ({ page }) => {
   await page.goto('/privacy/');
-  await page.getByRole('link', { name: 'Consulting IT' }).click();
-  await expect(page).toHaveURL(/\/$/);
+  await page.locator('header').getByRole('link', { name: 'Luciano Perez Ruiz' }).click();
+  await expect(page).toHaveURL(/\/#top$/);
 
   await page.goto('/en/privacy/');
-  await page.getByRole('link', { name: 'Consulting IT' }).click();
-  await expect(page).toHaveURL(/\/en\/$/);
+  await page.locator('header').getByRole('link', { name: 'Luciano Perez Ruiz' }).click();
+  await expect(page).toHaveURL(/\/en\/#top$/);
 });
 
-test('language switcher toggles locale and exposes the correct hreflang', async ({ page }) => {
+test('"Reservar" in the header jumps to the booking section', async ({ page }) => {
   await page.goto('/');
-  const toEnglish = page.getByRole('link', { name: 'EN', exact: true });
-  await expect(toEnglish).toHaveAttribute('hreflang', 'en');
+  const book = page.locator('header').getByRole('link', { name: 'Reservar' });
+  await expect(book).toHaveAttribute('href', '/#booking');
+  await book.click();
+  await expect(page.locator('#booking')).toBeInViewport();
+});
+
+test('language switcher in the menu toggles locale and exposes the correct hreflang', async ({ page }) => {
+  await page.goto('/');
+  await page.locator('#menu-toggle').click();
+  const toEnglish = page.locator('#site-menu a[hreflang="en"]');
+  await expect(toEnglish).toHaveAttribute('href', '/en/');
   await toEnglish.click();
   await expect(page).toHaveURL(/\/en\/$/);
 
-  const toSpanish = page.getByRole('link', { name: 'ES', exact: true });
-  await expect(toSpanish).toHaveAttribute('hreflang', 'es');
+  await page.locator('#menu-toggle').click();
+  const toSpanish = page.locator('#site-menu a[hreflang="es"]');
+  await expect(toSpanish).toHaveAttribute('href', '/');
   await toSpanish.click();
   await expect(page).toHaveURL(/\/$/);
 });
 
 test('language switcher on the privacy page links to the translated privacy page, not the home page', async ({ page }) => {
   await page.goto('/privacy/');
-  await page.getByRole('link', { name: 'EN', exact: true }).click();
+  await page.locator('#menu-toggle').click();
+  await page.locator('#site-menu a[hreflang="en"]').click();
   await expect(page).toHaveURL(/\/en\/privacy\/$/);
 
-  await page.getByRole('link', { name: 'ES', exact: true }).click();
+  await page.locator('#menu-toggle').click();
+  await page.locator('#site-menu a[hreflang="es"]').click();
   await expect(page).toHaveURL(/\/privacy\/$/);
-});
-
-test('desktop nav links point to the right sections and scroll to them', async ({ page, isMobile }) => {
-  test.skip(isMobile, 'Desktop nav is hidden on mobile; see mobile-menu.spec.ts');
-
-  await page.goto('/');
-  const nav = page.locator('header nav').first();
-  await expect(nav.getByRole('link', { name: 'Servicios' })).toHaveAttribute('href', '/#services');
-  await expect(nav.getByRole('link', { name: 'Sobre mí' })).toHaveAttribute('href', '/#about');
-  await expect(nav.getByRole('link', { name: 'Experiencia' })).toHaveAttribute('href', '/#experience');
-  await expect(nav.getByRole('link', { name: 'Reservar reunión' })).toHaveAttribute('href', '/booking/');
-  await expect(nav.getByRole('link', { name: 'Contacto' })).toHaveAttribute('href', '/#contact');
-
-  await nav.getByRole('link', { name: 'Contacto' }).click();
-  await expect(page).toHaveURL(/#contact$/);
-  await expect(page.locator('#contact')).toBeInViewport();
 });

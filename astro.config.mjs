@@ -9,6 +9,12 @@ import sitemap from '@astrojs/sitemap';
 export default defineConfig({
   site: 'https://luciano-consulting.web.app',
 
+  // Booking used to live on its own page; it's now a section of the home.
+  redirects: {
+    '/booking': '/#booking',
+    '/en/booking': '/en/#booking'
+  },
+
   i18n: {
     locales: ['es', 'en'],
     defaultLocale: 'es',

@@ -10,17 +10,19 @@ const pageContent = content[locale];
 
 <Layout locale={locale} content={pageContent} path="/en/privacy/">
   <Header locale={locale} content={pageContent} otherLocalePath="/privacy/" />
-  <main class="mx-auto max-w-3xl px-6 py-24">
-    <h1 class="text-3xl font-bold text-slate-900">{pageContent.privacy.heading}</h1>
-    <p class="mt-4 text-slate-600">{pageContent.privacy.intro}</p>
-    {
-      pageContent.privacy.sections.map((section) => (
-        <section class="mt-8">
-          <h2 class="text-xl font-semibold text-slate-900">{section.heading}</h2>
-          <p class="mt-2 text-slate-600">{section.body}</p>
-        </section>
-      ))
-    }
+  <main class="wrap pb-24 pt-[140px]">
+    <div class="mx-auto max-w-[720px]">
+      <h1 class="text-[clamp(34px,5vw,56px)] leading-[1.05] font-medium tracking-[-0.035em]">{pageContent.privacy.heading}</h1>
+      <p class="mt-6 text-[17px] leading-[1.65] text-ink-soft">{pageContent.privacy.intro}</p>
+      {
+        pageContent.privacy.sections.map((section) => (
+          <section class="mt-10 border-t border-line pt-6">
+            <h2 class="text-xl font-medium tracking-[-0.015em]">{section.heading}</h2>
+            <p class="mt-3 text-base leading-[1.65] text-ink-soft">{section.body}</p>
+          </section>
+        ))
+      }
+    </div>
   </main>
   <Footer content={pageContent} locale={locale} />
 </Layout>

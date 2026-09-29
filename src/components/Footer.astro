@@ -1,5 +1,5 @@
 ---
-import type { Locale, SiteContent } from '../i18n/content';
+import { sectionIds, type Locale, type SiteContent } from '../i18n/content';
 
 interface Props {
   content: SiteContent;
@@ -7,12 +7,16 @@ interface Props {
 }
 
 const { content, locale } = Astro.props;
+const homePath = locale === 'es' ? '/' : '/en/';
 const privacyHref = locale === 'es' ? '/privacy/' : '/en/privacy/';
 ---
 
-<footer class="bg-brand-navy py-8 text-center text-sm text-slate-400">
-  <p>{content.footer.text} · {content.footer.location} · {new Date().getFullYear()}</p>
-  <p class="mt-2">
-    <a href={privacyHref} class="underline hover:text-slate-200">{content.footer.privacyLink}</a>
-  </p>
+<footer class="border-t border-line">
+  <div class="wrap flex flex-wrap justify-between gap-3 py-7 text-sm text-muted">
+    <span>© {new Date().getFullYear()} Luciano Perez Ruiz · {content.footer.role}</span>
+    <div class="flex flex-wrap gap-6">
+      <a href={privacyHref} class="text-muted hover:text-accent">{content.footer.privacyLink}</a>
+      <a href={`${homePath}#${sectionIds.home}`} class="text-muted hover:text-accent">{content.footer.backToTop}</a>
+    </div>
+  </div>
 </footer>

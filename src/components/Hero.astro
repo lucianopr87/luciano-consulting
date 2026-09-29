@@ -1,5 +1,7 @@
 ---
-import type { SiteContent } from '../i18n/content';
+import { Image } from 'astro:assets';
+import portrait from '../assets/luciano-portrait.jpg';
+import { cvPdfPath, sectionIds, type SiteContent } from '../i18n/content';
 
 interface Props {
   content: SiteContent;
@@ -8,31 +10,44 @@ interface Props {
 const { content } = Astro.props;
 ---
 
-<section class="relative overflow-hidden bg-white">
-  <img
-    src="/hero-banner.jpg"
-    alt=""
-    class="absolute inset-0 hidden h-full w-full object-cover md:block"
-  />
-  <div class="relative mx-auto max-w-5xl px-6 py-28 md:py-36">
-    <div class="max-w-xl">
-      <p class="mb-4 text-sm font-semibold uppercase tracking-wide text-brand-blue">
-        {content.hero.eyebrow}
-      </p>
-      <h1 class="text-4xl font-extrabold leading-tight text-brand-navy md:text-5xl">
-        {content.hero.headline}
-      </h1>
-      <p class="mt-6 text-lg text-slate-600">
-        {content.hero.subheadline}
-      </p>
-      <div class="mt-10">
-        <a
-          href="#contact"
-          class="inline-block rounded-full bg-brand-teal px-8 py-3 font-semibold text-brand-navy transition hover:opacity-90"
-        >
-          {content.hero.cta}
-        </a>
-      </div>
+<section class="wrap flex flex-wrap items-end gap-14 pb-[88px] pt-[140px]">
+  <div class="flex flex-[1_1_480px] flex-col gap-7">
+    <div class="flex flex-wrap items-center gap-2.5 font-mono text-xs tracking-[0.06em] text-muted">
+      <span class="block size-2 rounded-full bg-ok" aria-hidden="true"></span>
+      <span>{content.hero.status}</span>
     </div>
+    <h1 class="text-[clamp(52px,8vw,104px)] leading-[0.95] font-medium tracking-[-0.045em]">
+      {content.hero.firstName}<br />{content.hero.lastName}
+    </h1>
+    <p class="max-w-[620px] text-[clamp(20px,2.2vw,26px)] leading-[1.35] tracking-[-0.015em] text-pretty">
+      {content.hero.lead}
+    </p>
+    <div class="flex flex-wrap gap-3 pt-2">
+      <a
+        href={`#${sectionIds.booking}`}
+        class="rounded-full bg-accent px-[22px] py-3.5 text-[15px] font-medium text-white transition-colors duration-150 hover:bg-accent-hover"
+      >
+        {content.hero.ctaBook}
+      </a>
+      <a
+        href={cvPdfPath}
+        target="_blank"
+        class="rounded-full border border-line-4 px-[22px] py-3.5 text-[15px] text-ink transition-colors duration-150 hover:border-ink"
+      >
+        {content.hero.ctaCv}
+      </a>
+    </div>
+  </div>
+  <div class="min-w-[260px] flex-[0_1_380px]">
+    <Image
+      src={portrait}
+      alt={content.hero.photoAlt}
+      widths={[380, 760]}
+      sizes="(max-width: 420px) 100vw, 380px"
+      format="webp"
+      quality={82}
+      loading="eager"
+      class="block aspect-square w-full rounded-full object-cover object-[50%_20%]"
+    />
   </div>
 </section>
