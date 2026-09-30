@@ -16,12 +16,19 @@ test('home (en) loads with English copy', async ({ page }) => {
   await expect(page.getByRole('heading', { name: 'From developer to IT project leader.' })).toBeVisible();
 });
 
-test('CV download links point to the PDF', async ({ page }) => {
-  await page.goto('/');
-  const cv = page.getByRole('link', { name: /Descargar CV/ }).first();
-  await expect(cv).toHaveAttribute('href', '/Luciano_Perez_Ruiz_CV_EN.pdf');
-  const response = await page.request.get('/Luciano_Perez_Ruiz_CV_EN.pdf');
-  expect(response.ok()).toBe(true);
+test('CV download links point to the PDF for the current locale', async ({ page }) => {
+  for (const [path, label, pdf] of [
+    ['/', /Descargar CV/, '/Luciano_Perez_Ruiz_CV_ES.pdf'],
+    ['/en/', /Download CV/, '/Luciano_Perez_Ruiz_CV_EN.pdf'],
+  ] as const) {
+    await page.goto(path);
+    await expect(page.getByRole('link', { name: label }).first()).toHaveAttribute('href', pdf);
+    await page.locator('#menu-toggle').click();
+    await expect(page.locator('#site-menu').getByRole('link', { name: label })).toHaveAttribute('href', pdf);
+    const response = await page.request.get(pdf);
+    expect(response.ok()).toBe(true);
+    expect(response.headers()['content-type']).toContain('pdf');
+  }
 });
 
 test('unknown routes render the 404 page', async ({ page }) => {

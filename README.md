@@ -28,7 +28,7 @@ CV online de Luciano Perez Ruiz (IT / Technical Project Manager), bilingüe (ES/
 - La home es un **CV online de una sola página**: Hero → Perfil → Experiencia → Habilidades → Formación → Blog (últimos posts) → Reservar reunión → Contacto. Cada sección tiene un id fijo, igual en ambos idiomas (`#top`, `#profile`, `#experience`, `#skills`, `#education`, `#blog`, `#booking`, `#contact`, definidos en `sectionIds` de `content.ts`), así los links tipo `/#contact` que usan los posts siguen funcionando.
 - Tokens (colores, tipografías) en el `@theme` de `src/styles/global.css`: fondo papel `#f6f4f0`, tinta `#1a1917`, acento terracota `#b5542f`, secciones oscuras `#1a1917`. Tipografía Geist (texto) y Geist Mono (labels, fechas, horarios). Sin sombras: jerarquía por bordes hairline y fondos.
 - El menú está **siempre colapsado** (desktop y mobile): botón "Menú" en el header que abre un overlay a pantalla completa con las secciones, contacto directo, descarga del CV y el switch de idioma. Se cierra con "Cerrar", con Esc o al elegir un link, y bloquea el scroll del body mientras está abierto.
-- El CV descargable es `public/Luciano_Perez_Ruiz_CV_EN.pdf` (solo existe en inglés; la versión ES lo aclara en el texto del link).
+- El CV descargable es un PDF por idioma: `public/Luciano_Perez_Ruiz_CV_ES.pdf` en la versión ES y `public/Luciano_Perez_Ruiz_CV_EN.pdf` en la EN (definido en `cvPdf` de `content.ts`). Al actualizar el CV hay que reemplazar los dos.
 - Identidad: monograma "LPR". Favicons, `apple-touch-icon`, `icon-192/512` y `og-image.png` se generaron con esa identidad (no hay fuente editable en el repo; si hace falta regenerarlos, se renderizó HTML con Geist y se capturó con Playwright).
 
 ## Comandos
@@ -89,7 +89,7 @@ Ninguna de estas variables se commitea con su valor real — los workflows las i
 - Corren en dos "proyectos": **Desktop Chromium** y **Mobile Chromium** (emulando un Pixel 5), para cubrir el layout en ambos anchos (el menú es el mismo overlay en los dos).
 - El build usado para testear define valores de prueba *ficticios* para `PUBLIC_GA_ID`, `PUBLIC_GSC_VERIFICATION`, `PUBLIC_WEB3FORMS_ACCESS_KEY` y `PUBLIC_BOOKING_ENDPOINT` (ver `playwright.config.ts`) — no son credenciales reales, solo lo necesario para que el banner de cookies, el snippet de GA y el widget de reserva se rendericen y puedan testearse. El envío del formulario de contacto y las llamadas al backend de reservas se interceptan (`page.route`) para no pegarle a la API real de Web3Forms ni al Apps Script real durante los tests.
 - Qué cubren:
-  - `site.spec.ts`: la home renderiza todas las secciones del CV (es/en), el link de descarga del CV apunta al PDF y el PDF existe, y la página 404.
+  - `site.spec.ts`: la home renderiza todas las secciones del CV (es/en), el link de descarga del CV apunta al PDF del idioma correspondiente y el PDF existe, y la página 404.
   - `header.spec.ts`: el nombre/monograma linkea al home del locale actual, "Reservar" lleva a `#booking`, y el switch de idioma del menú cambia de locale (con el `hreflang` correcto) respetando la página actual (ej. desde `/privacy/` va a `/en/privacy/`, no al home).
   - `footer.spec.ts`: texto de copyright con el año actual, y el link a la política de privacidad es correcto y navegable en ambos locales.
   - `cookie-consent.spec.ts`: el banner aparece en la primera visita, GA trackea igual desde el arranque, y "Entendido" oculta el banner de forma persistente.

@@ -16,8 +16,6 @@ export const sectionIds = {
 } as const;
 export type SectionKey = keyof typeof sectionIds;
 
-export const cvPdfPath = '/Luciano_Perez_Ruiz_CV_EN.pdf';
-
 export const contactDetails = {
   email: 'lucianopr87@gmail.com',
   linkedinHandle: 'luciano-perez-ruiz',
@@ -34,6 +32,8 @@ export interface ExperienceEntry {
 }
 
 export interface SiteContent {
+  /** Downloadable CV, one PDF per locale. */
+  cvPdf: string;
   meta: {
     title: string;
     description: string;
@@ -152,6 +152,7 @@ export interface SiteContent {
 
 export const content: Record<Locale, SiteContent> = {
   es: {
+    cvPdf: '/Luciano_Perez_Ruiz_CV_ES.pdf',
     meta: {
       title: 'Luciano Perez Ruiz — IT / Technical Project Manager',
       description:
@@ -172,7 +173,7 @@ export const content: Record<Locale, SiteContent> = {
       close: 'Cerrar',
       bookShort: 'Reservar',
       directContact: 'CONTACTO DIRECTO',
-      downloadCv: 'Descargar CV (PDF, EN) ↓',
+      downloadCv: 'Descargar CV (PDF) ↓',
       otherLanguage: 'English',
     },
     hero: {
@@ -181,7 +182,7 @@ export const content: Record<Locale, SiteContent> = {
       lastName: 'Perez Ruiz',
       lead: 'IT / Technical Project Manager. Más de 10 años convirtiendo iniciativas complejas en productos lanzados — con la mirada de alguien que empezó escribiendo código.',
       ctaBook: 'Reservar una reunión',
-      ctaCv: 'Descargar CV (PDF, EN) ↓',
+      ctaCv: 'Descargar CV (PDF) ↓',
       photoAlt: 'Luciano Perez Ruiz',
     },
     profile: {
@@ -411,6 +412,7 @@ export const content: Record<Locale, SiteContent> = {
     },
   },
   en: {
+    cvPdf: '/Luciano_Perez_Ruiz_CV_EN.pdf',
     meta: {
       title: 'Luciano Perez Ruiz — IT / Technical Project Manager',
       description:
