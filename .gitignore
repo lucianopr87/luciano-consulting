@@ -20,6 +20,9 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# local blog drafts, not ready to commit
+/drafts/
+
 # jetbrains setting folder
 .idea/
 

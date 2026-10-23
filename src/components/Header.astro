@@ -27,25 +27,50 @@ const navLinks = navKeys.map((key, index) => ({
         class="flex size-[34px] flex-none items-center justify-center rounded-full bg-ink font-mono text-xs tracking-[0.02em] text-paper"
         aria-hidden="true">LPR</span
       >
-      <span class="min-w-0 truncate text-[15px] font-medium tracking-[-0.01em]">Luciano Perez Ruiz</span>
+      <span class="sr-only min-w-0 truncate text-[15px] font-medium tracking-[-0.01em] sm:not-sr-only">Luciano Perez Ruiz</span>
     </a>
     <div class="flex flex-none items-center gap-2.5">
+      <nav
+        id="lang-switch"
+        aria-label={content.nav.languageSwitch}
+        class="flex items-center rounded-full border border-line-4 p-[3px] font-mono text-xs tracking-[0.04em]"
+      >
+        {
+          (['es', 'en'] as const).map((code) =>
+            code === locale ? (
+              <span aria-current="true" class="rounded-full bg-ink px-2 py-[5px] text-paper sm:px-2.5">
+                {code.toUpperCase()}
+              </span>
+            ) : (
+              <a
+                href={resolvedOtherLocalePath}
+                hreflang={code}
+                lang={code}
+                aria-label={content.nav.otherLanguage}
+                class="rounded-full px-2 py-[5px] text-muted sm:px-2.5 transition-colors duration-150 hover:text-ink"
+              >
+                {code.toUpperCase()}
+              </a>
+            ),
+          )
+        }
+      </nav>
       <a
         href={`${homePath}#${sectionIds.booking}`}
-        class="whitespace-nowrap rounded-full border border-ink px-4 py-[9px] text-sm text-ink transition-colors duration-150 hover:bg-ink hover:text-paper"
+        class="whitespace-nowrap rounded-full border border-ink px-3.5 py-[9px] sm:px-4 text-sm text-ink transition-colors duration-150 hover:bg-ink hover:text-paper"
       >
         {content.nav.bookShort}
       </a>
       <button
         id="menu-toggle"
         type="button"
-        class="flex cursor-pointer items-center gap-2.5 py-[9px] pl-2.5 pr-1 text-sm text-ink"
+        class="flex cursor-pointer items-center gap-2.5 py-[9px] pl-1.5 pr-1 text-sm text-ink sm:pl-2.5"
         aria-expanded="false"
         aria-controls="site-menu"
         data-label-open={content.nav.menu}
         data-label-close={content.nav.close}
       >
-        <span id="menu-toggle-label">{content.nav.menu}</span>
+        <span id="menu-toggle-label" class="sr-only sm:not-sr-only">{content.nav.menu}</span>
         <span class="flex w-[22px] flex-col gap-[5px]" aria-hidden="true">
           <span class="block h-[1.5px] bg-ink"></span>
           <span class="ml-2 block h-[1.5px] w-3.5 bg-ink"></span>
