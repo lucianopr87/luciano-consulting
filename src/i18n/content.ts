@@ -46,6 +46,7 @@ export interface SiteContent {
     directContact: string;
     downloadCv: string;
     otherLanguage: string;
+    languageSwitch: string;
   };
   hero: {
     status: string;
@@ -175,6 +176,7 @@ export const content: Record<Locale, SiteContent> = {
       directContact: 'CONTACTO DIRECTO',
       downloadCv: 'Descargar CV (PDF) ↓',
       otherLanguage: 'English',
+      languageSwitch: 'Idioma',
     },
     hero: {
       status: 'DISPONIBLE PARA ROLES REMOTOS · SANTA FE, ARGENTINA',
@@ -435,6 +437,7 @@ export const content: Record<Locale, SiteContent> = {
       directContact: 'DIRECT CONTACT',
       downloadCv: 'Download CV (PDF) ↓',
       otherLanguage: 'Español',
+      languageSwitch: 'Language',
     },
     hero: {
       status: 'OPEN TO REMOTE ROLES · SANTA FE, ARGENTINA',

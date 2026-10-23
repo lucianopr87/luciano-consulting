@@ -29,12 +29,10 @@ test('"see all articles" goes to the blog index for the current locale', async (
 
 test('language switcher on the blog index links to the translated blog index, not the home page', async ({ page }) => {
   await page.goto('/blog/');
-  await page.locator('#menu-toggle').click();
-  await page.locator('#site-menu a[hreflang="en"]').click();
+  await page.locator('#lang-switch a[hreflang="en"]').click();
   await expect(page).toHaveURL(/\/en\/blog\/$/);
 
-  await page.locator('#menu-toggle').click();
-  await page.locator('#site-menu a[hreflang="es"]').click();
+  await page.locator('#lang-switch a[hreflang="es"]').click();
   await expect(page).toHaveURL(/\/blog\/$/);
 });
 
