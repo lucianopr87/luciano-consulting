@@ -13,7 +13,11 @@ const blog = defineCollection({
       lang: z.enum(['es', 'en']),
       draft: z.boolean().default(true),
       coverImage: image().optional(),
-      coverImageAlt: z.string().optional()
+      coverImageAlt: z.string().optional(),
+      // Republished posts: the original article's URL (used as the page's canonical) and the
+      // name of the site it was first published on (shown in the attribution note).
+      canonicalUrl: z.string().url().optional(),
+      canonicalSiteName: z.string().optional()
     })
 });
 

@@ -3,7 +3,7 @@ import Layout from '../../../layouts/Layout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
 import { content } from '../../../i18n/content';
-import { getPublishedPosts, postMeta } from '../../../lib/blog';
+import { getPublishedPosts, postJsonLd, postMeta } from '../../../lib/blog';
 import { render } from 'astro:content';
 import { Image } from 'astro:assets';
 
@@ -20,12 +20,16 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+const path = `/en/blog/${post.id}/`;
+const { canonicalUrl, canonicalSiteName } = post.data;
 ---
 
 <Layout
   locale={locale}
   content={pageContent}
-  path={`/en/blog/${post.id}/`}
+  path={path}
+  canonical={canonicalUrl}
+  jsonLd={postJsonLd(post, new URL(path, Astro.site))}
   title={`${post.data.title} — ${pageContent.meta.title}`}
   description={post.data.description}
 >
@@ -38,6 +42,16 @@ const { Content } = await render(post);
         {post.data.title}
       </h1>
       <p class="mt-5 text-sm text-muted">{pageContent.blog.byline} {post.data.author}</p>
+      {
+        canonicalUrl && (
+          <p class="mt-2 text-sm text-muted" data-testid="republished-note">
+            {pageContent.blog.republishedPrefix}{' '}
+            <a href={canonicalUrl} target="_blank" rel="noopener noreferrer" class="underline underline-offset-2 hover:text-accent">
+              {canonicalSiteName ?? new URL(canonicalUrl).hostname}
+            </a>.
+          </p>
+        )
+      }
       {
         post.data.coverImage && (
           <Image
