@@ -4,6 +4,7 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 import sitemap from '@astrojs/sitemap';
+import { satteri } from '@astrojs/markdown-satteri';
 import { readdirSync, readFileSync } from 'node:fs';
 
 const site = 'https://luciano-consulting.web.app';
@@ -22,6 +23,20 @@ const republishedPages = new Set(
     })
 );
 
+// Links in Markdown posts that point to another site open in a new tab.
+const externalLinksPlugin = {
+  name: 'external-links',
+  element: {
+    filter: ['a'],
+    visit(node, ctx) {
+      const href = node.properties?.href;
+      if (typeof href !== 'string' || !/^https?:\/\//.test(href) || new URL(href).origin === site) return;
+      ctx.setProperty(node, 'target', '_blank');
+      ctx.setProperty(node, 'rel', 'noopener noreferrer');
+    }
+  }
+};
+
 // https://astro.build/config
 export default defineConfig({
   site,
@@ -38,6 +53,10 @@ export default defineConfig({
     routing: {
       prefixDefaultLocale: false
     }
+  },
+
+  markdown: {
+    processor: satteri({ hastPlugins: [externalLinksPlugin] })
   },
 
   vite: {

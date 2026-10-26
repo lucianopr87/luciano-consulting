@@ -86,6 +86,7 @@ test('the cloud costs post republished from Pipa Code credits the original and p
     await expect(page.locator('meta[property="og:url"]')).toHaveAttribute('content', original);
     await expect(page.getByTestId('republished-note')).toHaveText(note);
     await expect(page.getByTestId('republished-note').getByRole('link')).toHaveAttribute('href', original);
+    await expect(page.getByTestId('republished-note').getByRole('link')).toHaveAttribute('target', '_blank');
     await expect(page.locator('article img')).toBeVisible();
 
     const jsonLd = await page.locator('script[type="application/ld+json"]').allTextContents();
@@ -108,4 +109,14 @@ test('the canonical of a regular post is its own URL on this site', async ({ pag
     'https://luciano-consulting.web.app/blog/medir-tokens-no-es-medir-desempeno/'
   );
   await expect(page.getByTestId('republished-note')).toHaveCount(0);
+});
+
+test('links to other sites inside a post open in a new tab, links within the site do not', async ({ page }) => {
+  await page.goto('/blog/reducir-costos-infraestructura-cloud/');
+  const external = page.locator('.prose a[href="https://estudiantino.com.ar"]');
+  await expect(external).toHaveAttribute('target', '_blank');
+  await expect(external).toHaveAttribute('rel', 'noopener noreferrer');
+
+  await page.goto('/blog/el-sindrome-del-mvp-infinito-y-como-evitarlo/');
+  await expect(page.getByRole('link', { name: 'hablemos' })).not.toHaveAttribute('target', /.+/);
 });
