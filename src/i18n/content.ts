@@ -147,6 +147,8 @@ export interface SiteContent {
     backLink: string;
     emptyState: string;
     byline: string;
+    /** Attribution note on republished posts, before the link to the original site. */
+    republishedPrefix: string;
     months: string[];
   };
 }
@@ -410,6 +412,7 @@ export const content: Record<Locale, SiteContent> = {
       backLink: '← Volver al blog',
       emptyState: 'Todavía no hay artículos publicados. Volvé pronto.',
       byline: 'Por',
+      republishedPrefix: 'Publicado originalmente en',
       months: ['ENE', 'FEB', 'MAR', 'ABR', 'MAY', 'JUN', 'JUL', 'AGO', 'SEP', 'OCT', 'NOV', 'DIC'],
     },
   },
@@ -671,6 +674,7 @@ export const content: Record<Locale, SiteContent> = {
       backLink: '← Back to blog',
       emptyState: 'No articles published yet. Check back soon.',
       byline: 'By',
+      republishedPrefix: 'Originally published on',
       months: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
     },
   },

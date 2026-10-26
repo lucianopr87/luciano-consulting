@@ -9,12 +9,16 @@ interface Props {
   path: string;
   title?: string;
   description?: string;
+  /** Absolute canonical URL, for pages whose original lives on another site. Defaults to `path` on this site. */
+  canonical?: string;
+  /** Extra JSON-LD for the page (e.g. a BlogPosting). */
+  jsonLd?: Record<string, unknown>;
 }
 
-const { locale, content, path, title, description } = Astro.props;
+const { locale, content, path, title, description, canonical, jsonLd } = Astro.props;
 const pageTitle = title ?? content.meta.title;
 const pageDescription = description ?? content.meta.description;
-const canonicalURL = new URL(path, Astro.site);
+const canonicalURL = canonical ? new URL(canonical) : new URL(path, Astro.site);
 const gaId = import.meta.env.PUBLIC_GA_ID ?? '';
 const gscVerification = import.meta.env.PUBLIC_GSC_VERIFICATION ?? '';
 
@@ -75,6 +79,7 @@ const personJsonLd = {
     />
 
     <script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
+    {jsonLd && <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />}
 
     {gaId && (
       <script is:inline define:vars={{ gaId }}>

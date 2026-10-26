@@ -21,3 +21,32 @@ export function postMeta(locale: Locale, post: BlogPost): string {
   const tags = post.data.tags.slice(0, 2).map((tag) => tag.toLocaleUpperCase(locale));
   return [`${day} ${month} ${date.getUTCFullYear()}`, ...tags].join(' · ');
 }
+
+/**
+ * BlogPosting JSON-LD for a post. Republished posts (`canonicalUrl`) point `url` and
+ * `mainEntityOfPage` at the original, so search engines credit that copy as the source.
+ */
+export function postJsonLd(post: BlogPost, pageUrl: URL): Record<string, unknown> {
+  const { title, description, author, pubDate, lang, canonicalUrl, canonicalSiteName } = post.data;
+  const originalUrl = canonicalUrl ?? pageUrl.href;
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'BlogPosting',
+    headline: title,
+    description,
+    inLanguage: lang,
+    datePublished: pubDate.toISOString().slice(0, 10),
+    author: {
+      '@type': 'Person',
+      name: author,
+      url: new URL('/', pageUrl).href,
+      sameAs: ['https://www.linkedin.com/in/luciano-perez-ruiz'],
+    },
+    url: originalUrl,
+    mainEntityOfPage: originalUrl,
+    ...(canonicalUrl && {
+      isBasedOn: canonicalUrl,
+      publisher: { '@type': 'Organization', name: canonicalSiteName, url: new URL('/', canonicalUrl).href },
+    }),
+  };
+}
