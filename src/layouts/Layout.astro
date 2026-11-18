@@ -1,7 +1,8 @@
 ---
 import '../styles/global.css';
 import CookieConsent from '../components/CookieConsent.astro';
-import type { Locale, SiteContent } from '../i18n/content';
+import { contactDetails, type Locale, type SiteContent } from '../i18n/content';
+import { cvMarkdownPath } from '../lib/cv-markdown';
 
 interface Props {
   locale: Locale;
@@ -22,24 +23,47 @@ const canonicalURL = canonical ? new URL(canonical) : new URL(path, Astro.site);
 const gaId = import.meta.env.PUBLIC_GA_ID ?? '';
 const gscVerification = import.meta.env.PUBLIC_GSC_VERIFICATION ?? '';
 
+// Person + their own product as one graph, so search engines and assistants get
+// the current role, employer and skills without parsing the page.
+const personId = new URL('/#person', Astro.site).href;
 const personJsonLd = {
   '@context': 'https://schema.org',
-  '@type': 'Person',
-  name: 'Luciano Perez Ruiz',
-  jobTitle: 'IT / Technical Project Manager',
-  url: Astro.site?.toString(),
-  sameAs: ['https://www.linkedin.com/in/luciano-perez-ruiz'],
-  knowsAbout: [
-    'IT Project Management',
-    'Technical Project Management',
-    'Agile / Scrum delivery',
-    'Full Stack Development',
+  '@graph': [
+    {
+      '@type': 'Person',
+      '@id': personId,
+      name: 'Luciano Perez Ruiz',
+      jobTitle: 'IT / Technical Project Manager · Product Owner',
+      description: content.meta.description.replace(/\u2011/g, '-'),
+      url: Astro.site?.toString(),
+      image: new URL('/og-image.png', Astro.site).href,
+      email: `mailto:${contactDetails.email}`,
+      sameAs: [contactDetails.linkedinUrl, 'https://github.com/lucianopr87'],
+      worksFor: { '@type': 'Organization', name: 'Pipa Code Studio', url: 'https://pipacode.studio' },
+      knowsAbout: [
+        'IT Project Management',
+        'Technical Project Management',
+        'Product ownership',
+        'Agile / Scrum delivery',
+        'AI agent orchestration',
+        'Claude Code',
+        'Full Stack Development',
+      ],
+      knowsLanguage: [
+        { '@type': 'Language', name: 'Spanish', alternateName: 'es' },
+        { '@type': 'Language', name: 'English', alternateName: 'en' },
+      ],
+      address: { '@type': 'PostalAddress', addressLocality: 'Santa Fe', addressCountry: 'AR' },
+    },
+    {
+      '@type': 'SoftwareApplication',
+      name: 'Tino',
+      url: 'https://estudiantino.com.ar',
+      applicationCategory: 'EducationalApplication',
+      operatingSystem: 'Web',
+      creator: { '@id': personId },
+    },
   ],
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Santa Fe',
-    addressCountry: 'AR',
-  },
 };
 ---
 
@@ -54,6 +78,7 @@ const personJsonLd = {
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" type="text/markdown" href={cvMarkdownPath[locale]} title="CV (Markdown)" />
     {gscVerification && <meta name="google-site-verification" content={gscVerification} />}
 
     <title>{pageTitle}</title>

@@ -31,6 +31,14 @@ CV online de Luciano Perez Ruiz (IT / Technical Project Manager), bilingüe (ES/
 - El CV descargable es un PDF por idioma: `public/Luciano_Perez_Ruiz_CV_ES.pdf` en la versión ES y `public/Luciano_Perez_Ruiz_CV_EN.pdf` en la EN (definido en `cvPdf` de `content.ts`). Al actualizar el CV hay que reemplazar los dos.
 - Identidad: monograma "LPR". Favicons, `apple-touch-icon`, `icon-192/512` y `og-image.png` se generaron con esa identidad (no hay fuente editable en el repo; si hace falta regenerarlos, se renderizó HTML con Geist y se capturó con Playwright).
 
+## Versiones para IA y buscadores
+
+- `/llms.txt` (convención [llms.txt](https://llmstxt.org)): quién es Luciano, qué roles busca y links a los CV en Markdown y PDF, y a los datos de contacto. En inglés, porque es lo que leen la mayoría de los asistentes.
+- `/cv.md` y `/en/cv.md`: el CV completo en Markdown, para asistentes y rastreadores que leen mejor texto plano que HTML. Cada home los declara con `<link rel="alternate" type="text/markdown">`.
+- Los tres se generan en el build desde `src/i18n/content.ts` (`src/lib/cv-markdown.ts` + endpoints en `src/pages/`), así que nunca se desincronizan con la página: si cambia el copy, cambian solos.
+- El `Layout` publica un JSON-LD con un `@graph` que tiene la `Person` (cargo, empleador, temas, idiomas y perfiles) y Tino como `SoftwareApplication` creada por esa persona. Si cambia el rol o el empleador, actualizar `personJsonLd` en `src/layouts/Layout.astro`.
+- Cobertura: `e2e/llms.spec.ts`.
+
 ## Comandos
 
 | Comando | Acción |
