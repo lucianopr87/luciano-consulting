@@ -226,11 +226,11 @@ export const content: Record<Locale, SiteContent> = {
           highlights: [
             {
               year: '2026',
-              text: 'De la idea a producción en 5 semanas: app web instalable (PWA), panel de administración con reportes, cobros con Mercado Pago (pago único y suscripción mensual) y landing con una página por materia para SEO. Hoy en etapa de validación comercial con estudiantes.',
+              text: 'De la idea a producción en unos 2 meses: app web instalable (PWA), panel de administración con reportes, cobros con Mercado Pago (pago único y suscripción mensual) y landing con una página por materia para SEO. Hoy en etapa de validación comercial con estudiantes.',
             },
             {
               year: '2026',
-              text: 'Proceso propio para convertir manuales en bancos de preguntas: extracción con OCR y generación con IA, siempre con revisión humana. Casi 5.000 preguntas publicadas en 3 materias.',
+              text: 'Proceso propio para convertir manuales en bancos de preguntas: extracción con OCR y generación con IA, siempre con revisión humana.',
             },
           ],
         },
@@ -523,11 +523,11 @@ export const content: Record<Locale, SiteContent> = {
           highlights: [
             {
               year: '2026',
-              text: 'From idea to production in 5 weeks: installable web app (PWA), admin panel with reporting, Mercado Pago payments (one‑time and monthly subscription) and a landing site with one SEO page per subject. Now in commercial validation with students.',
+              text: 'From idea to production in about 2 months: installable web app (PWA), admin panel with reporting, Mercado Pago payments (one‑time and monthly subscription) and a landing site with one SEO page per subject. Now in commercial validation with students.',
             },
             {
               year: '2026',
-              text: 'Built a pipeline that turns textbooks into question banks: OCR extraction and AI generation, always with human review. Nearly 5,000 questions published across 3 subjects.',
+              text: 'Built a pipeline that turns textbooks into question banks: OCR extraction and AI generation, always with human review.',
             },
           ],
         },
