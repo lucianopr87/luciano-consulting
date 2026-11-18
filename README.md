@@ -31,6 +31,14 @@ CV online de Luciano Perez Ruiz (IT / Technical Project Manager), bilingüe (ES/
 - El CV descargable es un PDF por idioma: `public/Luciano_Perez_Ruiz_CV_ES.pdf` en la versión ES y `public/Luciano_Perez_Ruiz_CV_EN.pdf` en la EN (definido en `cvPdf` de `content.ts`). Al actualizar el CV hay que reemplazar los dos.
 - Identidad: monograma "LPR". Favicons, `apple-touch-icon`, `icon-192/512` y `og-image.png` se generaron con esa identidad (no hay fuente editable en el repo; si hace falta regenerarlos, se renderizó HTML con Geist y se capturó con Playwright).
 
+## Perfil de desarrollador (`/developer/`)
+
+- `/developer/` (ES) y `/en/developer/` (EN): la misma experiencia contada para roles de desarrollo full-stack/frontend. Usa los mismos componentes y secciones que el home; solo cambia el contenido, definido en `src/i18n/developer.ts`, que parte de `content.ts` y pisa el título, el hero, el perfil, la experiencia, el stack y el PDF.
+- PDFs propios: `public/Luciano_Perez_Ruiz_CV_Dev_ES.pdf` y `_EN.pdf`. Al actualizar el CV de desarrollador hay que reemplazar los dos.
+- Los dos perfiles se enlazan entre sí desde el hero (`hero.crossLink`). En `/developer/`, el menú apunta a las secciones de esa página (prop `sectionsPath` del `Header`) y el toggle de idioma lleva a la otra versión de desarrollador.
+- Markdown: `/developer/cv.md` y `/en/developer/cv.md`, también listados en `/llms.txt`.
+- Cobertura: `e2e/developer.spec.ts`.
+
 ## Versiones para IA y buscadores
 
 - `/llms.txt` (convención [llms.txt](https://llmstxt.org)): quién es Luciano, qué roles busca y links a los CV en Markdown y PDF, y a los datos de contacto. En inglés, porque es lo que leen la mayoría de los asistentes.

@@ -56,6 +56,8 @@ export interface SiteContent {
     ctaBook: string;
     ctaCv: string;
     photoAlt: string;
+    /** Link to the other version of the CV (PM ↔ developer). */
+    crossLink: { label: string; href: string };
   };
   profile: {
     label: string;
@@ -188,6 +190,7 @@ export const content: Record<Locale, SiteContent> = {
       ctaBook: 'Reservar una reunión',
       ctaCv: 'Descargar CV (PDF) ↓',
       photoAlt: 'Luciano Perez Ruiz',
+      crossLink: { label: '¿Buscás un desarrollador? Ver mi perfil full-stack →', href: '/developer/' },
     },
     profile: {
       label: '01 — PERFIL',
@@ -485,6 +488,7 @@ export const content: Record<Locale, SiteContent> = {
       ctaBook: 'Book a meeting',
       ctaCv: 'Download CV (PDF) ↓',
       photoAlt: 'Luciano Perez Ruiz',
+      crossLink: { label: 'Hiring a developer? See my full-stack profile →', href: '/en/developer/' },
     },
     profile: {
       label: '01 — PROFILE',

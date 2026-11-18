@@ -14,9 +14,11 @@ interface Props {
   canonical?: string;
   /** Extra JSON-LD for the page (e.g. a BlogPosting). */
   jsonLd?: Record<string, unknown>;
+  /** Markdown version of this page's CV. Defaults to the locale's main CV. */
+  markdownPath?: string;
 }
 
-const { locale, content, path, title, description, canonical, jsonLd } = Astro.props;
+const { locale, content, path, title, description, canonical, jsonLd, markdownPath } = Astro.props;
 const pageTitle = title ?? content.meta.title;
 const pageDescription = description ?? content.meta.description;
 const canonicalURL = canonical ? new URL(canonical) : new URL(path, Astro.site);
@@ -78,7 +80,7 @@ const personJsonLd = {
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href={canonicalURL} />
-    <link rel="alternate" type="text/markdown" href={cvMarkdownPath[locale]} title="CV (Markdown)" />
+    <link rel="alternate" type="text/markdown" href={markdownPath ?? cvMarkdownPath[locale]} title="CV (Markdown)" />
     {gscVerification && <meta name="google-site-verification" content={gscVerification} />}
 
     <title>{pageTitle}</title>
