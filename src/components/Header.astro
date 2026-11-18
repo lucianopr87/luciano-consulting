@@ -5,9 +5,11 @@ interface Props {
   locale: Locale;
   content: SiteContent;
   otherLocalePath?: string;
+  /** Page whose sections the menu links to. Defaults to the locale's home. */
+  sectionsPath?: string;
 }
 
-const { locale, content, otherLocalePath } = Astro.props;
+const { locale, content, otherLocalePath, sectionsPath } = Astro.props;
 const homePath = locale === 'es' ? '/' : '/en/';
 const otherLocale = locale === 'es' ? 'en' : 'es';
 const resolvedOtherLocalePath = otherLocalePath ?? (otherLocale === 'es' ? '/' : '/en/');
@@ -16,7 +18,7 @@ const navKeys = Object.keys(sectionIds) as SectionKey[];
 const navLinks = navKeys.map((key, index) => ({
   num: String(index).padStart(2, '0'),
   label: content.nav.items[key],
-  href: `${homePath}#${sectionIds[key]}`,
+  href: `${sectionsPath ?? homePath}#${sectionIds[key]}`,
 }));
 ---
 
@@ -56,7 +58,7 @@ const navLinks = navKeys.map((key, index) => ({
         }
       </nav>
       <a
-        href={`${homePath}#${sectionIds.booking}`}
+        href={`${sectionsPath ?? homePath}#${sectionIds.booking}`}
         class="whitespace-nowrap rounded-full border border-ink px-3.5 py-[9px] sm:px-4 text-sm text-ink transition-colors duration-150 hover:bg-ink hover:text-paper"
       >
         {content.nav.bookShort}

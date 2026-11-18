@@ -1,4 +1,5 @@
-import { contactDetails, content, type Locale } from '../i18n/content';
+import { contactDetails, content, type Locale, type SiteContent } from '../i18n/content';
+import { developerContent, developerMarkdownPath, developerPath } from '../i18n/developer';
 
 // Plain-Markdown versions of the CV for assistants and crawlers that read text
 // better than HTML (/cv.md, /en/cv.md and /llms.txt). Everything comes from
@@ -37,14 +38,15 @@ const labels = {
   },
 } as const;
 
-export function cvMarkdown(locale: Locale): string {
-  const c = content[locale];
+export function cvMarkdown(locale: Locale, variant: 'pm' | 'developer' = 'pm'): string {
+  const c: SiteContent = variant === 'developer' ? developerContent[locale] : content[locale];
+  const role = variant === 'developer' ? c.footer.role : `${c.footer.role} · Product Owner`;
   const l = labels[locale];
-  const home = new URL(locale === 'en' ? '/en/' : '/', site).href;
+  const home = new URL(variant === 'developer' ? developerPath[locale] : locale === 'en' ? '/en/' : '/', site).href;
   const lines: string[] = [];
 
   lines.push(`# ${c.hero.firstName} ${c.hero.lastName}`, '');
-  lines.push(`**${c.footer.role} · Product Owner** · ${l.location}`, '');
+  lines.push(`**${plain(role)}** · ${l.location}`, '');
   lines.push(`> ${plain(c.hero.lead)}`, '');
 
   lines.push(`## ${l.profile}`, '', plain(c.profile.lead), '', plain(c.profile.body), '');
@@ -98,6 +100,16 @@ export function llmsTxt(): string {
     `- [CV (English, PDF)](${new URL(en.cvPdf, site).href})`,
     `- [CV (Español, PDF)](${new URL(content.es.cvPdf, site).href})`,
     `- [Online CV](${site}/): the same content as a web page (Spanish; English at /en/)`,
+    '',
+    '## Developer profile',
+    '',
+    `The same experience told for full-stack / frontend roles (TypeScript, React, Next.js, React Native, Node, NestJS, Supabase, AWS).`,
+    '',
+    `- [Developer CV (English, Markdown)](${new URL(developerMarkdownPath.en, site).href})`,
+    `- [Developer CV (Español, Markdown)](${new URL(developerMarkdownPath.es, site).href})`,
+    `- [Developer CV (English, PDF)](${new URL(developerContent.en.cvPdf, site).href})`,
+    `- [Developer CV (Español, PDF)](${new URL(developerContent.es.cvPdf, site).href})`,
+    `- [Developer page](${new URL(developerPath.en, site).href}) (Spanish at ${developerPath.es})`,
     '',
     '## Contact',
     '',
