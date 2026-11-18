@@ -1,0 +1,35 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Hero from '../../components/Hero.astro';
+import Profile from '../../components/Profile.astro';
+import Experience from '../../components/Experience.astro';
+import Skills from '../../components/Skills.astro';
+import Education from '../../components/Education.astro';
+import BlogTeaser from '../../components/BlogTeaser.astro';
+import Booking from '../../components/Booking.astro';
+import Contact from '../../components/Contact.astro';
+import Footer from '../../components/Footer.astro';
+import { sectionIds } from '../../i18n/content';
+import { developerContent, developerMarkdownPath, developerPath } from '../../i18n/developer';
+
+// Developer version of the online CV: same sections and components as the home,
+// with the developer copy and PDF.
+const locale = 'es';
+const pageContent = developerContent[locale];
+---
+
+<Layout locale={locale} content={pageContent} path={developerPath[locale]} markdownPath={developerMarkdownPath[locale]}>
+  <Header locale={locale} content={pageContent} otherLocalePath="/en/developer/" sectionsPath={developerPath[locale]} />
+  <main id={sectionIds.home}>
+    <Hero content={pageContent} />
+    <Profile content={pageContent} />
+    <Experience content={pageContent} />
+    <Skills content={pageContent} />
+    <Education content={pageContent} />
+    <BlogTeaser locale={locale} content={pageContent} />
+    <Booking content={pageContent} />
+    <Contact content={pageContent} />
+  </main>
+  <Footer content={pageContent} locale={locale} />
+</Layout>
