@@ -7,7 +7,7 @@ test('home (es) renders the CV sections', async ({ page }) => {
   for (const id of ['profile', 'experience', 'skills', 'education', 'blog', 'booking', 'contact']) {
     await expect(page.locator(`#${id}`)).toBeAttached();
   }
-  await expect(page.locator('#experience article')).toHaveCount(6);
+  await expect(page.locator('#experience article')).toHaveCount(7);
 });
 
 test('home (en) loads with English copy', async ({ page }) => {

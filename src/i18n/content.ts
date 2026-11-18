@@ -159,7 +159,7 @@ export const content: Record<Locale, SiteContent> = {
     meta: {
       title: 'Luciano Perez Ruiz — IT / Technical Project Manager',
       description:
-        'IT / Technical Project Manager con más de 10 años en Mercado Libre y startups. Empecé escribiendo código: hoy lidero equipos y convierto iniciativas complejas en productos lanzados.',
+        'IT / Technical Project Manager y Product Owner con más de 10 años en Mercado Libre y startups. Empecé escribiendo código: hoy lidero equipos de desarrolladores y agentes de IA y convierto iniciativas complejas en productos lanzados.',
     },
     nav: {
       items: {
@@ -184,7 +184,7 @@ export const content: Record<Locale, SiteContent> = {
       status: 'DISPONIBLE PARA ROLES REMOTOS · SANTA FE, ARGENTINA',
       firstName: 'Luciano',
       lastName: 'Perez Ruiz',
-      lead: 'IT / Technical Project Manager. Más de 10 años convirtiendo iniciativas complejas en productos lanzados — con la mirada de alguien que empezó escribiendo código.',
+      lead: 'IT / Technical Project Manager y Product Owner. Más de 10 años convirtiendo iniciativas complejas en productos lanzados — con la mirada de alguien que empezó escribiendo código, y hoy con equipos que suman agentes de IA.',
       ctaBook: 'Reservar una reunión',
       ctaCv: 'Descargar CV (PDF) ↓',
       photoAlt: 'Luciano Perez Ruiz',
@@ -192,7 +192,7 @@ export const content: Record<Locale, SiteContent> = {
     profile: {
       label: '01 — PERFIL',
       lead: 'Hablo “negocio” e “ingeniería” con la misma fluidez. Lideré equipos de hasta 8 personas en Mercado Libre y startups, desde e‑commerce construidos desde cero hasta iniciativas que requerían alinear a múltiples unidades de negocio.',
-      body: 'Empecé como desarrollador full‑stack, así que no solo gestiono roadmaps: entiendo qué es realmente difícil al construir software. Trabajo con Agile, Scrum, Kanban y esquemas híbridos. Mejoré métricas operativas clave un 30% en un solo trimestre con rediseño de procesos basado en datos, y entregué en tiempo y alcance la plataforma Adobe Commerce de un retailer líder del mercado.',
+      body: 'Empecé como desarrollador full‑stack, así que no solo gestiono roadmaps: entiendo qué es realmente difícil al construir software. Trabajo con Agile, Scrum, Kanban y esquemas híbridos. Mejoré métricas operativas clave un 30% en un solo trimestre con rediseño de procesos basado en datos, y entregué en tiempo y alcance la plataforma Adobe Commerce de un retailer líder del mercado. Hoy llevo proyectos de cliente y un producto propio en producción, y diseño la forma de trabajo de equipos donde desarrolladores y agentes de IA construyen juntos, con reglas, revisiones y CI compartidas.',
     },
     experience: {
       label: '02 — EXPERIENCIA',
@@ -201,10 +201,38 @@ export const content: Record<Locale, SiteContent> = {
         {
           years: '2026 — Hoy',
           company: 'pipacode.studio',
-          role: 'Cofundador · Consultor IT',
+          role: 'Cofundador · IT Project Manager',
           description:
-            'Estudio que ofrece servicios de desarrollo de software, automatización y consultoría. Ayudo a founders y startups a definir y planificar su producto desde el día uno, actuando como su IT Project Manager: armo el roadmap y mantengo la entrega en marcha. En paralelo automatizo flujos de trabajo con IA generativa (Claude Code, Claude API) para investigación y reportes.',
+            'Estudio de desarrollo de software, automatización y consultoría. Llevo la parte de producto y entrega: discovery con el cliente, propuestas por etapas, roadmap y coordinación de un equipo de desarrolladores y agentes de IA (Claude Code). También busco y califico clientes nuevos.',
           link: { label: 'pipacode.studio ↗', href: 'https://pipacode.studio' },
+          highlights: [
+            {
+              year: '2026',
+              text: 'Carn.AR: PM del MVP de un marketplace de carne para una cadena de carnicerías con 4 sucursales. Plan de 12 semanas en 6 etapas con un hito de cobro por etapa, backlog de más de 70 tareas en GitHub Projects, ADRs, actas y un registro de dudas y supuestos con el cliente. Coordino a 2 desarrolladores full‑stack y me ocupo del repo, la infraestructura (Docker, CI/CD, Sentry) y el panel de admin (NestJS, Next.js, PostgreSQL/PostGIS).',
+            },
+            {
+              year: '2026',
+              text: 'Armé la forma de trabajo del equipo con IA: reglas compartidas para los agentes de cada desarrollador, skills de análisis funcional y de planificación antes de codear, un resumen automático de novedades al empezar cada sesión, Conventional Commits, PRs chicos con review cruzada y CI obligatorio para mergear.',
+            },
+          ],
+        },
+        {
+          years: '2026 — Hoy',
+          company: 'Tino · proyecto propio',
+          role: 'Fundador · Product Owner',
+          description:
+            'App de estudio con repetición espaciada para estudiantes de Abogacía (UNL) y cursos de habilitación (ANAC, CNV). La llevo solo de punta a punta: producto, diseño, desarrollo con agentes de IA, contenido y salida al mercado.',
+          link: { label: 'estudiantino.com.ar ↗', href: 'https://estudiantino.com.ar' },
+          highlights: [
+            {
+              year: '2026',
+              text: 'De la idea a producción en 5 semanas: app web instalable (PWA), panel de administración con reportes, cobros con Mercado Pago (pago único y suscripción mensual) y landing con una página por materia para SEO. Hoy en etapa de validación comercial con estudiantes.',
+            },
+            {
+              year: '2026',
+              text: 'Proceso propio para convertir manuales en bancos de preguntas: extracción con OCR y generación con IA, siempre con revisión humana. Casi 5.000 preguntas publicadas en 3 materias.',
+            },
+          ],
         },
         {
           years: '2024 — 2025',
@@ -275,7 +303,11 @@ export const content: Record<Locale, SiteContent> = {
       groups: [
         {
           title: 'Metodologías y entrega',
-          items: ['Agile', 'Scrum', 'Kanban', 'Waterfall', 'Híbrido', 'Roadmapping', 'Gestión de riesgo y alcance'],
+          items: ['Agile', 'Scrum', 'Kanban', 'Waterfall', 'Híbrido', 'Roadmapping', 'Gestión de riesgo y alcance', 'Lanzamientos'],
+        },
+        {
+          title: 'Producto',
+          items: ['Product ownership', 'Discovery', 'Backlog y priorización', 'MVP', 'Go‑to‑market', 'Pagos (Mercado Pago)'],
         },
         {
           title: 'Liderazgo',
@@ -283,13 +315,16 @@ export const content: Record<Locale, SiteContent> = {
         },
         {
           title: 'Herramientas',
-          items: ['Jira', 'Confluence', 'Monday', 'Slack', 'Google Workspace', 'Excel / Sheets', 'BigQuery'],
+          items: ['Jira', 'Confluence', 'GitHub Projects', 'Monday', 'Slack', 'Google Workspace', 'Excel / Sheets', 'BigQuery'],
         },
         {
           title: 'Base técnica',
-          items: ['AWS', 'CI/CD', 'SDLC', 'Node.js', 'React', 'React Native', 'PHP', 'SQL', 'CCNA'],
+          items: ['AWS', 'CI/CD', 'SDLC', 'Node.js', 'React', 'React Native', 'Next.js', 'NestJS', 'Supabase', 'Docker', 'PHP', 'SQL', 'CCNA'],
         },
-        { title: 'IA y automatización', items: ['Claude Code', 'Claude API', 'Automatización con IA'] },
+        {
+          title: 'IA y automatización',
+          items: ['Orquestación de agentes de IA', 'Claude Code (skills, hooks)', 'Claude API', 'Automatización con IA'],
+        },
       ],
     },
     education: {
@@ -421,7 +456,7 @@ export const content: Record<Locale, SiteContent> = {
     meta: {
       title: 'Luciano Perez Ruiz — IT / Technical Project Manager',
       description:
-        'IT / Technical Project Manager with 10+ years at Mercado Libre and startups. I started out writing code — today I lead teams and turn complex initiatives into shipped products.',
+        'IT / Technical Project Manager and Product Owner with 10+ years at Mercado Libre and startups. I started out writing code — today I lead teams of developers and AI agents and turn complex initiatives into shipped products.',
     },
     nav: {
       items: {
@@ -446,7 +481,7 @@ export const content: Record<Locale, SiteContent> = {
       status: 'OPEN TO REMOTE ROLES · SANTA FE, ARGENTINA',
       firstName: 'Luciano',
       lastName: 'Perez Ruiz',
-      lead: 'IT / Technical Project Manager. 10+ years turning complex initiatives into shipped products — with the eye of someone who started out writing code.',
+      lead: 'IT / Technical Project Manager and Product Owner. 10+ years turning complex initiatives into shipped products — with the eye of someone who started out writing code, now leading teams that include AI agents.',
       ctaBook: 'Book a meeting',
       ctaCv: 'Download CV (PDF) ↓',
       photoAlt: 'Luciano Perez Ruiz',
@@ -454,7 +489,7 @@ export const content: Record<Locale, SiteContent> = {
     profile: {
       label: '01 — PROFILE',
       lead: 'I speak both “business” and “engineering” fluently. I’ve led teams of up to 8 people at Mercado Libre and startups, from e‑commerce platforms built from scratch to initiatives that needed buy‑in from several business units.',
-      body: 'I started out as a full‑stack developer, so I don’t just manage roadmaps — I understand what’s actually hard about building software. I work across Agile, Scrum, Kanban and hybrid delivery. I improved core operational metrics by 30% in a single quarter through data‑driven process redesign, and delivered a market‑leading retailer’s Adobe Commerce platform on time and on scope.',
+      body: 'I started out as a full‑stack developer, so I don’t just manage roadmaps — I understand what’s actually hard about building software. I work across Agile, Scrum, Kanban and hybrid delivery. I improved core operational metrics by 30% in a single quarter through data‑driven process redesign, and delivered a market‑leading retailer’s Adobe Commerce platform on time and on scope. Today I run client projects and my own product in production, and I design how teams of developers and AI agents build together, with shared rules, reviews and CI.',
     },
     experience: {
       label: '02 — EXPERIENCE',
@@ -463,10 +498,38 @@ export const content: Record<Locale, SiteContent> = {
         {
           years: '2026 — Present',
           company: 'pipacode.studio',
-          role: 'Co‑founder · IT Consultant',
+          role: 'Co‑founder · IT Project Manager',
           description:
-            'A studio offering software development, automation and consulting services. I help founders and startups define and plan their product from day one, acting as their IT Project Manager: building the roadmap and keeping delivery on track. In parallel, I automate workflows with generative AI (Claude Code, Claude API) for research and reporting.',
+            'A software development, automation and consulting studio. I own product and delivery: client discovery, staged proposals, roadmap, and coordination of a team of developers and AI agents (Claude Code). I also source and qualify new clients.',
           link: { label: 'pipacode.studio ↗', href: 'https://pipacode.studio' },
+          highlights: [
+            {
+              year: '2026',
+              text: 'Carn.AR: PM for the MVP of a meat marketplace for a 4‑branch butcher chain. 12‑week plan in 6 stages with a payment milestone per stage, a 70+ task backlog in GitHub Projects, ADRs, meeting minutes and a client decisions‑and‑assumptions log. I coordinate 2 full‑stack developers and own the repo, infrastructure (Docker, CI/CD, Sentry) and admin panel (NestJS, Next.js, PostgreSQL/PostGIS).',
+            },
+            {
+              year: '2026',
+              text: 'Designed the team’s AI‑assisted workflow: shared rules for each developer’s agents, functional‑analysis and planning skills before any code is written, an automatic “what changed” briefing at the start of every session, Conventional Commits, small cross‑reviewed PRs and CI required to merge.',
+            },
+          ],
+        },
+        {
+          years: '2026 — Present',
+          company: 'Tino · own product',
+          role: 'Founder · Product Owner',
+          description:
+            'A spaced‑repetition study app for law students (UNL) and licensing courses (ANAC, CNV). I run it solo end to end: product, design, development with AI agents, content and go‑to‑market.',
+          link: { label: 'estudiantino.com.ar ↗', href: 'https://estudiantino.com.ar' },
+          highlights: [
+            {
+              year: '2026',
+              text: 'From idea to production in 5 weeks: installable web app (PWA), admin panel with reporting, Mercado Pago payments (one‑time and monthly subscription) and a landing site with one SEO page per subject. Now in commercial validation with students.',
+            },
+            {
+              year: '2026',
+              text: 'Built a pipeline that turns textbooks into question banks: OCR extraction and AI generation, always with human review. Nearly 5,000 questions published across 3 subjects.',
+            },
+          ],
         },
         {
           years: '2024 — 2025',
@@ -537,7 +600,11 @@ export const content: Record<Locale, SiteContent> = {
       groups: [
         {
           title: 'Delivery & methodology',
-          items: ['Agile', 'Scrum', 'Kanban', 'Waterfall', 'Hybrid delivery', 'Roadmapping', 'Risk & scope management'],
+          items: ['Agile', 'Scrum', 'Kanban', 'Waterfall', 'Hybrid delivery', 'Roadmapping', 'Risk & scope management', 'Product launches'],
+        },
+        {
+          title: 'Product',
+          items: ['Product ownership', 'Discovery', 'Backlog & prioritization', 'MVP', 'Go‑to‑market', 'Payments (Mercado Pago)'],
         },
         {
           title: 'Leadership',
@@ -545,13 +612,16 @@ export const content: Record<Locale, SiteContent> = {
         },
         {
           title: 'Tools',
-          items: ['Jira', 'Confluence', 'Monday', 'Slack', 'Google Workspace', 'Excel / Sheets', 'BigQuery'],
+          items: ['Jira', 'Confluence', 'GitHub Projects', 'Monday', 'Slack', 'Google Workspace', 'Excel / Sheets', 'BigQuery'],
         },
         {
           title: 'Technical background',
-          items: ['AWS', 'CI/CD', 'SDLC', 'Node.js', 'React', 'React Native', 'PHP', 'SQL', 'CCNA'],
+          items: ['AWS', 'CI/CD', 'SDLC', 'Node.js', 'React', 'React Native', 'Next.js', 'NestJS', 'Supabase', 'Docker', 'PHP', 'SQL', 'CCNA'],
         },
-        { title: 'AI & automation', items: ['Claude Code', 'Claude API', 'AI workflow automation'] },
+        {
+          title: 'AI & automation',
+          items: ['AI agent orchestration', 'Claude Code (skills, hooks)', 'Claude API', 'AI workflow automation'],
+        },
       ],
     },
     education: {
