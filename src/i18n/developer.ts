@@ -118,10 +118,10 @@ export const developerContent: Record<Locale, SiteContent> = {
           highlights: [
             {
               year: '2022',
-              text: 'Everprep: beta launch de una plataforma de estudio multi‑tenant de gran escala sobre AWS + React (Lambda, DynamoDB, S3, Cognito, Amplify). Di la capacitación interna de AWS Amplify.',
+              text: 'Everprep: beta launch de una plataforma de estudio multi‑tenant de gran escala sobre AWS + React (Lambda, DynamoDB, S3, Cognito, Amplify). Publicada en App Store y Google Play. Di la capacitación interna de AWS Amplify.',
             },
             { year: '2021', text: '45R: construí y lancé una tienda WooCommerce.' },
-            { year: '2020', text: 'Bluejacketeer: rediseño de la web app y nueva app mobile con React y React Native.' },
+            { year: '2020', text: 'Bluejacketeer: rediseño de la web app y nueva app mobile en React Native, publicada en App Store y Google Play.' },
             { year: '2019', text: 'Metro‑Manhattan: construí y lancé un sitio inmobiliario.' },
           ],
         },
@@ -270,10 +270,10 @@ export const developerContent: Record<Locale, SiteContent> = {
           highlights: [
             {
               year: '2022',
-              text: 'Everprep: beta launch of a large multi‑tenant study platform on AWS + React (Lambda, DynamoDB, S3, Cognito, Amplify). Gave the company’s internal AWS Amplify training.',
+              text: 'Everprep: beta launch of a large multi‑tenant study platform on AWS + React (Lambda, DynamoDB, S3, Cognito, Amplify). Published to the App Store and Google Play. Gave the company’s internal AWS Amplify training.',
             },
             { year: '2021', text: '45R: built and launched a WooCommerce store.' },
-            { year: '2020', text: 'Bluejacketeer: web app redesign and a new mobile app with React and React Native.' },
+            { year: '2020', text: 'Bluejacketeer: web app redesign and a new React Native mobile app, published to the App Store and Google Play.' },
             { year: '2019', text: 'Metro‑Manhattan: built and launched a real‑estate website.' },
           ],
         },
