@@ -1,6 +1,6 @@
 # Luciano Consulting — Sitio web
 
-CV online de Luciano Perez Ruiz (IT / Technical Project Manager), bilingüe (ES/EN), con blog, reserva de reuniones y formulario de contacto. Construido con [Astro](https://docs.astro.build) + Tailwind, desplegado en Firebase Hosting.
+CV online de Luciano Perez Ruiz (IT / Technical Project Manager), bilingüe (ES/EN), con blog, reserva de reuniones y formulario de contacto. Construido con [Astro](https://docs.astro.build) + Tailwind, desplegado en Firebase Hosting en **https://lucianoperezruiz.dev**.
 
 ## Estructura
 
@@ -38,6 +38,15 @@ CV online de Luciano Perez Ruiz (IT / Technical Project Manager), bilingüe (ES/
 - Los dos perfiles se enlazan entre sí desde el hero (`hero.crossLink`). En `/developer/`, el menú apunta a las secciones de esa página (prop `sectionsPath` del `Header`) y el toggle de idioma lleva a la otra versión de desarrollador.
 - Markdown: `/developer/cv.md` y `/en/developer/cv.md`, también listados en `/llms.txt`.
 - Cobertura: `e2e/developer.spec.ts`.
+
+## Dominio y SEO
+
+- Dominio propio: `lucianoperezruiz.dev` (registrado en Hostinger, DNS en Hostinger). Apunta a Firebase Hosting como dominio personalizado (gratis en el plan Spark): registro `A @ 199.36.158.100` + `TXT hosting-site=luciano-consulting`; `www` es un `CNAME` a `luciano-consulting.web.app` y Firebase lo redirige al dominio sin `www`.
+- Por qué: en `luciano-consulting.web.app` Google nunca rastreó el sitio (3 meses con 0 visitas de Googlebot, sitemap "No se ha podido obtener"); los subdominios compartidos de `web.app` reciben prioridad de rastreo casi nula.
+- `site` en `astro.config.mjs` (y `site` en `src/lib/cv-markdown.ts`) definen el dominio de canonical, sitemap, Open Graph, JSON-LD y `llms.txt`; `public/robots.txt` declara el sitemap.
+- Los hosts por defecto de Firebase (`luciano-consulting.web.app` / `.firebaseapp.com`) siguen sirviendo el sitio; un script al principio del `<head>` (`Layout.astro`) redirige al dominio propio conservando path, query y hash. Firebase no permite un 301 por host en su dominio por defecto, y Google sigue los redirects por JS. Los canales de preview (staging) no se redirigen.
+- Las páginas con traducción 1:1 (home, blog, developer, privacidad) pasan `alternates` al `Layout`, que emite `hreflang` es/en/x-default. Los posts no, porque sus slugs difieren por idioma y no hay un mapeo entre traducciones.
+- Search Console: propiedad de tipo **Dominio** `lucianoperezruiz.dev` verificada por TXT en el DNS (la propiedad vieja de prefijo de URL de `web.app` queda como histórico).
 
 ## Versiones para IA y buscadores
 
@@ -107,7 +116,7 @@ Ninguna de estas variables se commitea con su valor real — los workflows las i
 - Corren en dos "proyectos": **Desktop Chromium** y **Mobile Chromium** (emulando un Pixel 5), para cubrir el layout en ambos anchos (el menú es el mismo overlay en los dos).
 - El build usado para testear define valores de prueba *ficticios* para `PUBLIC_GA_ID`, `PUBLIC_GSC_VERIFICATION`, `PUBLIC_WEB3FORMS_ACCESS_KEY` y `PUBLIC_BOOKING_ENDPOINT` (ver `playwright.config.ts`) — no son credenciales reales, solo lo necesario para que el banner de cookies, el snippet de GA y el widget de reserva se rendericen y puedan testearse. El envío del formulario de contacto y las llamadas al backend de reservas se interceptan (`page.route`) para no pegarle a la API real de Web3Forms ni al Apps Script real durante los tests.
 - Qué cubren:
-  - `site.spec.ts`: la home renderiza todas las secciones del CV (es/en), el link de descarga del CV apunta al PDF del idioma correspondiente y el PDF existe, y la página 404.
+  - `site.spec.ts`: la home renderiza todas las secciones del CV (es/en), el link de descarga del CV apunta al PDF del idioma correspondiente y el PDF existe, la página 404, el canonical + `hreflang` (es/en/x-default) de las páginas traducidas apuntan a `lucianoperezruiz.dev`, y `robots.txt` declara el sitemap del dominio propio.
   - `header.spec.ts`: el nombre/monograma linkea al home del locale actual, "Reservar" lleva a `#booking`, el toggle de idioma del header es visible y marca el locale actual, y cambia de locale (con el `hreflang` correcto) respetando la página actual (ej. desde `/privacy/` va a `/en/privacy/`, no al home); el switch del menú también sigue funcionando.
   - `footer.spec.ts`: texto de copyright con el año actual, y el link a la política de privacidad es correcto y navegable en ambos locales.
   - `cookie-consent.spec.ts`: el banner aparece en la primera visita, GA trackea igual desde el arranque, y "Entendido" oculta el banner de forma persistente.

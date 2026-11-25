@@ -19,7 +19,7 @@ const locale = 'es';
 const pageContent = developerContent[locale];
 ---
 
-<Layout locale={locale} content={pageContent} path={developerPath[locale]} markdownPath={developerMarkdownPath[locale]}>
+<Layout locale={locale} content={pageContent} path={developerPath[locale]} alternates={developerPath} markdownPath={developerMarkdownPath[locale]}>
   <Header locale={locale} content={pageContent} otherLocalePath="/en/developer/" sectionsPath={developerPath[locale]} />
   <main id={sectionIds.home}>
     <Hero content={pageContent} />
