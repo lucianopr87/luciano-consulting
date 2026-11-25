@@ -28,8 +28,8 @@ export const developerContent: Record<Locale, SiteContent> = {
     },
     profile: {
       label: '01 — PERFIL',
-      lead: 'Escribo código pensando en el producto completo: alcance, trade‑offs, tests y producción.',
-      body: 'Empecé con PHP, JavaScript y SQL sobre LAMP y WordPress, y hoy trabajo en monorepos TypeScript con React, Next.js, React Native, Node y NestJS. Pasé varios años liderando entregas en Mercado Libre y en una software factory, y en 2026 volví a construir de primera mano: lancé mi propio producto, Tino, de punta a punta, y llevo el repo, el CI/CD y la infraestructura de un marketplace para un cliente. Trabajo a diario con agentes de IA (Claude Code) dentro de un flujo prolijo: planificar antes de codear, PRs chicos, y tests y CI como condición para mergear.',
+      lead: 'Programo pensando en el producto completo: alcance, trade‑offs, tests y producción.',
+      body: 'Empecé con PHP, JavaScript y SQL sobre LAMP y WordPress, y hoy trabajo en monorepos TypeScript con React, Next.js, React Native, Node y NestJS. Pasé varios años liderando entregas en Mercado Libre y en una software factory, y en 2026 volví a programar yo mismo: lancé mi propio producto, Tino, de punta a punta, y llevo el repo, el CI/CD y la infraestructura de un marketplace para un cliente. Trabajo a diario con agentes de IA (Claude Code) dentro de un flujo prolijo: planificar antes de codear, PRs chicos, y tests y CI como condición para mergear.',
     },
     experience: {
       label: '02 — EXPERIENCIA',
@@ -92,7 +92,7 @@ export const developerContent: Record<Locale, SiteContent> = {
           highlights: [
             {
               year: '2025',
-              text: 'Lideré un equipo de 6 desarrolladores que construyó desde cero una plataforma Adobe Commerce (Magento 2) para un retailer líder de electrónica en Argentina, con integraciones con SAP y Google BigQuery. Lanzada en fecha, con el 100% del alcance.',
+              text: 'Lideré un equipo de 6 desarrolladores que construyó desde cero una plataforma Adobe Commerce (Magento 2) para un retailer líder de electrónica en Argentina, con integraciones con SAP y Google BigQuery. Salió en fecha y con el 100% del alcance.',
             },
           ],
         },
@@ -101,11 +101,11 @@ export const developerContent: Record<Locale, SiteContent> = {
           company: 'Mercado Libre',
           role: 'IT Project Leader (líder de equipo)',
           description:
-            'Lideré un equipo de desarrollo en la unidad de envíos durante todo el ciclo de vida del software con Agile/Scrum, definiendo las soluciones técnicas junto con el líder técnico. Servicios en Go y SQL sobre Fury, la plataforma cloud interna de Mercado Libre construida sobre servicios de AWS, con monitoreo en Sentry y Jira. También llevé contratación y desempeño del equipo.',
+            'Lideré un equipo de desarrollo en la unidad de envíos durante todo el ciclo de vida del software con Agile/Scrum, definiendo las soluciones técnicas junto con el líder técnico. Servicios en Go y SQL sobre Fury, la plataforma cloud interna de Mercado Libre construida sobre servicios de AWS, con monitoreo en Sentry y Jira. También estuve a cargo de las contrataciones y la evaluación de desempeño del equipo.',
           highlights: [
             {
               year: '2024',
-              text: 'Análisis de métricas de nivel 2 y diseño de soluciones con el equipo: mejora del 30% en métricas clave en un trimestre.',
+              text: 'Analicé métricas de nivel 2 y diseñé soluciones con el equipo: mejoramos un 30% métricas clave en un trimestre.',
             },
           ],
         },
@@ -114,11 +114,11 @@ export const developerContent: Record<Locale, SiteContent> = {
           company: 'Serfe',
           role: 'Senior Developer / Project Manager',
           description:
-            'Senior developer y team lead en 3 proyectos simultáneos con equipos de hasta 6 desarrolladores. Configuré AWS (apps en Amplify, repositorios y testing automatizado) para habilitar CI/CD.',
+            'Senior developer y team lead en 3 proyectos en paralelo, con equipos de hasta 6 desarrolladores. Configuré AWS (apps en Amplify, repositorios y testing automatizado) para habilitar CI/CD.',
           highlights: [
             {
               year: '2022',
-              text: 'Everprep: beta launch de una plataforma de estudio multi‑tenant de gran escala sobre AWS + React (Lambda, DynamoDB, S3, Cognito, Amplify). Publicada en App Store y Google Play. Di la capacitación interna de AWS Amplify.',
+              text: 'Everprep: lanzamiento de la beta de una plataforma de estudio multi‑tenant de gran escala sobre AWS + React (Lambda, DynamoDB, S3, Cognito, Amplify). Publicada en App Store y Google Play. Di la capacitación interna de AWS Amplify.',
             },
             { year: '2021', text: '45R: construí y lancé una tienda WooCommerce.' },
             { year: '2020', text: 'Bluejacketeer: rediseño de la web app y nueva app mobile en React Native, publicada en App Store y Google Play.' },
@@ -130,7 +130,7 @@ export const developerContent: Record<Locale, SiteContent> = {
           company: 'Independiente',
           role: 'Desarrollador web',
           description:
-            'SIGE, sistema web de gestión de legajos para la Regional IV de Educación de Santa Fe (PHP/CodeIgniter, MySQL, jQuery): relevamiento, desarrollo, deploy y capacitación del personal. Patrone Equipamientos: showroom en WordPress con setup de marketing digital.',
+            'SIGE, sistema web de gestión de legajos para la Regional IV de Educación de Santa Fe (PHP/CodeIgniter, MySQL, jQuery): relevamiento, desarrollo, deploy y capacitación del personal. Patrone Equipamientos: showroom en WordPress con la configuración de marketing digital.',
         },
         {
           years: '2014 — 2017',

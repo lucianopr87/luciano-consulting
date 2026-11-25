@@ -161,7 +161,7 @@ export const content: Record<Locale, SiteContent> = {
     meta: {
       title: 'Luciano Perez Ruiz — IT / Technical Project Manager',
       description:
-        'IT / Technical Project Manager y Product Owner con más de 10 años en Mercado Libre y startups. Empecé escribiendo código: hoy lidero equipos de desarrolladores y agentes de IA y convierto iniciativas complejas en productos lanzados.',
+        'IT / Technical Project Manager y Product Owner con más de 10 años de experiencia en Mercado Libre y startups. Empecé programando y hoy gestiono equipos de desarrolladores y agentes de IA para llevar proyectos complejos hasta producción.',
     },
     nav: {
       items: {
@@ -183,10 +183,10 @@ export const content: Record<Locale, SiteContent> = {
       languageSwitch: 'Idioma',
     },
     hero: {
-      status: 'DISPONIBLE PARA ROLES REMOTOS · SANTA FE, ARGENTINA',
+      status: 'DISPONIBLE PARA TRABAJO REMOTO · SANTA FE, ARGENTINA',
       firstName: 'Luciano',
       lastName: 'Perez Ruiz',
-      lead: 'IT / Technical Project Manager y Product Owner. Más de 10 años convirtiendo iniciativas complejas en productos lanzados — con la mirada de alguien que empezó escribiendo código, y hoy con equipos que suman agentes de IA.',
+      lead: 'IT / Technical Project Manager y Product Owner. Más de 10 años llevando proyectos complejos de la idea al lanzamiento. Empecé programando y hoy gestiono equipos de desarrolladores y agentes de IA.',
       ctaBook: 'Reservar una reunión',
       ctaCv: 'Descargar CV (PDF) ↓',
       photoAlt: 'Luciano Perez Ruiz',
@@ -194,28 +194,28 @@ export const content: Record<Locale, SiteContent> = {
     },
     profile: {
       label: '01 — PERFIL',
-      lead: 'Hablo “negocio” e “ingeniería” con la misma fluidez. Lideré equipos de hasta 8 personas en Mercado Libre y startups, desde e‑commerce construidos desde cero hasta iniciativas que requerían alinear a múltiples unidades de negocio.',
-      body: 'Empecé como desarrollador full‑stack, así que no solo gestiono roadmaps: entiendo qué es realmente difícil al construir software. Trabajo con Agile, Scrum, Kanban y esquemas híbridos. Mejoré métricas operativas clave un 30% en un solo trimestre con rediseño de procesos basado en datos, y entregué en tiempo y alcance la plataforma Adobe Commerce de un retailer líder del mercado. Hoy llevo proyectos de cliente y un producto propio en producción, y diseño la forma de trabajo de equipos donde desarrolladores y agentes de IA construyen juntos, con reglas, revisiones y CI compartidas.',
+      lead: 'Hablo el idioma del negocio y el de la ingeniería con la misma soltura. Lideré equipos de hasta 8 personas en Mercado Libre y en startups: desde tiendas online hechas de cero hasta iniciativas que obligaban a poner de acuerdo a varias áreas de la empresa.',
+      body: 'Empecé como desarrollador full‑stack, así que no me quedo en el roadmap: sé dónde está la dificultad real de construir software. Trabajo con Agile, Scrum, Kanban y esquemas híbridos. Mejoré un 30% métricas operativas clave en un solo trimestre rediseñando procesos a partir de datos, y entregué en fecha y con el alcance completo la plataforma Adobe Commerce de un retailer líder. Hoy llevo proyectos para clientes y un producto propio que ya está en producción, y defino cómo trabajan juntos desarrolladores y agentes de IA: reglas compartidas, revisión de código y CI.',
     },
     experience: {
       label: '02 — EXPERIENCIA',
-      heading: 'De developer a líder de proyectos IT.',
+      heading: 'De desarrollador a líder de proyectos IT.',
       items: [
         {
           years: '2026 — Hoy',
           company: 'pipacode.studio',
           role: 'Cofundador · IT Project Manager',
           description:
-            'Estudio de desarrollo de software, automatización y consultoría. Llevo la parte de producto y entrega: discovery con el cliente, propuestas por etapas, roadmap y coordinación de un equipo de desarrolladores y agentes de IA (Claude Code). También busco y califico clientes nuevos.',
+            'Estudio de desarrollo de software, automatización y consultoría. Estoy a cargo de producto y entrega: discovery con el cliente, propuestas por etapas, roadmap y coordinación de un equipo de desarrolladores y agentes de IA (Claude Code). También me ocupo de conseguir clientes nuevos y evaluar cuáles encajan.',
           link: { label: 'pipacode.studio ↗', href: 'https://pipacode.studio' },
           highlights: [
             {
               year: '2026',
-              text: 'Carn.AR: PM del MVP de un marketplace de carne para una cadena de carnicerías con 4 sucursales. Plan de 12 semanas en 6 etapas con un hito de cobro por etapa, backlog de más de 70 tareas en GitHub Projects, ADRs, actas y un registro de dudas y supuestos con el cliente. Coordino a 2 desarrolladores full‑stack y me ocupo del repo, la infraestructura (Docker, CI/CD, Sentry) y el panel de admin (NestJS, Next.js, PostgreSQL/PostGIS).',
+              text: 'Carn.AR: PM del MVP de un marketplace de carne para una cadena de carnicerías con 4 sucursales. Plan de 12 semanas en 6 etapas con un hito de cobro por etapa, backlog de más de 70 tareas en GitHub Projects, ADRs, actas de reunión y un registro de decisiones y supuestos acordados con el cliente. Coordino a 2 desarrolladores full‑stack y me ocupo del repo, la infraestructura (Docker, CI/CD, Sentry) y el panel de admin (NestJS, Next.js, PostgreSQL/PostGIS).',
             },
             {
               year: '2026',
-              text: 'Armé la forma de trabajo del equipo con IA: reglas compartidas para los agentes de cada desarrollador, skills de análisis funcional y de planificación antes de codear, un resumen automático de novedades al empezar cada sesión, Conventional Commits, PRs chicos con review cruzada y CI obligatorio para mergear.',
+              text: 'Diseñé cómo trabaja el equipo con IA: reglas compartidas para los agentes de cada desarrollador, skills de análisis funcional y planificación antes de escribir código, un resumen automático de novedades al arrancar cada sesión, Conventional Commits, PRs chicos con review cruzada y CI en verde como requisito para mergear.',
             },
           ],
         },
@@ -242,11 +242,11 @@ export const content: Record<Locale, SiteContent> = {
           company: 'IURCO',
           role: 'IT Project Manager',
           description:
-            'Gestión simultánea de múltiples proyectos de software factory, desde la planificación inicial hasta la entrega final. Coordinación con product owners y stakeholders para definir alcance, alinear procesos y documentación, con feedback continuo y mejora de procesos.',
+            'Gestioné en paralelo varios proyectos de software factory, desde la planificación inicial hasta la entrega. Trabajé con product owners y stakeholders para definir el alcance y acordar procesos y documentación, con feedback continuo para ir mejorando la forma de trabajo.',
           highlights: [
             {
               year: '2025',
-              text: 'Planificación, ejecución y entrega end‑to‑end de una plataforma Adobe Commerce de gran escala, desde cero, para un retailer líder de electrónica en Argentina. Equipo de 6 devs con Scrum y Jira, integraciones con SAP y Google BigQuery. Lanzada en fecha, con el 100% del alcance.',
+              text: 'Planifiqué y entregué de punta a punta una plataforma Adobe Commerce de gran escala, construida desde cero, para un retailer líder de electrónica en Argentina. Equipo de 6 desarrolladores con Scrum y Jira, e integraciones con SAP y Google BigQuery. Salió en fecha y con el 100% del alcance.',
             },
           ],
         },
@@ -255,15 +255,15 @@ export const content: Record<Locale, SiteContent> = {
           company: 'Mercado Libre',
           role: 'IT Project Leader',
           description:
-            'Lideré un equipo de desarrollo en la unidad de envíos, a cargo del ciclo de vida completo del software bajo Agile/Scrum. Responsable de contratación, desarrollo y evaluación de desempeño del equipo.',
+            'Lideré un equipo de desarrollo en la unidad de envíos, a cargo de todo el ciclo de vida del software con Agile/Scrum. También me ocupaba de las contrataciones, el crecimiento profesional y la evaluación de desempeño del equipo.',
           highlights: [
             {
               year: '2024',
-              text: 'Análisis de métricas de nivel 2 y diseño de soluciones con el equipo IT: mejora del 30% en métricas clave en un solo trimestre y definición del roadmap de largo plazo junto al liderazgo técnico.',
+              text: 'Analicé métricas de nivel 2 y diseñé soluciones junto al equipo IT: mejoramos un 30% métricas clave en un solo trimestre y definimos el roadmap de largo plazo con el liderazgo técnico.',
             },
             {
               year: '2023',
-              text: 'Desarrollo y lanzamiento de iniciativas cross‑business que requirieron coordinación y negociación entre varias unidades de negocio, IT, producto y UX.',
+              text: 'Lancé iniciativas que atravesaban varias unidades de negocio y obligaban a coordinar y negociar con cada una, además de IT, producto y UX.',
             },
           ],
         },
@@ -272,16 +272,16 @@ export const content: Record<Locale, SiteContent> = {
           company: 'Serfe',
           role: 'Senior Developer / Project Manager',
           description:
-            'Project manager y team lead en 3 proyectos simultáneos con equipos de hasta 6 desarrolladores. Configuración de AWS — apps en Amplify, repositorios y testing automatizado — habilitando CI/CD para el equipo.',
+            'Project manager y team lead en 3 proyectos en paralelo, con equipos de hasta 6 desarrolladores. Configuré AWS (apps en Amplify, repositorios y testing automatizado) para que el equipo trabajara con CI/CD.',
           highlights: [
             {
               year: '2022',
-              text: 'Beta launch de Everprep sobre AWS + React, uno de los proyectos más grandes de la empresa. Capacitación interna en AWS Amplify.',
+              text: 'Lanzamiento de la beta de Everprep (AWS + React), uno de los proyectos más grandes de la empresa. Di la capacitación interna de AWS Amplify.',
             },
             { year: '2021', text: 'Lanzamiento de la tienda WooCommerce del proyecto 45R.' },
             {
               year: '2020',
-              text: 'Rediseño de web app y nueva app mobile (React / React Native) para Bluejacketeer.',
+              text: 'Rediseño de la web app y nueva app mobile (React / React Native) para Bluejacketeer.',
             },
           ],
         },
@@ -290,7 +290,7 @@ export const content: Record<Locale, SiteContent> = {
           company: 'Independiente',
           role: 'Web Developer',
           description:
-            'Dos proyectos end‑to‑end: Patrone Equipamientos, showroom online en WordPress con setup de marketing digital; y SIGE, sistema de gestión de legajos para la Regional IV de Educación de Santa Fe (PHP/CodeIgniter, MySQL), incluyendo relevamiento, deploy y capacitación.',
+            'Dos proyectos de punta a punta: Patrone Equipamientos, showroom online en WordPress con la configuración de marketing digital; y SIGE, sistema de gestión de legajos para la Regional IV de Educación de Santa Fe (PHP/CodeIgniter, MySQL), que incluyó relevamiento, deploy y capacitación del personal.',
         },
         {
           years: '2014 — 2017',
@@ -314,7 +314,7 @@ export const content: Record<Locale, SiteContent> = {
         },
         {
           title: 'Liderazgo',
-          items: ['Equipos cross‑funcionales', 'Stakeholders', 'Reportes ejecutivos', 'Hiring y coaching', 'Clientes y proveedores'],
+          items: ['Equipos multidisciplinarios', 'Stakeholders', 'Reportes ejecutivos', 'Contratación y coaching', 'Clientes y proveedores'],
         },
         {
           title: 'Herramientas',
@@ -363,7 +363,7 @@ export const content: Record<Locale, SiteContent> = {
       bullets: [
         '30 minutos por Google Meet',
         'Martes a jueves 10–17 h, viernes 11–15 h (GMT‑3)',
-        'La invitación de Google Calendar llega con el link',
+        'Te llega la invitación de Google Calendar con el link de Meet',
       ],
       stepDay: '1. Elegí un día',
       stepTime: '2. Elegí un horario',
@@ -383,7 +383,7 @@ export const content: Record<Locale, SiteContent> = {
       loadError: 'No se pudieron cargar los horarios disponibles. Probá de nuevo en un rato.',
       formError: 'Hubo un error al confirmar la reserva. Probá de nuevo o escribime directamente.',
       slotTakenError: 'Justo se ocupó ese horario. Elegí otro de la lista actualizada.',
-      rateLimitedError: 'Ya recibimos una reserva tuya hace poco. Si necesitás otro horario, escribime directamente.',
+      rateLimitedError: 'Ya tengo una reserva tuya de hace poco. Si necesitás otro horario, escribime directamente.',
       invalidSlotError: 'Ese horario ya no está disponible. Elegí otro de la lista actualizada.',
     },
     contact: {
@@ -409,7 +409,7 @@ export const content: Record<Locale, SiteContent> = {
       privacyLink: 'Política de Privacidad',
     },
     cookieConsent: {
-      message: 'Este sitio usa Google Analytics para entender cómo se usa.',
+      message: 'Este sitio usa Google Analytics para medir cómo se navega.',
       policyLinkText: 'Más información',
       dismissLabel: 'Entendido',
     },
@@ -432,7 +432,7 @@ export const content: Record<Locale, SiteContent> = {
         },
         {
           heading: 'Enlaces a sitios de terceros',
-          body: 'Este sitio incluye enlaces a sitios externos, como LinkedIn. Una vez que hacés clic en esos enlaces y salís de este sitio, no tenemos control sobre el sitio al que sos redirigido ni somos responsables de sus términos o políticas de privacidad.',
+          body: 'Este sitio incluye enlaces a sitios externos, como LinkedIn. Una vez que hacés clic en esos enlaces y salís de este sitio, no tenemos control sobre el sitio de destino ni somos responsables de sus términos o políticas de privacidad.',
         },
         {
           heading: 'Cambios en esta política',
