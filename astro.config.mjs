@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 import { satteri } from '@astrojs/markdown-satteri';
 import { readdirSync, readFileSync } from 'node:fs';
 
-const site = 'https://luciano-consulting.web.app';
+const site = 'https://lucianoperezruiz.dev';
 
 // Republished posts (frontmatter `canonicalUrl`) declare the original on another site as
 // canonical, so they stay out of the sitemap: it should only list this site's canonical URLs.

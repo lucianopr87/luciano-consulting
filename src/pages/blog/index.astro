@@ -15,6 +15,7 @@ const posts = await getPublishedPosts(locale);
   locale={locale}
   content={pageContent}
   path="/blog/"
+  alternates={{ es: '/blog/', en: '/en/blog/' }}
   title={`${pageContent.blog.heading} — ${pageContent.meta.title}`}
   description={pageContent.blog.intro}
 >

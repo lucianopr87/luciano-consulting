@@ -5,7 +5,7 @@ import { developerContent, developerMarkdownPath, developerPath } from '../i18n/
 // better than HTML (/cv.md, /en/cv.md and /llms.txt). Everything comes from
 // content.ts, so they can't drift from the page.
 
-export const site = 'https://luciano-consulting.web.app';
+export const site = 'https://lucianoperezruiz.dev';
 
 export const cvMarkdownPath: Record<Locale, string> = { es: '/cv.md', en: '/en/cv.md' };
 

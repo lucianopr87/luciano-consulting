@@ -36,3 +36,25 @@ test('unknown routes render the 404 page', async ({ page }) => {
   expect(response?.status()).toBe(404);
   await expect(page.getByRole('heading', { name: '404' })).toBeVisible();
 });
+
+test('translated pages declare their canonical and hreflang alternates on the custom domain', async ({ page }) => {
+  const origin = 'https://lucianoperezruiz.dev';
+  for (const [path, es, en] of [
+    ['/', '/', '/en/'],
+    ['/en/', '/', '/en/'],
+    ['/blog/', '/blog/', '/en/blog/'],
+    ['/en/developer/', '/developer/', '/en/developer/'],
+    ['/privacy/', '/privacy/', '/en/privacy/']
+  ]) {
+    await page.goto(path);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', origin + path);
+    await expect(page.locator('link[hreflang="es"]')).toHaveAttribute('href', origin + es);
+    await expect(page.locator('link[hreflang="en"]')).toHaveAttribute('href', origin + en);
+    await expect(page.locator('link[hreflang="x-default"]')).toHaveAttribute('href', origin + es);
+  }
+});
+
+test('robots.txt points to the sitemap on the custom domain', async ({ request }) => {
+  const robots = await (await request.get('/robots.txt')).text();
+  expect(robots).toContain('Sitemap: https://lucianoperezruiz.dev/sitemap-index.xml');
+});
