@@ -16,7 +16,7 @@ const locale = 'en';
 const pageContent = content[locale];
 ---
 
-<Layout locale={locale} content={pageContent} path="/en/">
+<Layout locale={locale} content={pageContent} path="/en/" alternates={{ es: '/', en: '/en/' }}>
   <Header locale={locale} content={pageContent} />
   <main id={sectionIds.home}>
     <Hero content={pageContent} />

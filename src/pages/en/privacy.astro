@@ -8,7 +8,7 @@ const locale = 'en';
 const pageContent = content[locale];
 ---
 
-<Layout locale={locale} content={pageContent} path="/en/privacy/">
+<Layout locale={locale} content={pageContent} path="/en/privacy/" alternates={{ es: '/privacy/', en: '/en/privacy/' }}>
   <Header locale={locale} content={pageContent} otherLocalePath="/privacy/" />
   <main class="wrap pb-24 pt-[140px]">
     <div class="mx-auto max-w-[720px]">

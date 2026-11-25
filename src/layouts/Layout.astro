@@ -16,9 +16,16 @@ interface Props {
   jsonLd?: Record<string, unknown>;
   /** Markdown version of this page's CV. Defaults to the locale's main CV. */
   markdownPath?: string;
+  /** Path of this page in each language, for pages with a 1:1 translation (emits hreflang links). */
+  alternates?: Record<Locale, string>;
 }
 
-const { locale, content, path, title, description, canonical, jsonLd, markdownPath } = Astro.props;
+const { locale, content, path, title, description, canonical, jsonLd, markdownPath, alternates } = Astro.props;
+// Firebase's default hosts still serve the site; send visitors (and Googlebot,
+// which follows JS redirects) to the custom domain. Preview channels
+// (luciano-consulting--<channel>.web.app) are left alone.
+const legacyHosts = ['luciano-consulting.web.app', 'luciano-consulting.firebaseapp.com'];
+const siteOrigin = Astro.site!.origin;
 const pageTitle = title ?? content.meta.title;
 const pageDescription = description ?? content.meta.description;
 const canonicalURL = canonical ? new URL(canonical) : new URL(path, Astro.site);
@@ -73,6 +80,11 @@ const personJsonLd = {
 <html lang={locale}>
   <head>
     <meta charset="UTF-8" />
+    <script is:inline define:vars={{ legacyHosts, siteOrigin }}>
+      if (legacyHosts.includes(location.hostname)) {
+        location.replace(siteOrigin + location.pathname + location.search + location.hash);
+      }
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -80,6 +92,15 @@ const personJsonLd = {
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="canonical" href={canonicalURL} />
+    {
+      alternates && (
+        <>
+          <link rel="alternate" hreflang="es" href={new URL(alternates.es, Astro.site)} />
+          <link rel="alternate" hreflang="en" href={new URL(alternates.en, Astro.site)} />
+          <link rel="alternate" hreflang="x-default" href={new URL(alternates.es, Astro.site)} />
+        </>
+      )
+    }
     <link rel="alternate" type="text/markdown" href={markdownPath ?? cvMarkdownPath[locale]} title="CV (Markdown)" />
     {gscVerification && <meta name="google-site-verification" content={gscVerification} />}
 

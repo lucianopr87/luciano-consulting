@@ -106,7 +106,7 @@ test('the canonical of a regular post is its own URL on this site', async ({ pag
   await page.goto('/blog/medir-tokens-no-es-medir-desempeno/');
   await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
     'href',
-    'https://luciano-consulting.web.app/blog/medir-tokens-no-es-medir-desempeno/'
+    'https://lucianoperezruiz.dev/blog/medir-tokens-no-es-medir-desempeno/'
   );
   await expect(page.getByTestId('republished-note')).toHaveCount(0);
 });
