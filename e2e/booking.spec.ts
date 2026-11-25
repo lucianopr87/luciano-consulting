@@ -115,7 +115,7 @@ test('shows the rate-limit message inline', async ({ page }) => {
   await widget.locator('.time-option').first().click();
   await fillDetails(page);
   await widget.getByRole('button', { name: 'Confirmar reunión' }).click();
-  await expect(widget.locator('.form-status')).toContainText('Ya recibimos una reserva tuya');
+  await expect(widget.locator('.form-status')).toContainText('Ya tengo una reserva tuya');
 });
 
 test('switching days after picking a time clears the stale selection instead of leaving it submittable', async ({ page }) => {
